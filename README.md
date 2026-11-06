@@ -36,6 +36,18 @@ An entry looks like this:
 }
 ```
 
+### Optional extra fields
+
+- `"examDates": ["2026-11-19", "2026-12-03"]` — use this **instead of** `examDate` when the
+  school picks one of several dates (SOF, SilverZone). Past dates are hidden automatically.
+- `"note": "..."` — a short message shown on the card (e.g. "Register through your school").
+- `"linkLabel": "Read news article"` — changes the button text (default: "Official website").
+- `"unverified": true` — shows a yellow "Unverified – confirm dates" label. Remove this line
+  once you have checked the dates with the school or official website.
+
+If `registrationLastDate` is `""`, the card shows "Ask your school" (for School-based
+competitions) or "Check official link" (for others).
+
 ### Rules that matter
 
 - **Dates** are written year-month-day: `"2026-12-15"`. If a date is not announced yet, write `""`.
@@ -54,7 +66,7 @@ contents of `competitions.json` into <https://jsonlint.com> to find the exact li
 
 ## What the site does automatically
 
-- **Upcoming deadlines** box shows competitions whose registration closes in the next 30 days.
+- **Upcoming deadlines & exams** box shows each competition's next registration deadline or exam date, if it is within 30 days.
 - Competitions whose **exam date has passed are hidden** — no need to delete them.
 - Competitions with registration closed but exam still ahead show a grey "Registration closed" label.
 - Entries with `"sample": true` show a red "SAMPLE – not real" label. Delete the 3 samples once you add real entries.

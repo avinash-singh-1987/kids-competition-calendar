@@ -1,5 +1,5 @@
 // Kids Competition Calendar
-// Reads competitions.json, then shows upcoming deadlines and the filtered list.
+// Reads competitions.json, then shows upcoming deadlines/exams and the filtered list.
 // You should not need to edit this file to add competitions — edit competitions.json.
 
 const DEADLINE_WINDOW_DAYS = 30;
@@ -11,7 +11,7 @@ let allCompetitions = [];
 
 // Turns "2026-12-15" into a date at midnight local time. Returns null if empty/invalid.
 function parseDate(text) {
-  if (!text || !/^\d{4}-\d{2}-\d{2}$/.test(text)) return null;
+  if (typeof text !== "string" || !/^\d{4}-\d{2}-\d{2}$/.test(text)) return null;
   const [y, m, d] = text.split("-").map(Number);
   const date = new Date(y, m - 1, d);
   return isNaN(date) ? null : date;
@@ -26,9 +26,7 @@ function daysBetween(from, to) {
   return Math.round((to - from) / 86400000);
 }
 
-function formatDate(text) {
-  const date = parseDate(text);
-  if (!date) return "To be announced";
+function formatDate(date) {
   return date.toLocaleDateString("en-IN", { day: "numeric", month: "short", year: "numeric" });
 }
 
@@ -55,10 +53,22 @@ function el(tag, className, text) {
 
 // ---------- Rules ----------
 
-// A competition is "finished" once its exam date has passed.
+// All exam dates of a competition, sorted. Supports "examDate" (one date)
+// and "examDates" (a list, when the school picks one of several dates).
+function examDates(c) {
+  const list = Array.isArray(c.examDates) ? c.examDates : [c.examDate];
+  return list.map(parseDate).filter(Boolean).sort((a, b) => a - b);
+}
+
+function upcomingExamDates(c) {
+  return examDates(c).filter(d => d >= today());
+}
+
+// A competition is "finished" once its LAST exam date has passed.
 // If no exam date is given, we use the registration date instead.
 function isFinished(c) {
-  const end = parseDate(c.examDate) || parseDate(c.registrationLastDate);
+  const dates = examDates(c);
+  const end = dates.length ? dates[dates.length - 1] : parseDate(c.registrationLastDate);
   return end ? end < today() : false;
 }
 
@@ -67,15 +77,32 @@ function isRegistrationClosed(c) {
   return reg ? reg < today() : false;
 }
 
-function sortByDates(a, b) {
+// The next thing a parent must act on: registration deadline or exam, whichever comes first.
+function nextEvent(c) {
+  const events = [];
+  const reg = parseDate(c.registrationLastDate);
+  if (reg && reg >= today()) events.push({ kind: "register", date: reg });
+  const exam = upcomingExamDates(c)[0];
+  if (exam) events.push({ kind: "exam", date: exam });
+  events.sort((a, b) => a.date - b.date);
+  return events[0] || null;
+}
+
+function sortByNextEvent(a, b) {
   const far = new Date(9999, 0, 1);
-  const regA = parseDate(a.registrationLastDate) || far;
-  const regB = parseDate(b.registrationLastDate) || far;
-  // Open registrations first, then by nearest date.
-  const closedA = isRegistrationClosed(a), closedB = isRegistrationClosed(b);
-  if (closedA !== closedB) return closedA ? 1 : -1;
-  if (closedA) return (parseDate(a.examDate) || far) - (parseDate(b.examDate) || far);
-  return regA - regB;
+  return ((nextEvent(a) || {}).date || far) - ((nextEvent(b) || {}).date || far);
+}
+
+function registerByText(c) {
+  const reg = parseDate(c.registrationLastDate);
+  if (reg) return formatDate(reg);
+  return c.mode === "School-based" ? "Ask your school" : "Check official link";
+}
+
+function examText(c) {
+  const upcoming = upcomingExamDates(c);
+  if (upcoming.length === 0) return "To be announced";
+  return upcoming.map(formatDate).join(" or ");
 }
 
 // ---------- Rendering ----------
@@ -86,23 +113,31 @@ function renderDeadlines(list) {
   const now = today();
 
   const upcoming = list
-    .map(c => ({ c, days: parseDate(c.registrationLastDate) ? daysBetween(now, parseDate(c.registrationLastDate)) : null }))
-    .filter(x => x.days !== null && x.days >= 0 && x.days <= DEADLINE_WINDOW_DAYS)
-    .sort((a, b) => a.days - b.days);
+    .map(c => ({ c, ev: nextEvent(c) }))
+    .filter(x => x.ev && daysBetween(now, x.ev.date) <= DEADLINE_WINDOW_DAYS)
+    .sort((a, b) => a.ev.date - b.ev.date);
 
   if (upcoming.length === 0) {
-    ul.appendChild(el("li", "empty", "No registration deadlines in the next 30 days."));
+    ul.appendChild(el("li", "empty", "Nothing due in the next 30 days."));
     return;
   }
 
-  upcoming.forEach(({ c, days }) => {
+  upcoming.forEach(({ c, ev }) => {
+    const days = daysBetween(now, ev.date);
+    const isExam = ev.kind === "exam";
     const li = el("li");
     const left = el("div");
     left.appendChild(el("div", "deadline-name", c.name));
-    left.appendChild(el("div", "muted", `Register by ${formatDate(c.registrationLastDate)} · ${formatClasses(c.classes)}`));
-    const label = days === 0 ? "Last day today!" : days === 1 ? "1 day left" : `${days} days left`;
+    let detail = (isExam ? "Exam: " : "Register by ") + formatDate(ev.date);
+    if (isExam && upcomingExamDates(c).length > 1) detail += " (one of the school's date options)";
+    left.appendChild(el("div", "muted", `${detail} · ${formatClasses(c.classes)}`));
+
+    let label;
+    if (days === 0) label = isExam ? "Exam today" : "Last day today!";
+    else label = (isExam ? "Exam in " : "") + (days === 1 ? "1 day" : `${days} days`) + (isExam ? "" : " left");
+
     li.appendChild(left);
-    li.appendChild(el("div", "days-left" + (days <= 7 ? " urgent" : ""), label));
+    li.appendChild(el("div", "days-left" + (days <= 7 ? " urgent" : "") + (isExam ? " exam" : ""), label));
     ul.appendChild(li);
   });
 }
@@ -112,6 +147,7 @@ function renderCard(c) {
 
   const badges = el("div", "badges");
   if (c.sample) badges.appendChild(el("span", "badge sample", "SAMPLE – not real"));
+  if (c.unverified) badges.appendChild(el("span", "badge unverified", "Unverified – confirm dates"));
   if (c.type) badges.appendChild(el("span", "badge", c.type));
   if (isRegistrationClosed(c)) badges.appendChild(el("span", "badge closed", "Registration closed"));
   card.appendChild(badges);
@@ -122,8 +158,8 @@ function renderCard(c) {
   const details = el("dl", "details");
   [
     ["Classes", formatClasses(c.classes)],
-    ["Register by", formatDate(c.registrationLastDate)],
-    ["Exam date", formatDate(c.examDate)],
+    ["Register by", registerByText(c)],
+    ["Exam date", examText(c)],
     ["Fee", c.fee || "—"],
     ["Mode", c.mode || "—"],
   ].forEach(([label, value]) => {
@@ -134,9 +170,11 @@ function renderCard(c) {
   });
   card.appendChild(details);
 
+  if (c.note) card.appendChild(el("p", "note", c.note));
+
   const url = safeLink(c.link);
   if (url) {
-    const a = el("a", "btn", c.sample ? "Example link (sample)" : "Official website ↗");
+    const a = el("a", "btn", c.sample ? "Example link (sample)" : (c.linkLabel || "Official website") + " ↗");
     a.href = url;
     a.target = "_blank";
     a.rel = "noopener noreferrer";
@@ -163,7 +201,7 @@ function renderList() {
     container.appendChild(el("p", "empty", "No competitions match these filters."));
     return;
   }
-  filtered.sort(sortByDates).forEach(c => container.appendChild(renderCard(c)));
+  filtered.sort(sortByNextEvent).forEach(c => container.appendChild(renderCard(c)));
 }
 
 function fillTypeFilter() {

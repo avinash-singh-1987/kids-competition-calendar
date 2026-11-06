@@ -76,6 +76,7 @@ h2 { font-size: 1.25rem; margin: 28px 0 12px; }
 .deadline-list li:first-child { border-top: none; }
 .deadline-name { font-weight: 600; }
 .days-left { font-weight: 700; white-space: nowrap; }
+.days-left.exam { color: var(--primary-dark); }
 .days-left.urgent { color: var(--urgent); }
 
 /* ---------- Filters ---------- */
@@ -132,6 +133,16 @@ h2 { font-size: 1.25rem; margin: 28px 0 12px; }
 }
 .badge.sample { background: var(--sample); color: #fff; }
 .badge.closed { background: #eef0f3; color: var(--muted); }
+.badge.unverified { background: #fff1c2; color: #7a5200; }
+
+.note {
+  margin: 0 0 14px;
+  padding: 8px 10px;
+  background: #f3f6fa;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  color: var(--muted);
+}
 
 .details { margin: 0 0 14px; }
 .details div {
