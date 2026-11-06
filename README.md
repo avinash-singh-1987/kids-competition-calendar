@@ -69,7 +69,7 @@ contents of `competitions.json` into <https://jsonlint.com> to find the exact li
 - **Upcoming deadlines & exams** box shows each competition's next registration deadline or exam date, if it is within 30 days.
 - Competitions whose **exam date has passed are hidden** — no need to delete them.
 - Competitions with registration closed but exam still ahead show a grey "Registration closed" label.
-- Entries with `"sample": true` show a red "SAMPLE – not real" label. Delete the 3 samples once you add real entries.
+- Entries with `"sample": true` show a red "SAMPLE – not real" label (useful for testing; don't leave them in).
 
 ## Putting the site online (GitHub Pages)
 

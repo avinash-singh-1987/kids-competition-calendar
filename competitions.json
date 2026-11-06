@@ -77,41 +77,5 @@
     "linkLabel": "Read news article",
     "note": "Children's Day event at DPS campus, Athani, Nedumbassery, from 10 am. Open to students up to Class 7. Registration details not confirmed — check the news link or Manorama Nallapadam.",
     "unverified": true
-  },
-  {
-    "name": "SAMPLE – Kochi Little Artists Drawing Contest",
-    "organiser": "SAMPLE Organiser (not real)",
-    "classes": [1, 2, 3],
-    "type": "Drawing",
-    "registrationLastDate": "2026-11-20",
-    "examDate": "2026-11-29",
-    "fee": "Free",
-    "mode": "Offline",
-    "link": "https://example.com",
-    "sample": true
-  },
-  {
-    "name": "SAMPLE – Junior Maths Olympiad",
-    "organiser": "SAMPLE Organiser (not real)",
-    "classes": [1, 2, 3, 4, 5],
-    "type": "Olympiad",
-    "registrationLastDate": "2026-12-31",
-    "examDate": "2027-02-14",
-    "fee": "₹150",
-    "mode": "School-based",
-    "link": "https://example.com",
-    "sample": true
-  },
-  {
-    "name": "SAMPLE – Ernakulam Kids GK Quiz",
-    "organiser": "SAMPLE Organiser (not real)",
-    "classes": [3, 4, 5],
-    "type": "Quiz",
-    "registrationLastDate": "2026-11-01",
-    "examDate": "2026-11-22",
-    "fee": "₹100",
-    "mode": "Offline",
-    "link": "https://example.com",
-    "sample": true
   }
 ]
