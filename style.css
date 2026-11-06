@@ -1,0 +1,169 @@
+/* ---------- Colours (change these to restyle the whole site) ---------- */
+:root {
+  --bg: #f6f7fb;
+  --card: #ffffff;
+  --text: #1f2933;
+  --muted: #616e7c;
+  --border: #e1e5ee;
+  --primary: #1d6f5f;      /* header + buttons */
+  --primary-dark: #145246;
+  --accent-bg: #fff8e6;    /* deadlines box */
+  --accent-border: #f0b429;
+  --urgent: #c62828;       /* "3 days left" */
+  --sample: #d32f2f;       /* SAMPLE badge */
+  --closed: #9aa5b1;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  font-size: 16px;
+  line-height: 1.5;
+}
+
+.wrap {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 0 16px;
+}
+
+.muted { color: var(--muted); font-weight: normal; font-size: 0.9em; }
+
+h2 { font-size: 1.25rem; margin: 28px 0 12px; }
+
+/* ---------- Header ---------- */
+.site-header {
+  background: var(--primary);
+  color: #fff;
+  padding: 24px 0 20px;
+}
+.site-header h1 { margin: 0; font-size: 1.6rem; }
+.tagline { margin: 4px 0 0; opacity: 0.9; }
+
+/* ---------- Error box ---------- */
+.error {
+  margin-top: 20px;
+  padding: 14px 16px;
+  background: #fdecea;
+  border: 1px solid var(--urgent);
+  border-radius: 8px;
+  color: #7f1d1d;
+}
+
+/* ---------- Upcoming deadlines ---------- */
+.deadlines {
+  margin-top: 20px;
+  background: var(--accent-bg);
+  border: 1px solid var(--accent-border);
+  border-left-width: 6px;
+  border-radius: 8px;
+  padding: 4px 16px 12px;
+}
+.deadlines h2 { margin-top: 12px; }
+.deadline-list { list-style: none; margin: 0; padding: 0; }
+.deadline-list li {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 4px 12px;
+  padding: 10px 0;
+  border-top: 1px solid rgba(0, 0, 0, 0.08);
+}
+.deadline-list li:first-child { border-top: none; }
+.deadline-name { font-weight: 600; }
+.days-left { font-weight: 700; white-space: nowrap; }
+.days-left.urgent { color: var(--urgent); }
+
+/* ---------- Filters ---------- */
+.filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 24px;
+}
+.filters label {
+  display: flex;
+  flex-direction: column;
+  font-weight: 600;
+  font-size: 0.9rem;
+  flex: 1 1 160px;
+}
+.filters select {
+  margin-top: 4px;
+  padding: 10px;
+  font-size: 1rem;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--card);
+  color: var(--text);
+}
+
+/* ---------- Competition cards ---------- */
+.card-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 16px;
+}
+.card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+}
+.card.is-sample { border: 2px dashed var(--sample); }
+.card h3 { margin: 6px 0 2px; font-size: 1.1rem; }
+.organiser { margin: 0 0 10px; color: var(--muted); }
+
+.badges { display: flex; flex-wrap: wrap; gap: 6px; }
+.badge {
+  display: inline-block;
+  font-size: 0.75rem;
+  font-weight: 700;
+  padding: 3px 8px;
+  border-radius: 999px;
+  background: #e6f2ef;
+  color: var(--primary-dark);
+}
+.badge.sample { background: var(--sample); color: #fff; }
+.badge.closed { background: #eef0f3; color: var(--muted); }
+
+.details { margin: 0 0 14px; }
+.details div {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 5px 0;
+  border-bottom: 1px solid var(--border);
+}
+.details dt { color: var(--muted); }
+.details dd { margin: 0; text-align: right; font-weight: 600; }
+
+.btn {
+  margin-top: auto;
+  display: block;
+  text-align: center;
+  padding: 10px;
+  background: var(--primary);
+  color: #fff;
+  text-decoration: none;
+  border-radius: 8px;
+  font-weight: 600;
+}
+.btn:hover, .btn:focus { background: var(--primary-dark); }
+
+.empty { color: var(--muted); padding: 8px 0; }
+
+/* ---------- Footer ---------- */
+.site-footer {
+  margin-top: 40px;
+  padding: 20px 0 32px;
+  border-top: 1px solid var(--border);
+  font-size: 0.9rem;
+}
+.site-footer p { margin: 4px 0; }
