@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Kids Competition Calendar – Kochi</title>
+  <meta name="description" content="Upcoming competitions for Class 1–5 students in Kochi, Kerala: Olympiads, scholarship tests, drawing, GK and quiz contests.">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="wrap">
+      <h1>Kids Competition Calendar</h1>
+      <p class="tagline">Competitions for Class 1–5 students · Kochi, Kerala</p>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <!-- Shown only if something goes wrong while loading the data -->
+    <div id="error" class="error" hidden></div>
+
+    <section class="deadlines" aria-labelledby="deadlines-title">
+      <h2 id="deadlines-title">Upcoming deadlines <span class="muted">(next 30 days)</span></h2>
+      <ul id="deadline-list" class="deadline-list"></ul>
+    </section>
+
+    <section class="filters" aria-label="Filters">
+      <label>
+        Class
+        <select id="class-filter">
+          <option value="all">All classes</option>
+          <option value="1">Class 1</option>
+          <option value="2">Class 2</option>
+          <option value="3">Class 3</option>
+          <option value="4">Class 4</option>
+          <option value="5">Class 5</option>
+        </select>
+      </label>
+      <label>
+        Type
+        <select id="type-filter">
+          <option value="all">All types</option>
+        </select>
+      </label>
+    </section>
+
+    <section aria-labelledby="all-title">
+      <h2 id="all-title">All competitions <span id="count" class="muted"></span></h2>
+      <div id="competition-list" class="card-list"></div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap">
+      <p><strong>Always confirm dates and fees on the official website before registering.</strong></p>
+      <p class="muted">Competitions that have already finished are hidden automatically.</p>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
