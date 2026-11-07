@@ -5,55 +5,138 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Kids Competition Calendar – Kochi</title>
   <meta name="description" content="Upcoming competitions for Class 1–5 students in Kochi, Kerala: Olympiads, scholarship tests, drawing, GK and quiz contests.">
+  <meta name="theme-color" content="#0f766e">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700&family=Nunito+Sans:wght@400;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <header class="site-header">
-    <div class="wrap">
-      <h1>Kids Competition Calendar</h1>
-      <p class="tagline">Competitions for Class 1–5 students · Kochi, Kerala</p>
+  <header class="hero">
+    <div class="wrap hero-inner">
+      <div class="hero-text">
+        <p class="eyebrow">Kochi · Ernakulam · Kerala</p>
+        <h1>Kids Competition Calendar</h1>
+        <p class="tagline">Olympiads, scholarship tests, drawing, GK and quiz competitions for <strong>Class 1–5</strong> — all in one place.</p>
+        <ul class="hero-stats" aria-label="Summary">
+          <li><span id="stat-total">–</span> competitions</li>
+          <li><span id="stat-soon">–</span> coming up in 30 days</li>
+        </ul>
+      </div>
+
+      <!-- Decorative illustration (drawn in code, no external images) -->
+      <svg class="hero-art" viewBox="0 0 360 280" aria-hidden="true" focusable="false">
+        <circle cx="185" cy="140" r="118" fill="#ffffff" opacity="0.10"/>
+        <circle cx="185" cy="140" r="84" fill="#ffffff" opacity="0.08"/>
+
+        <!-- Calendar -->
+        <g class="float f1">
+          <rect x="112" y="62" width="150" height="150" rx="18" fill="#ffffff"/>
+          <path d="M112 80a18 18 0 0 1 18-18h114a18 18 0 0 1 18 18v20H112z" fill="#ff7a59"/>
+          <rect x="140" y="50" width="10" height="26" rx="5" fill="#334155"/>
+          <rect x="224" y="50" width="10" height="26" rx="5" fill="#334155"/>
+          <g fill="#e2e8f0">
+            <rect x="128" y="114" width="22" height="18" rx="4"/><rect x="157" y="114" width="22" height="18" rx="4"/>
+            <rect x="186" y="114" width="22" height="18" rx="4"/><rect x="215" y="114" width="22" height="18" rx="4"/>
+            <rect x="128" y="140" width="22" height="18" rx="4"/><rect x="157" y="140" width="22" height="18" rx="4"/>
+            <rect x="215" y="140" width="22" height="18" rx="4"/>
+            <rect x="128" y="166" width="22" height="18" rx="4"/><rect x="157" y="166" width="22" height="18" rx="4"/>
+            <rect x="186" y="166" width="22" height="18" rx="4"/><rect x="215" y="166" width="22" height="18" rx="4"/>
+          </g>
+          <rect x="186" y="140" width="22" height="18" rx="4" fill="#ffd43b"/>
+          <path d="M197 142.5l2 4.2 4.6.6-3.3 3.2.8 4.6-4.1-2.2-4.1 2.2.8-4.6-3.3-3.2 4.6-.6z" fill="#e8590c"/>
+        </g>
+
+        <!-- Trophy -->
+        <g class="float f2">
+          <path d="M44 168h44v8c0 14-10 26-22 26s-22-12-22-26z" fill="#ffd43b"/>
+          <path d="M44 172h-8a10 10 0 0 0 10 14M88 172h8a10 10 0 0 1-10 14" fill="none" stroke="#ffd43b" stroke-width="5" stroke-linecap="round"/>
+          <rect x="61" y="200" width="10" height="14" fill="#f59f00"/>
+          <rect x="50" y="212" width="32" height="9" rx="3" fill="#f59f00"/>
+          <path d="M66 176l2.4 5 5.4.7-3.9 3.8.9 5.4-4.8-2.6-4.8 2.6.9-5.4-3.9-3.8 5.4-.7z" fill="#ffffff" opacity="0.9"/>
+        </g>
+
+        <!-- Palette -->
+        <g class="float f3">
+          <path d="M300 30c-24 0-42 16-42 36 0 16 12 26 26 26 6 0 8-4 8-8s-3-6-3-10c0-5 4-8 9-8h8c11 0 20-7 20-18 0-11-12-18-26-18z" fill="#ffffff"/>
+          <circle cx="278" cy="58" r="5" fill="#e8590c"/><circle cx="292" cy="44" r="5" fill="#4dabf7"/>
+          <circle cx="310" cy="44" r="5" fill="#51cf66"/><circle cx="322" cy="56" r="5" fill="#cc5de8"/>
+        </g>
+
+        <!-- Pencil -->
+        <g class="float f4">
+          <g transform="rotate(35 300 200)">
+            <rect x="282" y="160" width="20" height="70" rx="3" fill="#ffd43b"/>
+            <rect x="282" y="160" width="20" height="10" rx="3" fill="#ff8787"/>
+            <rect x="282" y="168" width="20" height="5" fill="#ced4da"/>
+            <path d="M282 230h20l-10 20z" fill="#ffe8cc"/>
+            <path d="M288.5 243h7l-3.5 7z" fill="#334155"/>
+          </g>
+        </g>
+
+        <!-- Book -->
+        <g class="float f2">
+          <path d="M30 70l30-8 30 8v44l-30-8-30 8z" fill="#ffffff"/>
+          <path d="M60 62v44" stroke="#4dabf7" stroke-width="3"/>
+          <path d="M38 80l14-3M38 90l14-3M68 77l14 3M68 87l14 3" stroke="#a5d8ff" stroke-width="2.5" stroke-linecap="round"/>
+        </g>
+
+        <!-- Twinkling stars -->
+        <g fill="#ffffff">
+          <path class="twinkle t1" d="M100 30l2 6 6 2-6 2-2 6-2-6-6-2 6-2z"/>
+          <path class="twinkle t2" d="M330 130l2 5 5 2-5 2-2 5-2-5-5-2 5-2z"/>
+          <path class="twinkle t3" d="M20 140l1.5 4 4 1.5-4 1.5-1.5 4-1.5-4-4-1.5 4-1.5z"/>
+          <path class="twinkle t1" d="M240 250l1.5 4 4 1.5-4 1.5-1.5 4-1.5-4-4-1.5 4-1.5z"/>
+        </g>
+      </svg>
     </div>
+
+    <svg class="hero-wave" viewBox="0 0 1440 60" preserveAspectRatio="none" aria-hidden="true" focusable="false">
+      <path d="M0 30c240 30 480 30 720 0s480-30 720 0v30H0z" fill="currentColor"/>
+    </svg>
   </header>
 
   <main class="wrap">
     <!-- Shown only if something goes wrong while loading the data -->
     <div id="error" class="error" hidden></div>
 
-    <section class="deadlines" aria-labelledby="deadlines-title">
-      <h2 id="deadlines-title">Upcoming deadlines &amp; exams <span class="muted">(next 30 days)</span></h2>
+    <section class="panel deadlines" aria-labelledby="deadlines-title">
+      <div class="section-head">
+        <span class="section-icon" aria-hidden="true">⏰</span>
+        <div>
+          <h2 id="deadlines-title">Coming up soon</h2>
+          <p class="muted">Registration deadlines and exams in the next 30 days</p>
+        </div>
+      </div>
       <ul id="deadline-list" class="deadline-list"></ul>
     </section>
 
     <section class="filters" aria-label="Filters">
-      <label>
-        Class
-        <select id="class-filter">
-          <option value="all">All classes</option>
-          <option value="1">Class 1</option>
-          <option value="2">Class 2</option>
-          <option value="3">Class 3</option>
-          <option value="4">Class 4</option>
-          <option value="5">Class 5</option>
-        </select>
-      </label>
-      <label>
-        Type
-        <select id="type-filter">
-          <option value="all">All types</option>
-        </select>
-      </label>
+      <div class="filter-group">
+        <span class="filter-label" id="class-label">Class</span>
+        <div class="chips" id="class-chips" role="group" aria-labelledby="class-label"></div>
+      </div>
+      <div class="filter-group">
+        <span class="filter-label" id="type-label">Type</span>
+        <div class="chips" id="type-chips" role="group" aria-labelledby="type-label"></div>
+      </div>
     </section>
 
     <section aria-labelledby="all-title">
-      <h2 id="all-title">All competitions <span id="count" class="muted"></span></h2>
-      <div id="competition-list" class="card-list"></div>
+      <div class="section-head plain">
+        <h2 id="all-title">All competitions <span id="count" class="count-pill"></span></h2>
+      </div>
+      <div id="competition-list" class="card-list" aria-live="polite"></div>
     </section>
   </main>
 
   <footer class="site-footer">
-    <div class="wrap">
-      <p><strong>Always confirm dates and fees on the official website before registering.</strong></p>
-      <p class="muted">Competitions that have already finished are hidden automatically.</p>
+    <div class="wrap footer-inner">
+      <div class="footer-icon" aria-hidden="true">✏️</div>
+      <div>
+        <p><strong>Always confirm dates and fees on the official website or with your school before registering.</strong></p>
+        <p class="muted">Finished competitions are hidden automatically. Labels marked “Unverified” come from news reports or blogs.</p>
+      </div>
     </div>
   </footer>
 

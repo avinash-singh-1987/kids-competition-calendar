@@ -105,7 +105,27 @@ function examText(c) {
   return upcoming.map(formatDate).join(" or ");
 }
 
+// ---------- Icons (small drawings for each competition type) ----------
+
+const ICONS = {
+  olympiad: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 3h10l-3 6h-4z"/><circle cx="12" cy="15" r="6"/><path d="M12 12.5l.9 1.8 2 .3-1.45 1.4.35 2-1.8-.95-1.8.95.35-2-1.45-1.4 2-.3z" fill="currentColor" stroke="none"/></svg>',
+  drawing: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3a9 9 0 1 0 0 18c1.1 0 1.6-.8 1.6-1.6 0-.5-.2-.9-.5-1.2-.3-.3-.5-.7-.5-1.2 0-.9.7-1.6 1.6-1.6H16a5 5 0 0 0 5-5C21 6.5 17 3 12 3z"/><circle cx="7.5" cy="11" r="1.2" fill="currentColor"/><circle cx="10" cy="7" r="1.2" fill="currentColor"/><circle cx="15" cy="7" r="1.2" fill="currentColor"/></svg>',
+  quiz: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a8 8 0 0 1-11.6 7.1L4 21l1.9-5.4A8 8 0 1 1 21 12z"/><path d="M10.2 9.5a2 2 0 1 1 2.6 1.9c-.5.2-.8.6-.8 1.1v.5"/><circle cx="12" cy="15.6" r=".6" fill="currentColor"/></svg>',
+  gk: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.5 3.8 5.5 3.8 9s-1.3 6.5-3.8 9c-2.5-2.5-3.8-5.5-3.8-9S9.5 5.5 12 3z"/></svg>',
+  scholarship: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 9l10-5 10 5-10 5z"/><path d="M6 11v5c0 1.7 2.7 3 6 3s6-1.3 6-3v-5"/><path d="M22 9v6"/></svg>',
+  other: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l2.7 5.6 6.1.9-4.4 4.3 1 6.1L12 17l-5.4 2.9 1-6.1-4.4-4.3 6.1-.9z"/></svg>',
+};
+
+const EMPTY_ART = '<svg viewBox="0 0 120 90" aria-hidden="true"><rect x="20" y="14" width="80" height="66" rx="10" fill="#e6f4f1"/><path d="M20 26a10 10 0 0 1 10-10h60a10 10 0 0 1 10 10v6H20z" fill="#0f766e"/><circle cx="48" cy="54" r="12" fill="none" stroke="#0f766e" stroke-width="4"/><path d="M57 63l10 10" stroke="#0f766e" stroke-width="4" stroke-linecap="round"/></svg>';
+
+function typeKey(type) {
+  const key = String(type || "").toLowerCase();
+  return ICONS[key] ? key : "other";
+}
+
 // ---------- Rendering ----------
+
+const filters = { cls: "all", type: "all" };
 
 function renderDeadlines(list) {
   const ul = document.getElementById("deadline-list");
@@ -117,43 +137,63 @@ function renderDeadlines(list) {
     .filter(x => x.ev && daysBetween(now, x.ev.date) <= DEADLINE_WINDOW_DAYS)
     .sort((a, b) => a.ev.date - b.ev.date);
 
+  document.getElementById("stat-soon").textContent = upcoming.length;
+
   if (upcoming.length === 0) {
     ul.appendChild(el("li", "empty", "Nothing due in the next 30 days."));
     return;
   }
 
-  upcoming.forEach(({ c, ev }) => {
+  upcoming.forEach(({ c, ev }, i) => {
     const days = daysBetween(now, ev.date);
     const isExam = ev.kind === "exam";
+    const urgent = days <= 7;
     const li = el("li");
-    const left = el("div");
-    left.appendChild(el("div", "deadline-name", c.name));
-    let detail = (isExam ? "Exam: " : "Register by ") + formatDate(ev.date);
-    if (isExam && upcomingExamDates(c).length > 1) detail += " (one of the school's date options)";
-    left.appendChild(el("div", "muted", `${detail} · ${formatClasses(c.classes)}`));
+    li.style.setProperty("--i", i);
+
+    const tile = el("div", "date-tile" + (urgent ? " urgent" : ""));
+    tile.appendChild(el("span", "day", String(ev.date.getDate())));
+    tile.appendChild(el("span", "mon", ev.date.toLocaleDateString("en-IN", { month: "short" })));
+
+    const body = el("div", "deadline-body");
+    body.appendChild(el("div", "deadline-name", c.name));
+    const meta = (isExam ? "Exam" : "Registration closes") + " · " + formatClasses(c.classes);
+    const metaRow = el("div", "deadline-meta", meta + " ");
+    body.appendChild(metaRow);
 
     let label;
-    if (days === 0) label = isExam ? "Exam today" : "Last day today!";
-    else label = (isExam ? "Exam in " : "") + (days === 1 ? "1 day" : `${days} days`) + (isExam ? "" : " left");
+    if (days === 0) label = isExam ? "Today" : "Last day!";
+    else label = days === 1 ? "1 day" : `${days} days`;
 
-    li.appendChild(left);
-    li.appendChild(el("div", "days-left" + (days <= 7 ? " urgent" : "") + (isExam ? " exam" : ""), label));
+    metaRow.appendChild(el("span", "days-left" + (urgent ? " urgent" : ""), label));
+    li.appendChild(tile);
+    li.appendChild(body);
     ul.appendChild(li);
   });
 }
 
-function renderCard(c) {
-  const card = el("article", "card" + (c.sample ? " is-sample" : ""));
+function renderCard(c, i) {
+  const key = typeKey(c.type);
+  const card = el("article", `card t-${key}` + (c.sample ? " is-sample" : ""));
+  card.style.setProperty("--i", i);
+
+  const top = el("div", "card-top");
+  const icon = el("div", "type-icon");
+  icon.innerHTML = ICONS[key]; // fixed drawings from this file, not from the data
+  icon.setAttribute("aria-hidden", "true");
+  const titles = el("div");
+  titles.appendChild(el("h3", null, c.name || "Unnamed competition"));
+  titles.appendChild(el("p", "organiser", c.organiser || ""));
+  top.appendChild(icon);
+  top.appendChild(titles);
+  card.appendChild(top);
 
   const badges = el("div", "badges");
   if (c.sample) badges.appendChild(el("span", "badge sample", "SAMPLE – not real"));
-  if (c.unverified) badges.appendChild(el("span", "badge unverified", "Unverified – confirm dates"));
   if (c.type) badges.appendChild(el("span", "badge", c.type));
+  if (c.unverified) badges.appendChild(el("span", "badge unverified", "Unverified – confirm dates"));
   if (isRegistrationClosed(c)) badges.appendChild(el("span", "badge closed", "Registration closed"));
   card.appendChild(badges);
-
-  card.appendChild(el("h3", null, c.name || "Unnamed competition"));
-  card.appendChild(el("p", "organiser", c.organiser || ""));
 
   const details = el("dl", "details");
   [
@@ -184,31 +224,51 @@ function renderCard(c) {
 }
 
 function renderList() {
-  const classValue = document.getElementById("class-filter").value;
-  const typeValue = document.getElementById("type-filter").value;
-
   const filtered = allCompetitions.filter(c => {
-    const classOk = classValue === "all" || (Array.isArray(c.classes) && c.classes.map(String).includes(classValue));
-    const typeOk = typeValue === "all" || c.type === typeValue;
+    const classOk = filters.cls === "all" || (Array.isArray(c.classes) && c.classes.map(String).includes(filters.cls));
+    const typeOk = filters.type === "all" || c.type === filters.type;
     return classOk && typeOk;
   });
 
   const container = document.getElementById("competition-list");
   container.innerHTML = "";
-  document.getElementById("count").textContent = `(${filtered.length})`;
+  document.getElementById("count").textContent = filtered.length;
 
   if (filtered.length === 0) {
-    container.appendChild(el("p", "empty", "No competitions match these filters."));
+    const box = el("div", "empty-state");
+    box.innerHTML = EMPTY_ART;
+    box.appendChild(el("p", null, "No competitions match these filters. Try another class or type."));
+    container.appendChild(box);
     return;
   }
-  filtered.sort(sortByNextEvent).forEach(c => container.appendChild(renderCard(c)));
+  filtered.sort(sortByNextEvent).forEach((c, i) => container.appendChild(renderCard(c, i)));
 }
 
-function fillTypeFilter() {
-  const select = document.getElementById("type-filter");
-  const types = new Set(BASE_TYPES);
-  allCompetitions.forEach(c => c.type && types.add(c.type)); // new types appear automatically
-  types.forEach(t => select.appendChild(new Option(t, t)));
+// Builds a row of tappable "chips" and keeps the chosen one highlighted.
+function buildChips(containerId, options, filterName) {
+  const box = document.getElementById(containerId);
+  box.innerHTML = "";
+  options.forEach(([value, label]) => {
+    const chip = el("button", "chip", label);
+    chip.type = "button";
+    chip.setAttribute("aria-pressed", String(filters[filterName] === value));
+    chip.addEventListener("click", () => {
+      filters[filterName] = value;
+      box.querySelectorAll(".chip").forEach(b => b.setAttribute("aria-pressed", String(b === chip)));
+      renderList();
+    });
+    box.appendChild(chip);
+  });
+}
+
+function buildFilters() {
+  buildChips("class-chips",
+    [["all", "All"], ["1", "1"], ["2", "2"], ["3", "3"], ["4", "4"], ["5", "5"]], "cls");
+
+  // Only show types that have at least one competition; new types appear automatically.
+  const present = new Set(allCompetitions.map(c => c.type).filter(Boolean));
+  const types = [...BASE_TYPES.filter(t => present.has(t)), ...[...present].filter(t => !BASE_TYPES.includes(t))];
+  buildChips("type-chips", [["all", "All"], ...types.map(t => [t, t])], "type");
 }
 
 function showError(message) {
@@ -245,12 +305,10 @@ async function start() {
   }
 
   allCompetitions = data.filter(c => c && typeof c === "object" && !isFinished(c));
-  fillTypeFilter();
+  document.getElementById("stat-total").textContent = allCompetitions.length;
+  buildFilters();
   renderDeadlines(allCompetitions);
   renderList();
-
-  document.getElementById("class-filter").addEventListener("change", renderList);
-  document.getElementById("type-filter").addEventListener("change", renderList);
 }
 
 start();
