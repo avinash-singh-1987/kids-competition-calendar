@@ -27,3 +27,6 @@
 - Visitor counter: GoatCounter, site code `kochikidscalendar`
   (dashboard https://kochikidscalendar.goatcounter.com). Button clicks are counted as
   events `click-whatsapp`, `click-calendar`, `click-official-link`.
+- School admissions page: `admissions.html` + `admissions.js`, data in `admissions.json`
+  (see README). Keep schools in popularity order (Rajagiri Kalamassery first). Never rate or
+  rank schools ourselves; status/age rules only from the school's own notice when possible.
