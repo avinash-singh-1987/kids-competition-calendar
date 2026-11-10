@@ -16,6 +16,8 @@
    → "Confirm merge".
 
 ## About the site
+- The site is called **Kochi Kids Calendar** (renamed Nov 2026). Do NOT rename the repository:
+  the GitHub Pages address depends on it and shared links would break.
 - Plain HTML/CSS/JS, hosted on GitHub Pages from `main`.
 - All competition data is in `competitions.json`; see README.md for the fields.
 - Never add competition dates as confirmed unless they come from an official source
@@ -23,7 +25,8 @@
 - Every new entry gets `source` (URL where it was found), `sourceType`
   (official/news/blog) and `addedOn` (today's date); set `updatedOn` when dates change.
 - Set `individual` ("yes"/"no"/"ask") only from what the source says; use "ask" if unclear.
-- `og-image.jpg` is the link-preview picture for WhatsApp etc.; keep it under 300 KB.
+- Link-preview pictures (WhatsApp etc.): `og-image.jpg` (home/competitions) and
+  `og-admissions.jpg` (admissions page), 1200x630 JPEG, keep each under 300 KB.
 - Visitor counter: GoatCounter, site code `kochikidscalendar`
   (dashboard https://kochikidscalendar.goatcounter.com). Button clicks are counted as
   events `click-whatsapp`, `click-calendar`, `click-official-link`.

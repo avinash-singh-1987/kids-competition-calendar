@@ -386,6 +386,17 @@ h1, h2, h3 { font-family: var(--heading-font); line-height: 1.2; }
   border-radius: 999px;
   border: 1px solid rgba(255, 255, 255, 0.35);
 }
+.tabs a.brand {
+  border: none;
+  padding: 7px 4px;
+  margin-right: auto;
+  font-family: var(--heading-font);
+  font-size: 1.1rem;
+}
+.tabs a.brand:hover { background: none; }
+@media (max-width: 759px) {
+  .tabs a.brand { flex-basis: 100%; padding: 0 2px 4px; }
+}
 .tabs a[aria-current="page"] { background: #fff; color: var(--primary-dark); border-color: #fff; }
 .tabs a:not([aria-current]):hover { background: rgba(255, 255, 255, 0.15); }
 
