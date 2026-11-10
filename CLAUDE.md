@@ -20,3 +20,5 @@
 - All competition data is in `competitions.json`; see README.md for the fields.
 - Never add competition dates as confirmed unless they come from an official source
   or the owner's school; otherwise set `"unverified": true` and add a `note`.
+- Every new entry gets `source` (URL where it was found), `sourceType`
+  (official/news/blog) and `addedOn` (today's date); set `updatedOn` when dates change.

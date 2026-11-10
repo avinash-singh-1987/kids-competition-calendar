@@ -42,7 +42,11 @@ An entry looks like this:
   school picks one of several dates (SOF, SilverZone). Past dates are hidden automatically.
 - `"note": "..."` — a short message shown on the card (e.g. "Register through your school").
 - `"linkLabel": "Read news article"` — changes the button text (default: "Official website").
-- `"unverified": true` — shows a yellow "Unverified – confirm dates" label. Remove this line
+- `"source": "https://..."` — the page where the information was found (shown as "Source" on the card).
+- `"sourceType": "official"` / `"news"` / `"blog"` — what kind of source it is.
+- `"addedOn": "2026-11-11"` — the date the entry was added. Optional `"updatedOn"` when dates change.
+  The newest of these dates (or the site's publish time) appears as "Last updated" at the top.
+- `"unverified": true` — shows a yellow "Not yet confirmed" label (without it, the card shows a green "Confirmed ✓"). Remove this line
   once you have checked the dates with the school or official website.
 
 If `registrationLastDate` is `""`, the card shows "Ask your school" (for School-based
