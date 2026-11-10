@@ -291,7 +291,8 @@ function renderCard(c, i) {
 
   // Where this information came from, and when it was added
   const sourceUrl = safeLink(c.source);
-  const added = parseDate(c.addedOn);
+  const updated = parseDate(c.updatedOn);
+  const added = updated || parseDate(c.addedOn);
   if (sourceUrl || added) {
     const line = el("p", "source-line");
     if (sourceUrl) {
@@ -302,7 +303,7 @@ function renderCard(c, i) {
       s.rel = "noopener noreferrer";
       line.appendChild(s);
     }
-    if (added) line.appendChild(document.createTextNode((sourceUrl ? " · " : "") + "Added " + formatDate(added)));
+    if (added) line.appendChild(document.createTextNode((sourceUrl ? " · " : "") + (updated ? "Checked " : "Added ") + formatDate(added)));
     card.appendChild(line);
   }
 
