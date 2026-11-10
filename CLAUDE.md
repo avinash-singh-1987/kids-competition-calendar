@@ -18,7 +18,8 @@
 ## About the site
 - The site is called **Kochi Kids Calendar** (renamed Nov 2026). Do NOT rename the repository:
   the GitHub Pages address depends on it and shared links would break.
-- Plain HTML/CSS/JS, hosted on GitHub Pages from `main`.
+- Plain HTML/CSS/JS, hosted on GitHub Pages from `main`, at **https://kochikidscalendar.com**
+  (domain bought on Hostinger; `CNAME` file holds the domain — don't delete it).
 - All competition data is in `competitions.json`; see README.md for the fields.
 - Never add competition dates as confirmed unless they come from an official source
   or the owner's school; otherwise set `"unverified": true` and add a `note`.

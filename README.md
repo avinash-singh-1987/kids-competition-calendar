@@ -1,7 +1,8 @@
 # Kochi Kids Calendar
 
 Competitions and school admissions for young children in Kochi, Kerala.
-(Repository and web address keep the old name `kids-competition-calendar` so shared links keep working.)
+Live at **https://kochikidscalendar.com** (domain on Hostinger, served by GitHub Pages via the `CNAME` file).
+The repository keeps the old name `kids-competition-calendar`; old github.io links redirect to the domain.
 
 A simple website for parents in Kochi, Kerala, listing upcoming competitions for
 Class 1–5 students: Olympiads, scholarship tests, and local drawing, GK and quiz contests.
