@@ -207,7 +207,13 @@ function renderCard(s, i) {
     } else {
       const results = s.entry.map(r => ({ r, res: eligibility(r, childDob, s) }));
       const anyFits = results.some(x => x.res && !x.res.tooOld);
-      results.forEach(({ r, res }) => {
+      if (!anyFits && results.some(x => x.res && x.res.tooOld)) {
+        const line = el("p");
+        line.appendChild(el("strong", null, "For your child: "));
+        line.appendChild(document.createTextNode("past the kindergarten entry age here — ask the school about Class 1."));
+        box.appendChild(line);
+      }
+      if (anyFits) results.forEach(({ r, res }) => {
         if (anyFits && (!res || res.tooOld)) return; // only show the classes that fit
 
         const line = el("p");
