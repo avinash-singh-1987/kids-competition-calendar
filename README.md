@@ -87,3 +87,17 @@ contents of `competitions.json` into <https://jsonlint.com> to find the exact li
 
 Note: opening `index.html` by double-clicking on your computer will **not** load the
 competitions — browsers block that. Always use the GitHub Pages address.
+
+## School admissions page (`admissions.html`)
+
+Data is in `admissions.json`, one entry per school, most popular first. Fields:
+
+- `school`, `area`, `board`, `why` (one line on why the school is listed)
+- `entry`: age rules, e.g. `[{"class": "LKG", "minAge": 4, "maxAge": 5, "cutoff": "06-01"}]`
+  = "4 to under 5 years on 1 June". `maxAge` can be `null`. Leave `[]` if unknown.
+- `applyMonth` (1–12) when applications usually open, `sessionMonth` (6 = June, 4 = April for KV)
+- `status`: `open` / `expected` (+ `expectedText`) / `check` / `closed`, and `statusNote`
+- `link`, optional `linkLabel`, `source`, `sourceType` (official/news/blog), `checkedOn`, `unverified`
+
+The "When can my child join?" box uses the age rules to tell parents the year their child can
+join each school and when to apply. The date of birth is kept only in the visitor's browser.

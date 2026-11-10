@@ -37,6 +37,7 @@ h1, h2, h3 { font-family: var(--heading-font); line-height: 1.2; }
 /* ---------- Hero ---------- */
 .hero {
   position: relative;
+  /* tabs sit above the illustration */
   color: #fff;
   background:
     radial-gradient(circle at 15% 20%, rgba(255, 255, 255, 0.12) 0 2px, transparent 3px) 0 0 / 28px 28px,
@@ -373,6 +374,53 @@ h1, h2, h3 { font-family: var(--heading-font); line-height: 1.2; }
   from { opacity: 0; transform: translateY(12px); }
   to { opacity: 1; transform: translateY(0); }
 }
+
+/* ---------- Section tabs (Competitions / School admissions) ---------- */
+.tabs { display: flex; gap: 6px; margin-bottom: 18px; flex-wrap: wrap; position: relative; z-index: 1; }
+.tabs a {
+  color: #fff;
+  text-decoration: none;
+  font-weight: 700;
+  font-size: 0.92rem;
+  padding: 7px 14px;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.35);
+}
+.tabs a[aria-current="page"] { background: #fff; color: var(--primary-dark); border-color: #fff; }
+.tabs a:not([aria-current]):hover { background: rgba(255, 255, 255, 0.15); }
+
+/* ---------- School admissions page ---------- */
+.age-checker { margin-top: -8px; position: relative; }
+.dob-row { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; }
+.dob-row label { font-weight: 700; }
+.dob-row input {
+  font: inherit;
+  padding: 9px 12px;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  background: var(--card);
+  color: var(--text);
+  min-width: 180px;
+}
+.dob-summary { margin: 10px 0 0; color: var(--primary-dark); font-weight: 600; font-size: 0.92rem; }
+.dob-summary:empty { display: none; }
+.card.t-school { --accent: #0e7490; --accent-soft: #e3f2f6; }
+.why { margin: -4px 0 10px; font-size: 0.85rem; color: var(--muted); font-style: italic; }
+.status { display: inline-block; font-size: 0.74rem; font-weight: 700; padding: 3px 9px; border-radius: 999px; }
+.status-open { background: #e3f6e8; color: #1b7a36; }
+.status-expected { background: #fff1c2; color: #7a5200; }
+.status-check { background: #eef0f3; color: var(--muted); }
+.status-closed { background: #fdecea; color: #b42318; }
+.for-child {
+  margin: 0 0 12px;
+  padding: 10px 12px;
+  border-radius: 10px;
+  background: var(--primary-soft);
+  color: var(--primary-dark);
+  font-size: 0.9rem;
+}
+.for-child p { margin: 0; }
+.for-child p + p { margin-top: 4px; }
 
 /* ---------- About ---------- */
 .about { margin-top: 48px; }
