@@ -192,8 +192,18 @@ function whatsappUrl(c) {
   return "https://wa.me/?text=" + encodeURIComponent(lines.join("\n"));
 }
 
-function actionLink(className, href, iconSvg, label) {
+// Counts button clicks anonymously in GoatCounter (does nothing if the counter is blocked).
+function track(name) {
+  try {
+    if (window.goatcounter && typeof window.goatcounter.count === "function") {
+      window.goatcounter.count({ path: name, title: name, event: true });
+    }
+  } catch (e) { /* counting must never break the page */ }
+}
+
+function actionLink(className, href, iconSvg, label, trackName) {
   const a = el("a", className);
+  if (trackName) a.addEventListener("click", () => track(trackName));
   a.href = href;
   a.target = "_blank";
   a.rel = "noopener noreferrer";
@@ -322,13 +332,14 @@ function renderCard(c, i) {
     a.href = url;
     a.target = "_blank";
     a.rel = "noopener noreferrer";
+    a.addEventListener("click", () => track("click-official-link"));
     actions.appendChild(a);
   }
   if (!c.sample) {
     const row = el("div", "secondary-actions");
     const cal = calendarUrl(c);
-    if (cal) row.appendChild(actionLink("btn-secondary", cal, ACTION_ICONS.calendar, "Add to calendar"));
-    row.appendChild(actionLink("btn-secondary", whatsappUrl(c), ACTION_ICONS.share, "WhatsApp"));
+    if (cal) row.appendChild(actionLink("btn-secondary", cal, ACTION_ICONS.calendar, "Add to calendar", "click-calendar"));
+    row.appendChild(actionLink("btn-secondary", whatsappUrl(c), ACTION_ICONS.share, "WhatsApp", "click-whatsapp"));
     actions.appendChild(row);
   }
   card.appendChild(actions);

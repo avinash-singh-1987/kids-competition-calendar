@@ -24,3 +24,6 @@
   (official/news/blog) and `addedOn` (today's date); set `updatedOn` when dates change.
 - Set `individual` ("yes"/"no"/"ask") only from what the source says; use "ask" if unclear.
 - `og-image.jpg` is the link-preview picture for WhatsApp etc.; keep it under 300 KB.
+- Visitor counter: GoatCounter, site code `kochikidscalendar`
+  (dashboard https://kochikidscalendar.goatcounter.com). Button clicks are counted as
+  events `click-whatsapp`, `click-calendar`, `click-official-link`.
