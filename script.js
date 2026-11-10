@@ -99,6 +99,13 @@ function registerByText(c) {
   return c.mode === "School-based" ? "Ask your school" : "Check official link";
 }
 
+// Can a parent register the child directly, without the school?
+function individualText(c) {
+  if (c.individual === "yes") return "Yes ✓";
+  if (c.individual === "no") return "No — school only";
+  return "Ask organiser";
+}
+
 function examText(c) {
   const upcoming = upcomingExamDates(c);
   if (upcoming.length === 0) return "To be announced";
@@ -279,6 +286,7 @@ function renderCard(c, i) {
     ["Exam date", examText(c)],
     ["Fee", c.fee || "—"],
     ["Mode", c.mode || "—"],
+    ["Apply without school", individualText(c)],
   ].forEach(([label, value]) => {
     const row = el("div");
     row.appendChild(el("dt", null, label));
