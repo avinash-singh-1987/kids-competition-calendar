@@ -30,3 +30,9 @@
 - School admissions page: `admissions.html` + `admissions.js`, data in `admissions.json`
   (see README). Keep schools in popularity order (Rajagiri Kalamassery first). Never rate or
   rank schools ourselves; status/age rules only from the school's own notice when possible.
+- School websites reachable from the cloud environment (owner added them to Allowed domains):
+  rajagiri.ac.in, christujayanthi.ac.in, bhavanskochikendra.com, choiceschool.com,
+  tochschool.com, assisi.ac.in, ncskochi.nesnavy.in, sanskaraschool.com, vidyodayaschool.ac.in,
+  gemsmodernacademy-kochi.in, globalpublicschool.org, chinmayavidyalaya.edu.in (Tripunithura),
+  shpublicschool.com. Chinmaya Vaduthala is chinmayavaduthala.edu.in (needs adding).
+  KV and EducationWorld sites block cloud servers — use news/search for those.

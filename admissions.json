@@ -13,33 +13,37 @@
     "applyMonth": 9,
     "sessionMonth": 6,
     "status": "closed",
-    "statusNote": "KG admissions are held in September. For June 2027 they were in September 2026; the next round is expected around September 2027 (for 2028-29). Applications with any age or birth-date mismatch are rejected.",
-    "link": "https://rajagiri.ac.in/",
-    "source": "https://rajagiri.ac.in/wp-content/uploads/2026/06/Admission-details.pdf",
+    "statusNote": "The school has published the final list for Kindergarten 2027-28, so admissions for June 2027 are over. KG admissions are held around September — the next round (for 2028-29) is expected around September 2027. Applications with any age or birth-date mismatch are rejected.",
+    "link": "https://rajagiri.ac.in/facilities/rajagiri-kindergarten/",
+    "source": "https://rajagiri.ac.in/latest_news/admissions-open-for-kindergarten-2027-28/",
     "sourceType": "official",
-    "checkedOn": "2026-11-11",
-    "unverified": true
+    "checkedOn": "2026-11-11"
   },
   {
     "school": "Bhavan's Vidya Mandir",
     "area": "Elamakkara + other Bhavan's campuses",
     "board": "CBSE",
     "why": "Very popular, good value",
-    "entry": [{"class": "LKG",
+    "entry": [{"class": "Pre-KG",
+        "minAge": 3,
+        "maxAge": 4,
+        "cutoff": "05-31"
+      },
+      {
+        "class": "LKG",
         "minAge": 4,
         "maxAge": 5,
-        "cutoff": "06-01"
+        "cutoff": "05-31"
       }
     ],
     "applyMonth": 7,
     "sessionMonth": 6,
     "status": "check",
-    "statusNote": "Pre-KG and LKG 2027-28 admissions are online only. LKG 2027-28: born 1 June 2022 – 31 May 2023. Last year's form window was a short period in July. Registration does not guarantee a seat.",
+    "statusNote": "2027-28 applications are online only. Pre-KG: born 1 June 2023 – 31 May 2024. LKG: born 1 June 2022 – 31 May 2023. Underage applications are rejected. Registration does not guarantee a seat; the 2027-28 fee structure is on the website.",
     "link": "https://bhavanskochikendra.com/Admission/ADMISSION-TO-PRE~KG-and-LKG",
     "source": "https://bhavanskochikendra.com/Admission/ADMISSION-TO-PRE~KG-and-LKG",
     "sourceType": "official",
-    "checkedOn": "2026-11-11",
-    "unverified": true
+    "checkedOn": "2026-11-11"
   },
   {
     "school": "Chinmaya Vidyalaya, Vaduthala",
@@ -48,11 +52,10 @@
     "why": "Popular with families from North India",
     "entry": [],
     "status": "check",
-    "statusNote": "Has LKG. Admission dates and age rules not found online yet — please check with the school office (Pallikkavu Temple Road, Vaduthala).",
-    "link": "https://school.careers360.com/schools/chinmaya-vidyalaya-vaduthala-kochi",
-    "linkLabel": "School profile",
-    "source": "https://school.careers360.com/schools/chinmaya-vidyalaya-vaduthala-kochi",
-    "sourceType": "blog",
+    "statusNote": "The school's website has a 'Kindergarten Admission 2027-2028' section. Phone: 0484-2400617 / 2405616, 80755 86514 (from the school's contact page).",
+    "link": "https://www.chinmayavaduthala.edu.in/",
+    "source": "https://www.chinmayavaduthala.edu.in/Contact-Us",
+    "sourceType": "official",
     "checkedOn": "2026-11-11",
     "unverified": true
   },
@@ -62,14 +65,15 @@
     "board": "CBSE",
     "why": "Popular with families from North India",
     "entry": [],
-    "status": "check",
-    "statusNote": "Established 1974, LKG to Class 12. Admission dates not found online yet — please check with the school.",
-    "link": "https://educationworld.in/chinmaya-vidyalaya-tripunithura-kochi/",
-    "linkLabel": "School profile",
-    "source": "https://school.careers360.com/schools/chinmaya-vidyalaya-tripunithura-ernakulam",
-    "sourceType": "blog",
+    "status": "expected",
+    "statusNote": "The school invites applications in April; admission tests are held in the first week of April for all classes, and seats depend on the child's performance and availability. Phone: +91 484 2778525.",
+    "link": "https://www.chinmayavidyalaya.edu.in/page?content=admission",
+    "source": "https://www.chinmayavidyalaya.edu.in/page?content=admission",
+    "sourceType": "official",
     "checkedOn": "2026-11-11",
-    "unverified": true
+    "expectedText": "April 2027",
+    "applyMonth": 4,
+    "sessionMonth": 6
   },
   {
     "school": "Sanskara School",
@@ -78,11 +82,10 @@
     "why": "Newer school, good parent feedback",
     "entry": [],
     "status": "check",
-    "statusNote": "Run by Muthoot Educational Trust. Kindergarten entry from about age 3 (listing site). Admission dates not found online yet — please check with the school.",
-    "link": "https://school.careers360.com/schools/sanskara-school-phase-ii-infopark-ernakulam",
-    "linkLabel": "School profile",
-    "source": "https://www.edustoke.com/kochi/sanskara-school-kakkanad",
-    "sourceType": "blog",
+    "statusNote": "Online admission form on the school website lists LKG and UKG onwards; there is also a separate 'Vidyaarambham' pre-school. Dates and age rules not published — please check with the school.",
+    "link": "https://www.sanskaraschool.com/admissions/",
+    "source": "https://www.sanskaraschool.com/admissions/",
+    "sourceType": "official",
     "checkedOn": "2026-11-11",
     "unverified": true
   },
@@ -93,10 +96,10 @@
     "why": "Ranked #3 co-ed day school in Kerala (EducationWorld 2024-25)",
     "entry": [],
     "status": "check",
-    "statusNote": "Has an LKG admissions page on its website. 2027-28 dates and age rules not confirmed yet — check the school website.",
-    "link": "https://www.christujayanthi.ac.in/",
-    "source": "https://www.onmanorama.com/career-and-campus/top-news/2024/11/26/top-kerala-schools-national-ranking-by-edu-portal.html",
-    "sourceType": "news",
+    "statusNote": "Has Pre-KG, LKG and UKG (Rajagiri Christu Jayanthi Kindergarten, 25 years). 2027-28 admission dates and age rules not published on the website yet — please check with the school.",
+    "link": "https://www.christujayanthi.ac.in/kindergarten/",
+    "source": "https://www.christujayanthi.ac.in/kindergarten-pre-kg/",
+    "sourceType": "official",
     "checkedOn": "2026-11-11",
     "unverified": true
   },
@@ -126,17 +129,32 @@
     "area": "Thiruvaniyoor",
     "board": "CBSE",
     "why": "Ranked in Kerala's top co-ed day-cum-boarding schools (EducationWorld 2026-27)",
-    "entry": [],
+    "entry": [{"class": "Toddler",
+        "minAge": 2,
+        "maxAge": 3,
+        "cutoff": "05-31"
+      },
+      {
+        "class": "Step 1 (Pre-KG)",
+        "minAge": 3,
+        "maxAge": 4,
+        "cutoff": "05-31"
+      },
+      {
+        "class": "Step 2 (LKG)",
+        "minAge": 4,
+        "maxAge": 5,
+        "cutoff": "05-31"
+      }
+    ],
     "applyMonth": 10,
     "sessionMonth": 6,
-    "status": "check",
-    "statusNote": "Pre-KG is called 'Stepping Stones'. Admissions reportedly begin every October for the next June.",
-    "link": "https://educationworld.in/global-public-school-kochi/",
-    "linkLabel": "School profile",
-    "source": "https://ipfs.ssi.eecc.de/ipns/en.wikipedia-on-ipfs.org/wiki/Global_Public_School",
-    "sourceType": "blog",
-    "checkedOn": "2026-11-11",
-    "unverified": true
+    "status": "open",
+    "statusNote": "Admissions for 2027-28 are open (Stepping Stones kindergarten). The school's own windows are slightly wider — e.g. Step 1: born 1 Jan 2023 – 31 May 2024; Toddler: born 1 Jan 2024 – 31 May 2025. Process: enquiry → call back → online registration → campus visit → fee payment. Phone: +91 484 271 3745.",
+    "link": "https://globalpublicschool.org/admission-enquiry?school=stepping-stones",
+    "source": "https://globalpublicschool.org/kochi/stepping-stones",
+    "sourceType": "official",
+    "checkedOn": "2026-11-11"
   },
   {
     "school": "GEMS Modern Academy",
@@ -145,10 +163,9 @@
     "why": "Ranked #1 international day school in Kerala (EducationWorld 2026-27)",
     "entry": [],
     "status": "check",
-    "statusNote": "Admission dates and age rules not found online yet — please check with the school.",
-    "link": "https://educationworld.in/top-schools-india/state/kerala/",
-    "linkLabel": "See ranking",
-    "source": "https://educationworld.in/top-schools-india/state/kerala/",
+    "statusNote": "International school (IB / Cambridge). Online enrolment and an age-placement guide are on the website; dates not published. Admissions: 0484-2587800, 79942 05050, admissions_mak@gemsedu.com.",
+    "link": "https://www.gemsmodernacademy-kochi.in/admission",
+    "source": "https://www.gemsmodernacademy-kochi.in/admission",
     "sourceType": "official",
     "checkedOn": "2026-11-11",
     "unverified": true
@@ -160,12 +177,11 @@
     "why": "Ranked #2 central-government day school in Kerala (EducationWorld 2026-27)",
     "entry": [],
     "status": "check",
-    "statusNote": "Priority for children of Navy personnel; seats for others may be limited. Check the school's admission notice for eligibility.",
-    "link": "https://ncskochi.nesnavy.in/",
-    "source": "https://ncskochi.nesnavy.in/Content/Pdf's/ADM PRG-2025-26.pdf",
+    "statusNote": "Seats are given by category: children of serving Navy personnel first, then other defence categories, then others if seats remain. Check the admission procedure for your category.",
+    "link": "https://ncskochi.nesnavy.in/admissionprocedure",
+    "source": "https://ncskochi.nesnavy.in/admissionprocedure",
     "sourceType": "official",
-    "checkedOn": "2026-11-11",
-    "unverified": true
+    "checkedOn": "2026-11-11"
   },
   {
     "school": "Vidyodaya School",
@@ -174,11 +190,11 @@
     "why": "Topped Kochi co-ed day school rankings in earlier EducationWorld editions",
     "entry": [],
     "status": "check",
-    "statusNote": "Admission dates and age rules not found online yet — please check with the school.",
-    "link": "https://online.flipbuilder.com/qzxg/tzdc/files/basic-html/page76.html",
-    "linkLabel": "See ranking",
-    "source": "https://online.flipbuilder.com/qzxg/tzdc/files/basic-html/page76.html",
-    "sourceType": "news",
+    "statusNote": "The school has published a notice for First Standard (Class 1) admissions 2027-28. Kindergarten details not found on the website — please check with the school.",
+    "link": "https://vidyodayaschool.ac.in/first-standard-admissions-2027-2028/",
+    "linkLabel": "Class 1 admissions 2027-28",
+    "source": "https://vidyodayaschool.ac.in/first-standard-admissions-2027-2028/",
+    "sourceType": "official",
     "checkedOn": "2026-11-11",
     "unverified": true
   },
@@ -187,34 +203,48 @@
     "area": "Thevara",
     "board": "CBSE",
     "why": "Listed among Kochi's top co-ed day schools in earlier EducationWorld editions",
-    "entry": [],
-    "status": "check",
-    "statusNote": "Admission dates and age rules not found online yet — please check with the school.",
-    "link": "https://online.flipbuilder.com/qzxg/tzdc/files/basic-html/page76.html",
-    "linkLabel": "See ranking",
-    "source": "https://online.flipbuilder.com/qzxg/tzdc/files/basic-html/page76.html",
-    "sourceType": "news",
-    "checkedOn": "2026-11-11",
-    "unverified": true
+    "entry": [{"class": "Pre-KG",
+        "minAge": 3,
+        "maxAge": 4,
+        "cutoff": "05-31"
+      },
+      {
+        "class": "LKG",
+        "minAge": 4,
+        "maxAge": 5,
+        "cutoff": "05-31"
+      }
+    ],
+    "status": "open",
+    "statusNote": "Kindergarten 2027-28 instructions are published with an 'Apply now' option. Pre-KG: born 1 June 2023 – 31 May 2024. LKG: born 1 June 2022 – 31 May 2023. KG phone: +91 484 3531971.",
+    "link": "https://shpublicschool.com/kindergarten-instructions/",
+    "source": "https://shpublicschool.com/kindergarten-instructions/",
+    "sourceType": "official",
+    "checkedOn": "2026-11-11"
   },
   {
     "school": "Toc H Public School",
     "area": "Vyttila",
     "board": "CBSE",
     "why": "Well-known CBSE school in Vyttila",
-    "entry": [{"class": "LKG",
+    "entry": [{"class": "Pre-KG",
+        "minAge": 3,
+        "maxAge": null,
+        "cutoff": "06-01"
+      },
+      {
+        "class": "LKG",
         "minAge": 4,
         "maxAge": null,
         "cutoff": "06-01"
       }
     ],
     "status": "check",
-    "statusNote": "The school's eligibility page says children who are 4 by June can join LKG. The page is undated — confirm the 2027-28 dates with the school.",
-    "link": "https://mail.tochschool.com/admission_eligibility.php",
-    "source": "https://mail.tochschool.com/admission_eligibility.php",
+    "statusNote": "Children who turn 3 by June can join Pre-KG, and 4 by June can join LKG. UKG admissions happen only in March, if seats are free. 2027-28 dates not published — check with the school.",
+    "link": "https://www.tochschool.com/admission_eligibility.php",
+    "source": "https://www.tochschool.com/admission_eligibility.php",
     "sourceType": "official",
-    "checkedOn": "2026-11-11",
-    "unverified": true
+    "checkedOn": "2026-11-11"
   },
   {
     "school": "Assisi Vidyaniketan (Alphadale kindergarten)",
@@ -224,13 +254,12 @@
     "entry": [],
     "applyMonth": 8,
     "sessionMonth": 6,
-    "status": "check",
-    "statusNote": "LKG online registration has started on 1 August in past years. Contact: kindergarten@assisi.ac.in (from the school's site).",
-    "link": "https://assisi.ac.in/admission.html",
-    "source": "https://assisi.ac.in/admission.html",
+    "status": "open",
+    "statusNote": "The school's website says 'Admission started for LKG'. Apply through the school's online portal (linked from the website). Phone: 0484 2424724.",
+    "link": "https://assisi.ac.in/kindergarten.html",
+    "source": "https://assisi.ac.in/",
     "sourceType": "official",
-    "checkedOn": "2026-11-11",
-    "unverified": true
+    "checkedOn": "2026-11-11"
   },
   {
     "school": "Kendriya Vidyalayas in Kochi (Balvatika)",

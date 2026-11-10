@@ -94,6 +94,10 @@ function eligibility(rule, dob, school) {
   return null;
 }
 
+function thisRoundOpen(s, year) {
+  return s.status === "open" && year === firstPlannableYear(s.sessionMonth);
+}
+
 function applyDate(school, sessionYear) {
   if (!school.applyMonth) return null;
   const sessionMonth = school.sessionMonth || 6;
@@ -170,7 +174,9 @@ function renderCard(s, i) {
 
   const badges = el("div", "badges");
   badges.appendChild(statusChip(s));
-  if (s.unverified) badges.appendChild(el("span", "badge unverified", "Not yet confirmed"));
+  badges.appendChild(s.unverified
+    ? el("span", "badge unverified", "Not yet confirmed")
+    : el("span", "badge confirmed", "From school website ✓"));
   card.appendChild(badges);
 
   if (s.why) card.appendChild(el("p", "why", s.why));
@@ -199,8 +205,11 @@ function renderCard(s, i) {
       box.appendChild(el("strong", null, "For your child: "));
       box.appendChild(document.createTextNode("ask the school for its age rule."));
     } else {
-      s.entry.forEach(r => {
-        const res = eligibility(r, childDob, s);
+      const results = s.entry.map(r => ({ r, res: eligibility(r, childDob, s) }));
+      const anyFits = results.some(x => x.res && !x.res.tooOld);
+      results.forEach(({ r, res }) => {
+        if (anyFits && (!res || res.tooOld)) return; // only show the classes that fit
+
         const line = el("p");
         line.appendChild(el("strong", null, `${r.class}: `));
         if (!res) line.appendChild(document.createTextNode("not within the next few years — check with the school."));
@@ -210,11 +219,14 @@ function renderCard(s, i) {
           let text = `can join in ${MONTHS[sessionStart.getMonth()]} ${res.year} (${res.year}-${String(res.year + 1).slice(2)} session).`;
           const apply = applyDate(s, res.year);
           if (apply) {
-            text += apply < today()
-              ? ` Applications for that session usually opened in ${MONTHS[apply.getMonth()]} ${apply.getFullYear()} — check now.`
-              : ` Apply around ${MONTHS[apply.getMonth()]} ${apply.getFullYear()}.`;
+            const thisRound = res.year === firstPlannableYear(s.sessionMonth);
+            if (apply >= today()) text += ` Apply around ${MONTHS[apply.getMonth()]} ${apply.getFullYear()}.`;
+            else if (thisRound && s.status === "open") text += " Admissions are open now — apply soon.";
+            else if (thisRound && s.status === "closed") text += " Admissions for that session have closed.";
+            else text += ` Applications usually opened in ${MONTHS[apply.getMonth()]} ${apply.getFullYear()} — check with the school now.`;
             if (apply >= today() && !reminder) reminder = { when: apply, cls: r.class, year: res.year };
           }
+          if (!s.applyMonth && thisRoundOpen(s, res.year)) text += " Admissions are open now — apply soon.";
           line.appendChild(document.createTextNode(text));
         }
         box.appendChild(line);
