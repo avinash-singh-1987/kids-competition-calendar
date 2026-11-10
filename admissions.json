@@ -13,7 +13,7 @@
     "applyMonth": 9,
     "sessionMonth": 6,
     "status": "closed",
-    "statusNote": "The school has published the final list for Kindergarten 2027-28, so admissions for June 2027 are over. KG admissions are held around September — the next round (for 2028-29) is expected around September 2027. Applications with any age or birth-date mismatch are rejected.",
+    "statusNote": "The school has published the final list for Kindergarten 2027-28, so admissions for June 2027 are over. KG admissions are held around September — the next round (for 2028-29) is expected around September 2027. Applications with any age or birth-date mismatch are rejected. Entry is at LKG; the school's notice does not mention UKG admissions.",
     "link": "https://rajagiri.ac.in/facilities/rajagiri-kindergarten/",
     "source": "https://rajagiri.ac.in/latest_news/admissions-open-for-kindergarten-2027-28/",
     "sourceType": "official",
@@ -34,12 +34,18 @@
         "minAge": 4,
         "maxAge": 5,
         "cutoff": "05-31"
+      },
+      {
+        "class": "UKG",
+        "minAge": 5,
+        "maxAge": 6,
+        "cutoff": "05-31"
       }
     ],
     "applyMonth": 7,
     "sessionMonth": 6,
     "status": "check",
-    "statusNote": "2027-28 applications are online only. Pre-KG: born 1 June 2023 – 31 May 2024. LKG: born 1 June 2022 – 31 May 2023. Underage applications are rejected. Registration does not guarantee a seat; the 2027-28 fee structure is on the website.",
+    "statusNote": "2027-28 applications are online only. Pre-KG: born 1 June 2023 – 31 May 2024. LKG: born 1 June 2022 – 31 May 2023. Underage applications are rejected. UKG has a separate online registration ('UKG to Std. IX'), only if seats are available — its age rule here is from the 2026-27 notice. Registration does not guarantee a seat.",
     "link": "https://bhavanskochikendra.com/Admission/ADMISSION-TO-PRE~KG-and-LKG",
     "source": "https://bhavanskochikendra.com/Admission/ADMISSION-TO-PRE~KG-and-LKG",
     "sourceType": "official",
@@ -99,7 +105,7 @@
     "why": "Newer school, good parent feedback",
     "entry": [],
     "status": "check",
-    "statusNote": "Online admission form on the school website lists LKG and UKG onwards; there is also a separate 'Vidyaarambham' pre-school. Dates and age rules not published — please check with the school.",
+    "statusNote": "Preschool runs from Play group to UKG (ages 3–5). The online admission form lists LKG and UKG onwards. Dates and exact age rules not published — please check with the school.",
     "link": "https://www.sanskaraschool.com/admissions/",
     "source": "https://www.sanskaraschool.com/admissions/",
     "sourceType": "official",
@@ -125,16 +131,28 @@
     "area": "Tripunithura",
     "board": "CBSE & IB",
     "why": "Ranked #2 in Kerala, co-ed day-cum-boarding (EducationWorld 2026-27)",
-    "entry": [{"class": "KG",
+    "entry": [{"class": "Kinderark (Pre-school)",
+        "minAge": 2,
+        "maxAge": 3,
+        "cutoff": "06-01"
+      },
+      {
+        "class": "KG (LKG)",
         "minAge": 3,
-        "maxAge": null,
+        "maxAge": 4,
+        "cutoff": "06-01"
+      },
+      {
+        "class": "Prep (UKG)",
+        "minAge": 4,
+        "maxAge": 5,
         "cutoff": "06-01"
       }
     ],
     "applyMonth": 8,
     "sessionMonth": 6,
     "status": "check",
-    "statusNote": "Online registration usually starts in August for the next June. Age rule is from an older year's notice.",
+    "statusNote": "Note: Choice starts a year earlier than most schools — KG (their LKG) from age 3 and Prep (their UKG) from age 4, by 1 June. Age rules are from the school's FAQ (2023-24 notice). Online registration usually starts in August for the next June.",
     "link": "https://ib.choiceschool.com/?p=1423",
     "source": "https://ib.choiceschool.com/?p=1423",
     "sourceType": "official",
@@ -162,12 +180,18 @@
         "minAge": 4,
         "maxAge": 5,
         "cutoff": "05-31"
+      },
+      {
+        "class": "Step 3 (UKG)",
+        "minAge": 5,
+        "maxAge": 6,
+        "cutoff": "05-31"
       }
     ],
     "applyMonth": 10,
     "sessionMonth": 6,
     "status": "open",
-    "statusNote": "Admissions for 2027-28 are open (Stepping Stones kindergarten). The school's own windows are slightly wider — e.g. Step 1: born 1 Jan 2023 – 31 May 2024; Toddler: born 1 Jan 2024 – 31 May 2025. Process: enquiry → call back → online registration → campus visit → fee payment. Phone: +91 484 271 3745.",
+    "statusNote": "Admissions for 2027-28 are open (Stepping Stones kindergarten). The school's own windows are slightly wider — e.g. Step 1: born 1 Jan 2023 – 31 May 2024; Toddler: born 1 Jan 2024 – 31 May 2025; Step 3 (UKG): born 1 Jan 2021 – 31 May 2022. Process: enquiry → call back → online registration → campus visit → fee payment. Phone: +91 484 271 3745.",
     "link": "https://globalpublicschool.org/admission-enquiry?school=stepping-stones",
     "source": "https://globalpublicschool.org/kochi/stepping-stones",
     "sourceType": "official",
@@ -246,18 +270,24 @@
     "why": "Well-known CBSE school in Vyttila",
     "entry": [{"class": "Pre-KG",
         "minAge": 3,
-        "maxAge": null,
+        "maxAge": 4,
         "cutoff": "06-01"
       },
       {
         "class": "LKG",
         "minAge": 4,
-        "maxAge": null,
+        "maxAge": 5,
+        "cutoff": "06-01"
+      },
+      {
+        "class": "UKG",
+        "minAge": 5,
+        "maxAge": 6,
         "cutoff": "06-01"
       }
     ],
     "status": "check",
-    "statusNote": "Children who turn 3 by June can join Pre-KG, and 4 by June can join LKG. UKG admissions happen only in March, if seats are free. 2027-28 dates not published — check with the school.",
+    "statusNote": "Children who turn 3 by June can join Pre-KG, 4 by June LKG. UKG admissions happen only in March and only if seats are free (child must turn 5 by June). 2027-28 dates not published — check with the school.",
     "link": "https://www.tochschool.com/admission_eligibility.php",
     "source": "https://www.tochschool.com/admission_eligibility.php",
     "sourceType": "official",
@@ -287,13 +317,25 @@
         "minAge": 3,
         "maxAge": 4,
         "cutoff": "03-31"
+      },
+      {
+        "class": "Balvatika-2",
+        "minAge": 4,
+        "maxAge": 5,
+        "cutoff": "03-31"
+      },
+      {
+        "class": "Balvatika-3",
+        "minAge": 5,
+        "maxAge": 6,
+        "cutoff": "03-31"
       }
     ],
     "applyMonth": 3,
     "sessionMonth": 4,
     "status": "expected",
     "expectedText": "March 2027",
-    "statusNote": "All KVs apply together online. For 2026-27, registration ran 20 March – 2 April 2026 and seats were given by lottery. Balvatika-1: age 3 to under 4 on 31 March.",
+    "statusNote": "All KVs apply together online. For 2026-27, registration ran 20 March – 2 April 2026 and seats were given by lottery. Balvatika-1, 2 and 3 are KV's Pre-KG, LKG and UKG (age 3–4, 4–5 and 5–6 on 31 March); Balvatika-2 and 3 usually only have a few seats.",
     "link": "https://no4cochin.kvs.ac.in/en/admission-details",
     "source": "https://news.careers360.com/kvs-admission-dates-2026-27-out-apply-online-kvsangathan-nic-in-balvatika-class-1-11-registration-tomorrow-age-lottery-list-online",
     "sourceType": "news",
