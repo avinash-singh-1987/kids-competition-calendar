@@ -1,4 +1,4 @@
-// Kids Competition Calendar
+// Kochi Kids Calendar – competitions page
 // Reads competitions.json, then shows upcoming deadlines/exams and the filtered list.
 // You should not need to edit this file to add competitions — edit competitions.json.
 
@@ -171,7 +171,7 @@ function calendarUrl(c) {
   lines.push("Register by: " + registerByText(c));
   if (c.unverified) lines.push("Dates not yet confirmed — please check with your school or the organiser.");
   if (safeLink(c.link)) lines.push("More info: " + c.link);
-  lines.push("Kids Competition Calendar: " + pageUrl(c));
+  lines.push("Kochi Kids Calendar: " + pageUrl(c));
   const params = new URLSearchParams({
     action: "TEMPLATE",
     text: (ev.kind === "exam" ? "" : "Last day to register: ") + c.name,

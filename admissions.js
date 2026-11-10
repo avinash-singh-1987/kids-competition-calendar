@@ -143,7 +143,7 @@ function reminderUrl(s, when, title) {
     action: "TEMPLATE",
     text: title,
     dates: ymd(when) + "/" + ymd(end),
-    details: `${s.school} (${s.area}) usually opens admissions around this month. Check the school's notice: ${s.link}\n\nKids Competition Calendar: ${location.origin + location.pathname}#${slugify(s.school)}`,
+    details: `${s.school} (${s.area}) usually opens admissions around this month. Check the school's notice: ${s.link}\n\nKochi Kids Calendar: ${location.origin + location.pathname}#${slugify(s.school)}`,
   });
   return "https://calendar.google.com/calendar/render?" + params.toString();
 }
