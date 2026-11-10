@@ -6,14 +6,14 @@
     "type": "Olympiad",
     "registrationLastDate": "",
     "examDates": ["2026-10-23", "2026-11-26", "2026-12-10"],
-    "fee": "Ask your school",
+    "fee": "₹170 (through school)",
     "mode": "School-based",
-    "link": "https://www.sofworld.org",
-    "source": "https://articles.findmycollege.com/news/sof-iso-imo-2026-27-exam-dates-announced-offline-tests-from-october-23/",
-    "sourceType": "blog",
+    "link": "https://sofworld.org/imo",
+    "source": "https://sofworld.org/imo",
+    "sourceType": "official",
     "addedOn": "2026-11-06",
-    "note": "Your school registers students and picks ONE of these exam dates. Ask the school which date and the last day to submit the form.",
-    "unverified": true
+    "note": "Only schools can register students — at least 30 days before the exam — and the school picks ONE of these dates. Students cannot apply individually.",
+    "updatedOn": "2026-11-10"
   },
   {
     "name": "International English Olympiad (IEO) – Level 1",
@@ -22,14 +22,14 @@
     "type": "Olympiad",
     "registrationLastDate": "",
     "examDates": ["2026-09-30", "2026-10-27", "2026-11-17"],
-    "fee": "Ask your school",
+    "fee": "₹170 (through school)",
     "mode": "School-based",
-    "link": "https://www.sofworld.org",
-    "source": "https://vaagaacademy.com/blog/sof-olympiad-exam-dates-2026-27",
-    "sourceType": "blog",
+    "link": "https://sofworld.org/ieo",
+    "source": "https://sofworld.org/ieo",
+    "sourceType": "official",
     "addedOn": "2026-11-06",
-    "note": "Your school registers students and picks ONE of these exam dates. Ask the school which date and the last day to submit the form.",
-    "unverified": true
+    "note": "Only schools can register students — at least 30 days before the exam — and the school picks ONE of these dates. Students cannot apply individually.",
+    "updatedOn": "2026-11-10"
   },
   {
     "name": "International Science Olympiad (ISO, earlier NSO) – Level 1",
@@ -38,14 +38,14 @@
     "type": "Olympiad",
     "registrationLastDate": "",
     "examDates": ["2026-10-30", "2026-11-19", "2026-12-03"],
-    "fee": "Ask your school",
+    "fee": "₹170 (through school)",
     "mode": "School-based",
-    "link": "https://www.sofworld.org",
-    "source": "https://articles.findmycollege.com/news/sof-iso-imo-2026-27-exam-dates-announced-offline-tests-from-october-23/",
-    "sourceType": "blog",
+    "link": "https://sofworld.org/iso",
+    "source": "https://sofworld.org/iso",
+    "sourceType": "official",
     "addedOn": "2026-11-06",
-    "note": "Your school registers students and picks ONE of these exam dates. Ask the school which date and the last day to submit the form.",
-    "unverified": true
+    "note": "Only schools can register students — at least 30 days before the exam — and the school picks ONE of these dates. Students cannot apply individually.",
+    "updatedOn": "2026-11-10"
   },
   {
     "name": "SilverZone International Olympiad of Mathematics (iOM)",
@@ -60,8 +60,9 @@
     "source": "https://motion.ac.in/examinfo/silverzone-olympiad-exam-dates/",
     "sourceType": "blog",
     "addedOn": "2026-11-06",
-    "note": "Dates found on education blogs that do not fully agree. Confirm with your school before relying on them.",
-    "unverified": true
+    "note": "SilverZone's official website says registration is open up to 15 days before the November and December exam dates. The exam dates themselves are from education blogs — confirm with your school.",
+    "unverified": true,
+    "updatedOn": "2026-11-10"
   },
   {
     "name": "SilverZone International Olympiad of English Language (iOEL)",
@@ -76,8 +77,9 @@
     "source": "https://schools.aglasem.com/silverzone-ioel/",
     "sourceType": "blog",
     "addedOn": "2026-11-06",
-    "note": "Dates found on education blogs that do not fully agree. Confirm with your school before relying on them.",
-    "unverified": true
+    "note": "SilverZone's official website says registration is open up to 15 days before the November and December exam dates. The exam dates themselves are from education blogs — confirm with your school.",
+    "unverified": true,
+    "updatedOn": "2026-11-10"
   },
   {
     "name": "Raja Ravi Varma Gold Medal Painting Competition",
@@ -86,15 +88,16 @@
     "type": "Drawing",
     "registrationLastDate": "",
     "examDates": ["2026-11-14"],
-    "fee": "Check news link",
+    "fee": "Free",
     "mode": "Offline",
-    "link": "https://www.onmanorama.com/news/kerala/2026/11/06/raja-ravi-varma-gold-medal-painting-competition-on-children-s-day.html",
+    "link": "https://docs.google.com/forms/d/e/1FAIpQLSeVOM76yfPCtdJaJLOR14RU5hAIjXTZPlGVGT_IXS_uALD_Nw/viewform",
     "source": "https://www.onmanorama.com/news/kerala/2026/11/06/raja-ravi-varma-gold-medal-painting-competition-on-children-s-day.html",
     "sourceType": "news",
     "addedOn": "2026-11-06",
-    "linkLabel": "Read news article",
-    "note": "Children's Day event at DPS campus, Athani, Nedumbassery, from 10 am. Open to students up to Class 7. Registration details not confirmed — check the news link or Manorama Nallapadam.",
-    "unverified": true
+    "linkLabel": "Register (Google Form)",
+    "note": "At DPS campus, Athani, Nedumbassery, from 10 am. Advance registration is required (free). Categories: Playschool, Pre-Primary, Primary (Class 1–3), Upper Primary (Class 4–7). Bring crayons, colour pencils, watercolours or oil pastels. Enquiries: 96455 51191 (as given in the news report).",
+    "unverified": true,
+    "updatedOn": "2026-11-10"
   },
   {
     "name": "International Computer Science Olympiad (ICSO)",
@@ -103,14 +106,14 @@
     "type": "Olympiad",
     "registrationLastDate": "",
     "examDates": ["2026-09-24", "2026-12-17"],
-    "fee": "Ask your school",
+    "fee": "₹170 (through school)",
     "mode": "School-based",
-    "link": "https://www.sofworld.org",
-    "source": "https://schools.aglasem.com/sof-icso/",
-    "sourceType": "blog",
+    "link": "https://sofworld.org/icso",
+    "source": "https://sofworld.org/icso",
+    "sourceType": "official",
     "addedOn": "2026-11-07",
-    "note": "Single-level exam. Your school registers students and picks the date. Dates from education websites — confirm with your school.",
-    "unverified": true
+    "note": "Single-level exam (no Level 2). Only schools can register students — at least 30 days before the exam — and the school picks the date. Students cannot apply individually.",
+    "updatedOn": "2026-11-10"
   },
   {
     "name": "International Hindi Olympiad (IHO)",
@@ -119,13 +122,28 @@
     "type": "Olympiad",
     "registrationLastDate": "",
     "examDates": ["2026-11-23", "2027-01-22"],
-    "fee": "Ask your school",
+    "fee": "₹170 (through school)",
     "mode": "School-based",
-    "link": "https://www.sofworld.org",
-    "source": "https://cracku.in/sof-exam-date-2026",
-    "sourceType": "blog",
+    "link": "https://sofworld.org/iho",
+    "source": "https://sofworld.org/iho",
+    "sourceType": "official",
     "addedOn": "2026-11-07",
-    "note": "For Class 3 and above. Dates found on only one education website — please confirm with your school.",
-    "unverified": true
+    "note": "For Class 3 and above. Only schools can register students — at least 30 days before the exam — and the school picks ONE of these dates. Students cannot apply individually.",
+    "updatedOn": "2026-11-10"
+  },
+  {
+    "name": "National Level Science Talent Search Exam (NSTSE)",
+    "organiser": "Unified Council",
+    "classes": [1, 2, 3, 4, 5],
+    "type": "Olympiad",
+    "registrationLastDate": "",
+    "examDates": ["2026-11-20", "2026-12-02", "2027-01-24"],
+    "fee": "₹150 via school · ₹354 direct",
+    "mode": "Offline via school, or online direct",
+    "link": "https://www.unifiedcouncil.com/about-nstse.html",
+    "source": "https://www.unifiedcouncil.com/about-nstse.html",
+    "sourceType": "official",
+    "addedOn": "2026-11-10",
+    "note": "Through your school: offline exam on 20 Nov or 2 Dec 2026. Without the school: parents can register directly on unifiedcouncil.com and the child takes an online exam on 24 Jan 2027 (practice test 17 Jan)."
   }
 ]
