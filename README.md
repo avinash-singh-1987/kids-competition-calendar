@@ -46,6 +46,8 @@ An entry looks like this:
 - `"sourceType": "official"` / `"news"` / `"blog"` — what kind of source it is.
 - `"addedOn": "2026-11-11"` — the date the entry was added. Optional `"updatedOn"` when dates change.
   The newest of these dates (or the site's publish time) appears as "Last updated" at the top.
+- `"individual": "yes"` / `"no"` / `"ask"` — can parents register directly without the school?
+  Shown on the card as "Apply without school".
 - `"unverified": true` — shows a yellow "Not yet confirmed" label (without it, the card shows a green "Confirmed ✓"). Remove this line
   once you have checked the dates with the school or official website.
 

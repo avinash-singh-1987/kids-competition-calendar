@@ -22,3 +22,5 @@
   or the owner's school; otherwise set `"unverified": true` and add a `note`.
 - Every new entry gets `source` (URL where it was found), `sourceType`
   (official/news/blog) and `addedOn` (today's date); set `updatedOn` when dates change.
+- Set `individual` ("yes"/"no"/"ask") only from what the source says; use "ask" if unclear.
+- `og-image.jpg` is the link-preview picture for WhatsApp etc.; keep it under 300 KB.
