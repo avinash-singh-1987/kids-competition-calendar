@@ -22,6 +22,7 @@
           <li><span id="stat-total">–</span> competitions</li>
           <li><span id="stat-soon">–</span> coming up in 30 days</li>
         </ul>
+        <p class="updated" id="updated-line" hidden>Last updated: <span id="last-updated"></span> · <a href="#about">How this works</a></p>
       </div>
 
       <!-- Decorative illustration (drawn in code, no external images) -->
@@ -128,15 +129,33 @@
       </div>
       <div id="competition-list" class="card-list" aria-live="polite"></div>
     </section>
+
+    <section class="about" id="about" aria-labelledby="about-title">
+      <h2 id="about-title">About this calendar</h2>
+      <div class="about-grid">
+        <div class="about-item">
+          <div class="about-icon" aria-hidden="true">🔎</div>
+          <h3>Where the information comes from</h3>
+          <p>Official Olympiad websites, Kochi newspapers in English and Malayalam, and education blogs. We check for new competitions every week, and finished competitions are hidden automatically.</p>
+        </div>
+        <div class="about-item">
+          <div class="about-icon" aria-hidden="true">🏷️</div>
+          <h3>How to read the labels</h3>
+          <p><strong>Confirmed ✓</strong> means the dates came from the organiser. <strong>Not yet confirmed</strong> means they came from a news report or blog. Every card links to its source, so you can check it yourself.</p>
+        </div>
+        <div class="about-item">
+          <div class="about-icon" aria-hidden="true">⚖️</div>
+          <h3>An independent, free guide</h3>
+          <p>This calendar is not connected to SOF, SilverZone, any school or any newspaper. Always confirm dates and fees with your school or the organiser before you register or pay.</p>
+        </div>
+      </div>
+    </section>
   </main>
 
   <footer class="site-footer">
     <div class="wrap footer-inner">
       <div class="footer-icon" aria-hidden="true">✏️</div>
-      <div>
-        <p><strong>Always confirm dates and fees on the official website or with your school before registering.</strong></p>
-        <p class="muted">Finished competitions are hidden automatically. Labels marked “Unverified” come from news reports or blogs.</p>
-      </div>
+      <p>Kids Competition Calendar · A free guide for parents in Kochi, Kerala</p>
     </div>
   </footer>
 
