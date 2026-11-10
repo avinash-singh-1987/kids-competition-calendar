@@ -34,5 +34,5 @@
   rajagiri.ac.in, christujayanthi.ac.in, bhavanskochikendra.com, choiceschool.com,
   tochschool.com, assisi.ac.in, ncskochi.nesnavy.in, sanskaraschool.com, vidyodayaschool.ac.in,
   gemsmodernacademy-kochi.in, globalpublicschool.org, chinmayavidyalaya.edu.in (Tripunithura),
-  shpublicschool.com. Chinmaya Vaduthala is chinmayavaduthala.edu.in (needs adding).
+  shpublicschool.com, chinmayavaduthala.edu.in (Chinmaya Vaduthala).
   KV and EducationWorld sites block cloud servers — use news/search for those.

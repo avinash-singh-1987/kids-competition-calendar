@@ -50,14 +50,31 @@
     "area": "Vaduthala",
     "board": "CBSE",
     "why": "Popular with families from North India",
-    "entry": [],
-    "status": "check",
-    "statusNote": "The school's website has a 'Kindergarten Admission 2027-2028' section. Phone: 0484-2400617 / 2405616, 80755 86514 (from the school's contact page).",
-    "link": "https://www.chinmayavaduthala.edu.in/",
-    "source": "https://www.chinmayavaduthala.edu.in/Contact-Us",
+    "entry": [{"class": "Pre-KG",
+        "minAge": 3,
+        "maxAge": 4,
+        "cutoff": "05-31"
+      },
+      {
+        "class": "LKG",
+        "minAge": 4,
+        "maxAge": 5,
+        "cutoff": "05-31"
+      },
+      {
+        "class": "UKG",
+        "minAge": 5,
+        "maxAge": 6,
+        "cutoff": "05-31"
+      }
+    ],
+    "status": "open",
+    "statusNote": "The 2027-28 application form for Pre-KG, LKG and UKG is on the school website. Age on 31 May 2027: Pre-KG 3 years and above, LKG 4 and above, UKG 5 and above. Registration fee ₹500 (non-refundable, paid online); the school then emails a date for an interaction. Phone: 0484-2400617.",
+    "link": "https://www.chinmayavaduthala.edu.in/Admission/Admission-2027%5E2028",
+    "source": "https://www.chinmayavaduthala.edu.in/Admission/Admission-2027%5E2028",
     "sourceType": "official",
     "checkedOn": "2026-11-11",
-    "unverified": true
+    "sessionMonth": 6
   },
   {
     "school": "Chinmaya Vidyalaya, Tripunithura",
