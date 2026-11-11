@@ -22,7 +22,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700&family=Nunito+Sans:wght@400;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css?v=20261116">
+  <link rel="stylesheet" href="style.css?v=20261118">
 </head>
 <body>
   <header class="hero">
@@ -153,6 +153,14 @@
       <div id="competition-list" class="card-list" aria-live="polite"></div>
     </section>
 
+    <section class="next-year" id="next-year" aria-labelledby="next-year-title" hidden>
+      <div class="section-head plain">
+        <h2 id="next-year-title">Closed for this year — don't miss next year <span id="next-year-count" class="count-pill"></span></h2>
+      </div>
+      <p class="muted next-year-intro">Registration for these has closed, but they are held every year. See this year's dates and set a reminder so you can ask your school (or register) in time next year.</p>
+      <div id="next-year-list" class="card-list"></div>
+    </section>
+
     <section class="about" id="about" aria-labelledby="about-title">
       <h2 id="about-title">About this calendar</h2>
       <div class="about-grid">
@@ -182,9 +190,9 @@
     </div>
   </footer>
 
-  <script src="script.js?v=20261116"></script>
+  <script src="script.js?v=20261118"></script>
   <!-- Anonymous visitor counter (GoatCounter: no cookies, no personal data) -->
-  <script src="announcement.js?v=20261116"></script>
+  <script src="announcement.js?v=20261118"></script>
   <script data-goatcounter="https://kochikidscalendar.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>
 </body>
 </html>

@@ -6,6 +6,9 @@ const DEADLINE_WINDOW_DAYS = 30;
 const BASE_TYPES = ["Olympiad", "Scholarship", "Drawing", "GK", "Quiz"];
 
 let allCompetitions = [];
+// Yearly competitions whose exams are over (kept for up to NEXT_YEAR_KEEP_DAYS so parents can plan next year).
+let pastCompetitions = [];
+const NEXT_YEAR_KEEP_DAYS = 300;
 
 // ---------- Date helpers ----------
 
@@ -98,6 +101,72 @@ function isAskSchool(c) {
 function isRegistrationClosed(c) {
   const reg = regDeadline(c);
   return reg ? reg < today() : false;
+}
+
+// ---------- Planning for next year ----------
+
+// All official dates of this year's round (including dates already past).
+function seasonDates(c) {
+  const list = Array.isArray(c.seasonDates) ? c.seasonDates.map(parseDate).filter(Boolean) : [];
+  return (list.length ? list : examDates(c)).sort((a, b) => a - b);
+}
+
+function addDays(date, days) { const d = new Date(date); d.setDate(d.getDate() + days); return d; }
+function addYears(date, years) { const d = new Date(date); d.setFullYear(d.getFullYear() + years); return d; }
+
+// This year's earliest "last day to register", only when it is known from the organiser:
+// a given registration date, or the school deadline rule ("schoolLeadDays") for the first exam date.
+function firstDeadlineThisYear(c) {
+  const first = seasonDates(c)[0];
+  const given = parseDate(c.registrationLastDate);
+  const lead = Number(c.schoolLeadDays);
+  const fromExam = first && lead ? addDays(first, -lead) : null;
+  if (given && fromExam) return given < fromExam ? given : fromExam;
+  return given || fromExam;
+}
+
+// When to remind the parent next year: a month before this year's first deadline,
+// or (if no deadline is known) two months before this year's first exam — one year on.
+function nextYearReminderDate(c) {
+  const deadline = firstDeadlineThisYear(c);
+  if (deadline) return addYears(addDays(deadline, -30), 1);
+  const first = seasonDates(c)[0];
+  return first ? addYears(addDays(first, -60), 1) : null;
+}
+
+// "early / mid / late Aug 2027" — an estimate should not look more exact than it is.
+function roughDate(date) {
+  const part = date.getDate() <= 10 ? "early" : date.getDate() <= 20 ? "mid" : "late";
+  return part + " " + date.toLocaleDateString("en-IN", { month: "short", year: "numeric" });
+}
+
+function dateRangeText(dates) {
+  if (!dates.length) return "";
+  const a = dates[0], b = dates[dates.length - 1];
+  return +a === +b ? formatDate(a) : formatDate(a) + " – " + formatDate(b);
+}
+
+// Google Calendar reminder for next year: a month before this year's first deadline, one year on.
+function nextYearReminderUrl(c) {
+  const remind = nextYearReminderDate(c);
+  if (!remind) return null;
+  const deadline = firstDeadlineThisYear(c);
+  const lines = ["This year's exams: " + dateRangeText(seasonDates(c)) + "."];
+  if (deadline) lines.push("This year the last day to register (for the first exam date) was " + formatDate(deadline) + ".");
+  lines.push(c.individual === "yes"
+    ? "Check the official website for next year's registration."
+    : "Ask your school whether it will take part next year, and check the official website for new dates.");
+  if (safeLink(c.link)) lines.push("Official website: " + c.link);
+  lines.push("Kochi Kids Calendar: " + location.origin + location.pathname);
+  const params = new URLSearchParams({
+    action: "TEMPLATE",
+    text: (c.individual === "yes" ? "Register for next year: " : "Ask school about next year: ") + c.name,
+    // 9:00–9:30 am India time, so the phone's usual event alert arrives that morning.
+    dates: ymd(remind) + "T090000/" + ymd(remind) + "T093000",
+    ctz: "Asia/Kolkata",
+    details: lines.join("\n"),
+  });
+  return "https://calendar.google.com/calendar/render?" + params.toString();
 }
 
 // The next thing a parent must act on: registration deadline or exam, whichever comes first.
@@ -400,13 +469,17 @@ function renderCard(c, i) {
   return card;
 }
 
+function matchesFilters(c) {
+  const classOk = filters.cls === "all" || (Array.isArray(c.classes) && c.classes.map(String).includes(filters.cls));
+  const typeOk = filters.type === "all" || c.type === filters.type;
+  const whoOk = filters.who === "all" || c.individual === "yes";
+  return classOk && typeOk && whoOk;
+}
+
 function renderList() {
-  const filtered = allCompetitions.filter(c => {
-    const classOk = filters.cls === "all" || (Array.isArray(c.classes) && c.classes.map(String).includes(filters.cls));
-    const typeOk = filters.type === "all" || c.type === filters.type;
-    const whoOk = filters.who === "all" || c.individual === "yes";
-    return classOk && typeOk && whoOk;
-  });
+  renderNextYear();
+  // Yearly competitions whose registration has closed move to the "next year" section below.
+  const filtered = allCompetitions.filter(c => !(c.repeatsYearly && isRegistrationClosed(c))).filter(matchesFilters);
 
   const container = document.getElementById("competition-list");
   container.innerHTML = "";
@@ -415,11 +488,84 @@ function renderList() {
   if (filtered.length === 0) {
     const box = el("div", "empty-state");
     box.innerHTML = EMPTY_ART;
-    box.appendChild(el("p", null, "No competitions match these filters. Try another class or type."));
+    const noFilters = filters.cls === "all" && filters.type === "all" && filters.who === "all";
+    box.appendChild(el("p", null, noFilters
+      ? "Nothing is open for registration right now. New competitions are added every week — see \u201cClosed for this year\u201d below to plan for next year."
+      : "No competitions match these filters. Try another class or type."));
     container.appendChild(box);
     return;
   }
   filtered.sort(sortByNextEvent).forEach((c, i) => container.appendChild(renderCard(c, i)));
+}
+
+// "Closed for this year — don't miss next year": this year's dates + a reminder for next year.
+function renderNextYear() {
+  const section = document.getElementById("next-year");
+  if (!section) return;
+  const list = [...allCompetitions.filter(c => c.repeatsYearly && isRegistrationClosed(c)), ...pastCompetitions]
+    .filter(matchesFilters)
+    .sort((a, b) => (nextYearReminderDate(a) || 0) - (nextYearReminderDate(b) || 0));
+  const box = document.getElementById("next-year-list");
+  box.innerHTML = "";
+  section.hidden = list.length === 0;
+  document.getElementById("next-year-count").textContent = list.length;
+  list.forEach((c, i) => box.appendChild(renderNextYearCard(c, i)));
+}
+
+function renderNextYearCard(c, i) {
+  const key = typeKey(c.type);
+  const card = el("article", `card ny-card t-${key}`);
+  card.style.setProperty("--i", i);
+  card.id = slugify(c.name);
+
+  const top = el("div", "card-top");
+  const icon = el("div", "type-icon");
+  icon.innerHTML = ICONS[key]; // fixed drawings from this file, not from the data
+  icon.setAttribute("aria-hidden", "true");
+  const titles = el("div");
+  titles.appendChild(el("h3", null, c.name || "Unnamed competition"));
+  titles.appendChild(el("p", "organiser", c.organiser || ""));
+  top.appendChild(icon);
+  top.appendChild(titles);
+  card.appendChild(top);
+
+  const deadline = firstDeadlineThisYear(c);
+  const details = el("dl", "details");
+  const rows = [["Classes", formatClasses(c.classes)], ["This year's exams", dateRangeText(seasonDates(c))]];
+  if (deadline) {
+    rows.push([c.individual === "yes" ? "Next year, register before" : "Next year, ask your school before",
+      roughDate(addYears(deadline, 1)) + " (approx.)"]);
+  }
+  rows.forEach(([label, value]) => {
+    const row = el("div");
+    row.appendChild(el("dt", null, label));
+    row.appendChild(el("dd", null, value));
+    details.appendChild(row);
+  });
+  card.appendChild(details);
+  if (deadline) card.appendChild(el("p", "ny-hint", "This is a guess from this year's official dates. We will add next year's exact dates here when they are announced."));
+
+  const actions = el("div", "card-actions");
+  const remind = nextYearReminderUrl(c);
+  if (remind) {
+    const a = el("a", "btn", "🔔 Remind me next year");
+    a.href = remind;
+    a.target = "_blank";
+    a.rel = "noopener noreferrer";
+    a.addEventListener("click", () => track("click-remind-next-year"));
+    actions.appendChild(a);
+  }
+  const url = safeLink(c.link);
+  if (url) {
+    const o = el("a", "ny-link", (c.linkLabel || "Official website") + " ↗");
+    o.href = url;
+    o.target = "_blank";
+    o.rel = "noopener noreferrer";
+    o.addEventListener("click", () => track("click-official-link"));
+    actions.appendChild(o);
+  }
+  card.appendChild(actions);
+  return card;
 }
 
 // Builds a row of tappable "chips" and keeps the chosen one highlighted.
@@ -497,6 +643,8 @@ async function start() {
   }
 
   allCompetitions = data.filter(c => c && typeof c === "object" && !isFinished(c));
+  pastCompetitions = data.filter(c => c && typeof c === "object" && c.repeatsYearly && isFinished(c) &&
+    examDates(c).length && daysBetween(examDates(c)[examDates(c).length - 1], today()) <= NEXT_YEAR_KEEP_DAYS);
   document.getElementById("stat-total").textContent = allCompetitions.length;
   showLastUpdated(data, lastModified);
   buildFilters();
