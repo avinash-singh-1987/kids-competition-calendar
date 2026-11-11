@@ -445,6 +445,7 @@ h2[id] { scroll-margin-top: 16px; }
 @media (max-width: 520px) {
   .announce-inner { display: grid; grid-template-columns: auto 1fr auto; row-gap: 8px; align-items: start; }
   .announce-btn { grid-column: 2; justify-self: start; }
+  .announce-inner:not(:has(.announce-close)) { grid-template-columns: auto 1fr; }
   .announce-close { grid-column: 3; grid-row: 1; margin-top: -4px; }
 }
 

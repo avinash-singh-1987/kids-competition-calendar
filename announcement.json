@@ -1,9 +1,9 @@
 {
   "active": true,
-  "id": "unified-council-2026-27",
-  "showUntil": "2026-12-31",
-  "text": "Registration open: Unified Council online Olympiads (Maths, Science, English) for Class 1–5. No school needed — parents can register directly. Exams in Jan 2027, from home.",
-  "linkText": "Register directly",
+  "id": "unified-council-direct",
+  "closable": false,
+  "text": "Olympiads without your school: Unified Council (NSTSE, UIMO, UIEO & more) lets parents register directly — exams are online, taken from home. Free practice tests on their site too.",
+  "linkText": "Visit Unified Council",
   "link": "https://register.unifiedcouncil.com/options",
-  "detailsLink": "./#unified-international-mathematics-olympiad-uimo-online"
+  "detailsLink": "./#no-school"
 }

@@ -1,6 +1,7 @@
 // Announcement bar shown at the top of every page.
 // Edit announcement.json to change or switch it off ("active": false).
-// It hides itself after "showUntil", and a visitor can close it (remembered per announcement id).
+// Optional: "showUntil" (YYYY-MM-DD) hides it after that date; "closable": true adds a ✕ button
+// (a visitor's close is remembered per announcement id). By default it always shows.
 (function () {
   const KEY = "kcc-closed-announcement";
 
@@ -24,7 +25,7 @@
       if (!a || !a.active || !a.text) return;
       const until = parseDate(a.showUntil);
       if (until && until < new Date()) return;
-      if (a.id && closedId() === a.id) return;
+      if (a.closable && a.id && closedId() === a.id) return;
 
       const bar = document.createElement("div");
       bar.className = "announce";
@@ -67,13 +68,15 @@
         inner.appendChild(btn);
       }
 
-      const close = document.createElement("button");
-      close.type = "button";
-      close.className = "announce-close";
-      close.setAttribute("aria-label", "Close announcement");
-      close.textContent = "✕";
-      close.addEventListener("click", () => { bar.remove(); if (a.id) rememberClosed(a.id); });
-      inner.appendChild(close);
+      if (a.closable) {
+        const close = document.createElement("button");
+        close.type = "button";
+        close.className = "announce-close";
+        close.setAttribute("aria-label", "Close announcement");
+        close.textContent = "✕";
+        close.addEventListener("click", () => { bar.remove(); if (a.id) rememberClosed(a.id); });
+        inner.appendChild(close);
+      }
 
       bar.appendChild(inner);
       document.body.insertBefore(bar, document.body.firstChild);

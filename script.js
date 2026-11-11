@@ -494,15 +494,28 @@ function openCard(id) {
   try { history.replaceState(null, "", "#" + id); } catch (e) { /* not important */ }
 }
 
+// "#no-school": show only competitions parents can apply for without the school.
+function showNoSchool() {
+  filters.cls = "all";
+  filters.type = "all";
+  filters.who = "yes";
+  buildFilters();
+  renderList();
+  const target = document.getElementById("who-label") || document.getElementById("all-title");
+  if (target) target.scrollIntoView({ behavior: "smooth", block: "start" });
+}
+
 // Links to a card on the same page (e.g. from the announcement bar) open it too.
 window.addEventListener("hashchange", () => {
   const id = decodeURIComponent(location.hash.slice(1));
+  if (id === "no-school") return showNoSchool();
   if (id && document.querySelector(".card")) openCard(id);
 });
 
 function scrollToLinkedCard() {
   const id = decodeURIComponent(location.hash.slice(1));
   if (!id) return;
+  if (id === "no-school") return showNoSchool();
   const card = document.getElementById(id);
   if (!card) return;
   card.classList.add("highlight");
