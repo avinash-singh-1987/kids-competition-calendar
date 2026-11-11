@@ -251,6 +251,8 @@ h2[id] { scroll-margin-top: 16px; }
 .chip:active { transform: scale(0.96); }
 .chip[aria-pressed="true"] { background: var(--primary); border-color: var(--primary); color: #fff; }
 .chip:focus-visible { outline: 3px solid #99e9d9; outline-offset: 2px; }
+.chip.two-line { border-radius: 16px; text-align: left; line-height: 1.25; padding: 6px 14px; }
+.chip-sub { display: block; font-size: 0.75rem; font-weight: 600; opacity: 0.8; }
 
 /* ---------- Competition cards ---------- */
 .card-list {

@@ -248,7 +248,7 @@ function renderDeadlines(list) {
     body.appendChild(el("div", "deadline-name", c.name));
     const meta = (isExam ? "Exam" : "Registration closes") + " · " + formatClasses(c.classes);
     const metaRow = el("div", "deadline-meta", meta + " ");
-    if (c.individual === "yes") body.appendChild(el("div", "direct-tag", "✓ No school needed"));
+    if (c.individual === "yes") body.appendChild(el("div", "direct-tag", "✓ Register directly · no school registration needed"));
     body.appendChild(metaRow);
 
     let label;
@@ -295,7 +295,7 @@ function renderCard(c, i) {
   const badges = el("div", "badges");
   if (c.sample) badges.appendChild(el("span", "badge sample", "SAMPLE – not real"));
   if (c.type) badges.appendChild(el("span", "badge", c.type));
-  if (c.individual === "yes" && !c.sample) badges.appendChild(el("span", "badge direct", "✓ Apply directly — no school needed"));
+  if (c.individual === "yes" && !c.sample) badges.appendChild(el("span", "badge direct", "✓ Register directly — no school registration needed"));
   if (!c.sample) {
     badges.appendChild(c.unverified
       ? el("span", "badge unverified", "Not yet confirmed")
@@ -311,7 +311,7 @@ function renderCard(c, i) {
     ["Exam date", examText(c)],
     ["Fee", c.fee || "—"],
     ["Mode", c.mode || "—"],
-    ["Apply without school", individualText(c)],
+    ["Parents can register directly", individualText(c)],
   ].forEach(([label, value]) => {
     const row = el("div");
     row.appendChild(el("dt", null, label));
@@ -387,8 +387,9 @@ function renderList() {
 function buildChips(containerId, options, filterName) {
   const box = document.getElementById(containerId);
   box.innerHTML = "";
-  options.forEach(([value, label]) => {
-    const chip = el("button", "chip", label);
+  options.forEach(([value, label, sub]) => {
+    const chip = el("button", sub ? "chip two-line" : "chip", label);
+    if (sub) chip.appendChild(el("span", "chip-sub", sub));
     chip.type = "button";
     chip.setAttribute("aria-pressed", String(filters[filterName] === value));
     chip.addEventListener("click", () => {
@@ -418,7 +419,7 @@ function buildFilters() {
     statDirect.textContent = direct;
     document.getElementById("stat-direct-item").hidden = direct === 0;
   }
-  buildChips("who-chips", [["all", "Any"], ["yes", `✓ No school needed (${direct})`]], "who");
+  buildChips("who-chips", [["all", "Any"], ["yes", `✓ Register directly (${direct})`, "No school registration needed"]], "who");
 }
 
 function showError(message) {
