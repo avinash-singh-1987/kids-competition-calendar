@@ -2,7 +2,7 @@
   "active": true,
   "id": "unified-council-direct",
   "closable": false,
-  "title": "Olympiads without your school",
+  "title": "Olympiads without school registration",
   "points": [
     {
       "text": "Registration open now: Unified Council Maths (UIMO), Science (NSTSE) & English (UIEO) for Class 1–5 — online exams from home in Jan 2027.",
@@ -10,7 +10,7 @@
       "showUntil": "2027-01-24"
     },
     {
-      "text": "Unified Council lets parents register directly — no school needed — and has free practice tests on its site.",
+      "text": "Parents can register directly with Unified Council (school registration not required), and it has free practice tests on its site.",
       "detailsLink": "./#no-school"
     }
   ],
