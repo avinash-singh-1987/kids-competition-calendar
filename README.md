@@ -105,3 +105,9 @@ Data is in `admissions.json`, one entry per school, most popular first. Fields:
 
 The "When can my child join?" box uses the age rules to tell parents the year their child can
 join each school and when to apply. The date of birth is kept only in the visitor's browser.
+
+## Announcement bar
+
+The orange bar at the top of both pages comes from `announcement.json`. Set `"active": false`
+to hide it. It also hides itself after `showUntil`. Give a new announcement a new `id`.
+

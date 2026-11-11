@@ -484,6 +484,12 @@ function openCard(id) {
   try { history.replaceState(null, "", "#" + id); } catch (e) { /* not important */ }
 }
 
+// Links to a card on the same page (e.g. from the announcement bar) open it too.
+window.addEventListener("hashchange", () => {
+  const id = decodeURIComponent(location.hash.slice(1));
+  if (id && document.querySelector(".card")) openCard(id);
+});
+
 function scrollToLinkedCard() {
   const id = decodeURIComponent(location.hash.slice(1));
   if (!id) return;
