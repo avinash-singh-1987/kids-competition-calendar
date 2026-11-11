@@ -319,6 +319,8 @@ h2[id] { scroll-margin-top: 16px; }
 .badge.sample { background: var(--sample); color: #fff; }
 .badge.closed { background: #eef0f3; color: var(--muted); }
 .badge.unverified { background: var(--warn-soft); color: var(--warn-text); }
+.badge.direct { background: #1b7a36; color: #fff; }
+.direct-tag { display: inline-block; margin: 2px 0; font-size: 0.75rem; font-weight: 700; color: #1b7a36; }
 .badge.confirmed { background: #e3f6e8; color: #1b7a36; }
 
 .source-line { margin: 0 0 12px; font-size: 0.8rem; color: var(--muted); }
