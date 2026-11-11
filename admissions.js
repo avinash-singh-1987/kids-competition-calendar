@@ -313,9 +313,18 @@ function setupDob() {
   const summary = document.getElementById("dob-summary");
   const t = today();
 
-  for (let d = 1; d <= 31; d++) daySel.appendChild(new Option(String(d), String(d)));
-  MONTHS.forEach((m, k) => monthSel.appendChild(new Option(m, String(k + 1))));
-  for (let y = t.getFullYear(); y >= t.getFullYear() - 10; y--) yearSel.appendChild(new Option(String(y), String(y)));
+  // The options are written in admissions.html, so the dropdowns work even before this runs.
+  // Only add what's missing (e.g. a new year after the HTML was written).
+  if (daySel.options.length < 32) for (let d = daySel.options.length; d <= 31; d++) daySel.appendChild(new Option(String(d), String(d)));
+  if (monthSel.options.length < 13) MONTHS.slice(monthSel.options.length - 1).forEach((m, k) => monthSel.appendChild(new Option(m, String(monthSel.options.length))));
+  const years = [...yearSel.options].map(o => Number(o.value)).filter(Boolean);
+  for (let y = t.getFullYear(); y >= t.getFullYear() - 10; y--) {
+    if (!years.includes(y)) {
+      const opt = new Option(String(y), String(y));
+      const before = [...yearSel.options].find(o => Number(o.value) && Number(o.value) < y);
+      yearSel.insertBefore(opt, before || null);
+    }
+  }
 
   function pad(n) { return String(n).padStart(2, "0"); }
 
