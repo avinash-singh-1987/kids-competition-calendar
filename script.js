@@ -151,7 +151,6 @@ function nextYearReminderUrl(c) {
   const remind = nextYearReminderDate(c);
   if (!remind) return null;
   const deadline = firstDeadlineThisYear(c);
-  const end = addDays(remind, 1);
   const lines = ["This year's exams: " + dateRangeText(seasonDates(c)) + "."];
   if (deadline) lines.push("This year the last day to register (for the first exam date) was " + formatDate(deadline) + ".");
   lines.push(c.individual === "yes"
@@ -162,7 +161,9 @@ function nextYearReminderUrl(c) {
   const params = new URLSearchParams({
     action: "TEMPLATE",
     text: (c.individual === "yes" ? "Register for next year: " : "Ask school about next year: ") + c.name,
-    dates: ymd(remind) + "/" + ymd(end),
+    // 9:00–9:30 am India time, so the phone's usual event alert arrives that morning.
+    dates: ymd(remind) + "T090000/" + ymd(remind) + "T093000",
+    ctz: "Asia/Kolkata",
     details: lines.join("\n"),
   });
   return "https://calendar.google.com/calendar/render?" + params.toString();
@@ -531,11 +532,9 @@ function renderNextYearCard(c, i) {
   const deadline = firstDeadlineThisYear(c);
   const details = el("dl", "details");
   const rows = [["Classes", formatClasses(c.classes)], ["This year's exams", dateRangeText(seasonDates(c))]];
-  const still = upcomingExamDates(c);
-  if (still.length) rows.push(["Still ahead (already registered)", still.map(formatDate).join(" or ")]);
   if (deadline) {
-    rows.push([c.individual === "yes" ? "Next year: register by about" : "Next year: ask your school by about",
-      roughDate(addYears(deadline, 1))]);
+    rows.push([c.individual === "yes" ? "Next year, register before" : "Next year, ask your school before",
+      roughDate(addYears(deadline, 1)) + " (approx.)"]);
   }
   rows.forEach(([label, value]) => {
     const row = el("div");
@@ -544,7 +543,7 @@ function renderNextYearCard(c, i) {
     details.appendChild(row);
   });
   card.appendChild(details);
-  if (deadline) card.appendChild(el("p", "ny-hint", "Estimate based on this year's official dates — next year's dates will be added here when they are announced."));
+  if (deadline) card.appendChild(el("p", "ny-hint", "This is a guess from this year's official dates. We will add next year's exact dates here when they are announced."));
 
   const actions = el("div", "card-actions");
   const remind = nextYearReminderUrl(c);
