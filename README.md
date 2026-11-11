@@ -115,3 +115,7 @@ make the button. Optional for the whole bar: `showUntil` and `closable: true` (a
 the bar always visible, so keep it `false`). The link `./#no-school` opens the competitions page filtered
 to "no school needed".
 
+Share link for WhatsApp: `https://kochikidscalendar.com/no-school/` (folder `no-school/`). It has its own
+link-preview picture (`og-no-school.jpg`) and opens the competitions page at the top with the
+"No school needed" filter on (`#direct`).
+
