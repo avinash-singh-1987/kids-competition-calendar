@@ -48,6 +48,14 @@ An entry looks like this:
   must register this many days before the exam date it picks. The card then shows "Ask your school
   before <date>", and once every date's deadline has passed it shows "Closed" and moves to the end
   of the list (and leaves "Coming up soon").
+- `"repeatsYearly": true` — the competition is held every year. When its registration has closed (or its
+  exams are over) it moves to the section **"Closed for this year — don't miss next year"**, which shows
+  this year's dates, an estimate of when to ask the school next year, and a **"Remind me next year"**
+  calendar button. Finished entries stay there for 300 days. When next year's dates are announced,
+  update the same entry (new dates) instead of adding a new one.
+- `"seasonDates": ["2026-10-08", "2026-11-18", "2026-12-07"]` — all official dates of this year's round,
+  including dates already past (used only for the "next year" section). Without it, `examDates` is used.
+- SilverZone entries use `"schoolLeadDays": 15` (register up to 15 days before the exam) for the estimate.
 - `"note": "..."` — a short message shown on the card (e.g. "Register through your school").
 - `"linkLabel": "Read news article"` — changes the button text (default: "Official website").
 - `"source": "https://..."` — the page where the information was found (shown as "Source" on the card).

@@ -29,12 +29,17 @@
 - Every new entry gets `source` (URL where it was found), `sourceType`
   (official/news/blog) and `addedOn` (today's date); set `updatedOn` when dates change.
 - Set `individual` ("yes"/"no"/"ask") only from what the source says; use "ask" if unclear.
+- Yearly competitions carry `repeatsYearly: true` (+ `seasonDates`, `schoolLeadDays`); once closed they
+  move to "Closed for this year — don't miss next year" with a "Remind me next year" calendar link.
+  The "next year" estimate is shown only when an official rule/deadline exists (SOF 30 days,
+  SilverZone 15 days). When next year's dates appear, UPDATE the existing entry (dates, seasonDates,
+  updatedOn) — don't add a duplicate.
 - Link-preview pictures (WhatsApp etc.): `og-image.jpg` (home/competitions),
   `og-admissions.jpg` (admissions page) and `og-no-school.jpg` (share link below), 1200x630 JPEG,
   keep each under 300 KB and keep the key words inside the middle 630x630 (WhatsApp may crop to a square).
 - Share link for WhatsApp: **https://kochikidscalendar.com/no-school/** — `no-school/index.html` only
   holds its own preview tags (noindex) and forwards to `/#direct`, which opens the competitions page at
-  the top (announcement bar visible) with the "No school needed" filter on. `#no-school` does the same
+  the top (announcement bar visible) with the "Register directly" filter on. `#no-school` does the same
   but scrolls down to the list.
 - Visitor counter: GoatCounter, site code `kochikidscalendar`
   (dashboard https://kochikidscalendar.goatcounter.com). Button clicks are counted as
