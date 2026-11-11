@@ -40,3 +40,5 @@
   gemsmodernacademy-kochi.in, globalpublicschool.org, chinmayavidyalaya.edu.in (Tripunithura),
   shpublicschool.com, chinmayavaduthala.edu.in (Chinmaya Vaduthala).
   KV and EducationWorld sites block cloud servers — use news/search for those.
+- Script/CSS links carry a version (`?v=YYYYMMDD`) to beat browser caches: when you change
+  script.js, admissions.js or style.css, bump the `?v=` date in index.html / admissions.html.
