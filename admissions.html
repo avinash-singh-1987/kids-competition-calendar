@@ -125,9 +125,13 @@
           <p class="muted">Enter your child's date of birth. Each school card will show the year your child can join and when to apply. The date stays on this phone only.</p>
         </div>
       </div>
-      <div class="dob-row">
-        <label for="child-dob">Child's date of birth</label>
-        <input type="date" id="child-dob">
+      <div class="dob-row" role="group" aria-labelledby="dob-label">
+        <span id="dob-label" class="dob-label">Child's date of birth</span>
+        <div class="dob-selects">
+          <select id="dob-day" aria-label="Day"><option value="">Day</option></select>
+          <select id="dob-month" aria-label="Month"><option value="">Month</option></select>
+          <select id="dob-year" aria-label="Year"><option value="">Year</option></select>
+        </div>
         <button type="button" id="clear-dob" class="chip" hidden>Clear</button>
       </div>
       <p id="dob-summary" class="dob-summary" aria-live="polite"></p>

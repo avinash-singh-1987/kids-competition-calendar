@@ -304,32 +304,54 @@ function saveDob(value) {
 }
 
 function setupDob() {
-  const input = document.getElementById("child-dob");
+  // Day / Month / Year dropdowns (Indian order), instead of the browser's date box,
+  // which shows month/day/year on many phones.
+  const daySel = document.getElementById("dob-day");
+  const monthSel = document.getElementById("dob-month");
+  const yearSel = document.getElementById("dob-year");
   const clear = document.getElementById("clear-dob");
   const summary = document.getElementById("dob-summary");
   const t = today();
-  input.max = ymd(t).replace(/(\d{4})(\d{2})(\d{2})/, "$1-$2-$3");
-  input.min = `${t.getFullYear() - 10}-01-01`;
+
+  for (let d = 1; d <= 31; d++) daySel.appendChild(new Option(String(d), String(d)));
+  MONTHS.forEach((m, k) => monthSel.appendChild(new Option(m, String(k + 1))));
+  for (let y = t.getFullYear(); y >= t.getFullYear() - 10; y--) yearSel.appendChild(new Option(String(y), String(y)));
+
+  function pad(n) { return String(n).padStart(2, "0"); }
+
+  // Returns "YYYY-MM-DD" when all three are chosen and the date is real, "" if not complete, null if invalid.
+  function readValue() {
+    const d = Number(daySel.value), m = Number(monthSel.value), y = Number(yearSel.value);
+    if (!d || !m || !y) return "";
+    const date = new Date(y, m - 1, d);
+    if (date.getMonth() !== m - 1 || date > t) return null; // e.g. 31 February, or a future date
+    return `${y}-${pad(m)}-${pad(d)}`;
+  }
 
   function apply(value) {
-    childDob = parseDate(value);
-    clear.hidden = !childDob;
-    summary.textContent = childDob
-      ? `Showing when a child born on ${formatDate(childDob)} can join each school.`
-      : "";
+    childDob = value ? parseDate(value) : null;
+    clear.hidden = !(daySel.value || monthSel.value || yearSel.value);
+    if (value === null) summary.textContent = "Please check the date — that day doesn't exist in this month.";
+    else summary.textContent = childDob ? `Showing when a child born on ${formatDate(childDob)} can join each school.` : "";
     render();
   }
-  const saved = loadDob();
-  if (saved && parseDate(saved)) input.value = saved;
-  apply(input.value);
 
-  input.addEventListener("change", () => {
-    saveDob(input.value);
-    apply(input.value);
-    if (input.value) track("used-age-checker");
-  });
+  const saved = loadDob();
+  const savedDate = saved && parseDate(saved);
+  if (savedDate) {
+    daySel.value = String(savedDate.getDate());
+    monthSel.value = String(savedDate.getMonth() + 1);
+    yearSel.value = String(savedDate.getFullYear());
+  }
+  apply(readValue());
+
+  [daySel, monthSel, yearSel].forEach(sel => sel.addEventListener("change", () => {
+    const value = readValue();
+    if (value) { saveDob(value); track("used-age-checker"); }
+    apply(value);
+  }));
   clear.addEventListener("click", () => {
-    input.value = "";
+    daySel.value = ""; monthSel.value = ""; yearSel.value = "";
     saveDob("");
     apply("");
   });

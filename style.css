@@ -403,16 +403,17 @@ h1, h2, h3 { font-family: var(--heading-font); line-height: 1.2; }
 /* ---------- School admissions page ---------- */
 .age-checker { margin-top: -8px; position: relative; }
 .dob-row { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; }
-.dob-row label { font-weight: 700; }
-.dob-row input {
+.dob-label { font-weight: 700; flex-basis: 100%; }
+.dob-selects { display: flex; gap: 8px; flex-wrap: wrap; }
+.dob-selects select {
   font: inherit;
-  padding: 9px 12px;
+  padding: 9px 10px;
   border: 1px solid var(--border);
   border-radius: 10px;
   background: var(--card);
   color: var(--text);
-  min-width: 180px;
 }
+.dob-selects #dob-month { min-width: 130px; }
 .dob-summary { margin: 10px 0 0; color: var(--primary-dark); font-weight: 600; font-size: 0.92rem; }
 .dob-summary:empty { display: none; }
 .card.t-school { --accent: #0e7490; --accent-soft: #e3f2f6; }
