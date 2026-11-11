@@ -173,16 +173,28 @@ h2[id] { scroll-margin-top: 16px; }
   .deadline-list { grid-template-columns: 1fr 1fr; }
 }
 .deadline-list li {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  padding: 10px;
+  display: block;
+  padding: 0;
   border-radius: 12px;
   background: #f8fafc;
   border: 1px solid var(--border);
   animation: rise 0.45s ease both;
   animation-delay: calc(var(--i, 0) * 60ms);
 }
+.deadline-link {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px;
+  color: inherit;
+  text-decoration: none;
+  border-radius: 12px;
+  transition: background 0.2s;
+}
+.deadline-list li:has(.deadline-link:hover) { border-color: var(--primary); }
+.deadline-link:hover { background: var(--primary-soft); }
+.deadline-link:focus-visible { outline: 3px solid #99e9d9; outline-offset: 2px; }
+.deadline-chevron { flex: none; font-size: 1.6rem; line-height: 1; color: var(--muted); padding-left: 2px; }
 .date-tile {
   flex: none;
   width: 54px;
@@ -335,7 +347,11 @@ h2[id] { scroll-margin-top: 16px; }
 .btn-secondary:hover, .btn-secondary:focus-visible { border-color: var(--accent); color: var(--accent); }
 .btn-secondary:active { transform: scale(0.98); }
 
-.card.highlight { box-shadow: 0 0 0 3px var(--accent), var(--shadow-hover); }
+.card.highlight { box-shadow: 0 0 0 3px var(--accent), var(--shadow-hover); animation: card-flash 1.4s ease 1; }
+@keyframes card-flash {
+  0%, 100% { box-shadow: 0 0 0 3px var(--accent), var(--shadow-hover); }
+  30% { box-shadow: 0 0 0 7px var(--accent), var(--shadow-hover); }
+}
 
 .details { margin: 0 0 12px; }
 .details div {
