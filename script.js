@@ -72,29 +72,63 @@ function isFinished(c) {
   return end ? end < today() : false;
 }
 
+// School-only Olympiads (SOF): the school must register "schoolLeadDays" days before the exam date
+// it picks. From that rule we work out the last day a parent can still ask the school.
+function schoolDeadlines(c) {
+  const lead = Number(c.schoolLeadDays);
+  if (!lead || parseDate(c.registrationLastDate)) return [];
+  return upcomingExamDates(c).map(d => { const x = new Date(d); x.setDate(x.getDate() - lead); return x; });
+}
+
+// The registration deadline that matters now: the given one, or else the earliest school
+// deadline that is still open (or, if all have passed, the last one — so it shows as closed).
+function regDeadline(c) {
+  const given = parseDate(c.registrationLastDate);
+  if (given) return given;
+  const list = schoolDeadlines(c);
+  if (!list.length) return null;
+  return list.find(d => d >= today()) || list[list.length - 1];
+}
+
+// "Ask your school" wording for school-only entries without a fixed deadline from the organiser.
+function isAskSchool(c) {
+  return !parseDate(c.registrationLastDate) && schoolDeadlines(c).length > 0;
+}
+
 function isRegistrationClosed(c) {
-  const reg = parseDate(c.registrationLastDate);
+  const reg = regDeadline(c);
   return reg ? reg < today() : false;
 }
 
 // The next thing a parent must act on: registration deadline or exam, whichever comes first.
 function nextEvent(c) {
   const events = [];
-  const reg = parseDate(c.registrationLastDate);
+  const reg = regDeadline(c);
   if (reg && reg >= today()) events.push({ kind: "register", date: reg });
+  // School-only Olympiads: while asking the school is still possible, that is the thing to act on
+  // (an earlier exam date whose deadline has passed is not).
+  if (reg && reg >= today() && isAskSchool(c)) return events[0];
   const exam = upcomingExamDates(c)[0];
   if (exam) events.push({ kind: "exam", date: exam });
   events.sort((a, b) => a.date - b.date);
   return events[0] || null;
 }
 
+// Competitions parents can still act on come first; "registration closed" ones go to the end.
 function sortByNextEvent(a, b) {
+  const closed = Number(isRegistrationClosed(a)) - Number(isRegistrationClosed(b));
+  if (closed) return closed;
   const far = new Date(9999, 0, 1);
   return ((nextEvent(a) || {}).date || far) - ((nextEvent(b) || {}).date || far);
 }
 
 function registerByText(c) {
-  const reg = parseDate(c.registrationLastDate);
+  const reg = regDeadline(c);
+  if (reg && isAskSchool(c)) {
+    return reg < today()
+      ? "Closed (school deadline was " + formatDate(reg) + ")"
+      : "Ask your school before " + formatDate(reg);
+  }
   if (reg) return formatDate(reg);
   return c.mode === "School-based" ? "Ask your school" : "Check official link";
 }
@@ -152,11 +186,12 @@ function ymd(d) {
 }
 
 // The date to put in the parent's calendar: next exam, or else the registration deadline.
+// While registration is still open, the reminder that helps most is the last day to register.
 function calendarEvent(c) {
+  const reg = regDeadline(c);
+  if (reg && reg >= today()) return { date: reg, kind: "register" };
   const exam = upcomingExamDates(c)[0];
   if (exam) return { date: exam, kind: "exam" };
-  const reg = parseDate(c.registrationLastDate);
-  if (reg && reg >= today()) return { date: reg, kind: "register" };
   return null;
 }
 
@@ -174,7 +209,7 @@ function calendarUrl(c) {
   lines.push("Kochi Kids Calendar: " + pageUrl(c));
   const params = new URLSearchParams({
     action: "TEMPLATE",
-    text: (ev.kind === "exam" ? "" : "Last day to register: ") + c.name,
+    text: (ev.kind === "exam" ? "" : (isAskSchool(c) ? "Ask school to register: " : "Last day to register: ")) + c.name,
     dates: ymd(ev.date) + "/" + ymd(end),
     details: lines.join("\n"),
   });
@@ -224,6 +259,8 @@ function renderDeadlines(list) {
   const upcoming = list
     .map(c => ({ c, ev: nextEvent(c) }))
     .filter(x => x.ev && daysBetween(now, x.ev.date) <= DEADLINE_WINDOW_DAYS)
+    // Only things a parent can still act on: skip exams whose registration has already closed.
+    .filter(x => !(x.ev.kind === "exam" && isRegistrationClosed(x.c)))
     .sort((a, b) => a.ev.date - b.ev.date);
 
   document.getElementById("stat-soon").textContent = upcoming.length;
@@ -246,7 +283,9 @@ function renderDeadlines(list) {
 
     const body = el("div", "deadline-body");
     body.appendChild(el("div", "deadline-name", c.name));
-    const meta = (isExam ? "Exam" : "Registration closes") + " · " + formatClasses(c.classes);
+    const what = !isExam ? (isAskSchool(c) ? "Last day to ask your school" : "Registration closes")
+      : "Exam";
+    const meta = what + " · " + formatClasses(c.classes);
     const metaRow = el("div", "deadline-meta", meta + " ");
     if (c.individual === "yes") body.appendChild(el("div", "direct-tag", "✓ Register directly · no school registration needed"));
     body.appendChild(metaRow);

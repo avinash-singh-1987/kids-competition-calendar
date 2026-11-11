@@ -2,6 +2,7 @@
   {
     "name": "International Mathematics Olympiad (IMO) – Level 1",
     "organiser": "Science Olympiad Foundation (SOF)",
+    "schoolLeadDays": 30,
     "classes": [1, 2, 3, 4, 5],
     "type": "Olympiad",
     "registrationLastDate": "",
@@ -19,6 +20,7 @@
   {
     "name": "International English Olympiad (IEO) – Level 1",
     "organiser": "Science Olympiad Foundation (SOF)",
+    "schoolLeadDays": 30,
     "classes": [1, 2, 3, 4, 5],
     "type": "Olympiad",
     "registrationLastDate": "",
@@ -36,6 +38,7 @@
   {
     "name": "International Science Olympiad (ISO, earlier NSO) – Level 1",
     "organiser": "Science Olympiad Foundation (SOF)",
+    "schoolLeadDays": 30,
     "classes": [1, 2, 3, 4, 5],
     "type": "Olympiad",
     "registrationLastDate": "",
@@ -106,6 +109,7 @@
   {
     "name": "International Computer Science Olympiad (ICSO)",
     "organiser": "Science Olympiad Foundation (SOF)",
+    "schoolLeadDays": 30,
     "classes": [1, 2, 3, 4, 5],
     "type": "Olympiad",
     "registrationLastDate": "",
@@ -123,6 +127,7 @@
   {
     "name": "International Hindi Olympiad (IHO)",
     "organiser": "Science Olympiad Foundation (SOF)",
+    "schoolLeadDays": 30,
     "classes": [3, 4, 5],
     "type": "Olympiad",
     "registrationLastDate": "",
