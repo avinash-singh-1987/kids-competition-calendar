@@ -124,6 +124,16 @@ const SHARE_ICON = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" s
 
 let schools = [];
 let childDob = null;
+let showOnly = "all"; // "all" or "open" (open + opening soon)
+
+function isOpenish(s) { return s.status === "open" || s.status === "expected"; }
+
+function setShow(value) {
+  showOnly = value === "open" ? "open" : "all";
+  document.querySelectorAll("#status-filter .chip").forEach(b =>
+    b.setAttribute("aria-pressed", String(b.dataset.show === showOnly)));
+  render();
+}
 
 function actionLink(href, icon, label, trackName) {
   const a = el("a", "btn-secondary");
@@ -287,8 +297,9 @@ function render() {
   const list = document.getElementById("school-list");
   if (!list) return;
   list.innerHTML = "";
-  document.getElementById("count").textContent = schools.length;
-  schools.forEach((s, i) => {
+  const shown = showOnly === "open" ? schools.filter(isOpenish) : schools;
+  document.getElementById("count").textContent = shown.length;
+  shown.forEach((s, i) => {
     try { list.appendChild(renderCard(s, i)); }
     catch (e) { console.error("Could not show school card:", s.school, e); }
   });
@@ -386,9 +397,13 @@ async function start() {
     return;
   }
   // Keep the order from admissions.json (most popular schools first).
-  const open = schools.filter(s => s.status === "open" || s.status === "expected").length;
+  const open = schools.filter(isOpenish).length;
   document.getElementById("stat-schools").textContent = schools.length;
   document.getElementById("stat-open").textContent = open;
+  // Summary pills and filter chips: "15 schools" shows all, "7 open or opening soon" shows only those.
+  document.querySelectorAll("[data-show]").forEach(el =>
+    el.addEventListener("click", () => { setShow(el.dataset.show); track("click-filter-" + el.dataset.show); }));
+
   // Always show the school cards first (general information), then set up the
   // optional date-of-birth box. A problem in that box must never hide the cards.
   render();
