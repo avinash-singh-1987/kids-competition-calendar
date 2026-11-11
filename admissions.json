@@ -230,14 +230,14 @@
     "board": "CBSE",
     "why": "Topped Kochi co-ed day school rankings in earlier EducationWorld editions",
     "entry": [],
-    "status": "check",
-    "statusNote": "The school has published a notice for First Standard (Class 1) admissions 2027-28. Kindergarten details not found on the website — please check with the school.",
+    "status": "open",
+    "statusNote": "Class 1 (2027-28) registration started on 25 Sep 2026: application forms at the Vidyodaya Trust office, Kacheripady, Ernakulam (₹300), limited seats. The website also lists 'Pre-KG Admissions 2027-2028' — details not readable online, please call 99470 28371 / 95674 61688.",
     "link": "https://vidyodayaschool.ac.in/first-standard-admissions-2027-2028/",
-    "linkLabel": "Class 1 admissions 2027-28",
     "source": "https://vidyodayaschool.ac.in/first-standard-admissions-2027-2028/",
     "sourceType": "official",
     "checkedOn": "2026-11-11",
-    "unverified": true
+    "sessionMonth": 6,
+    "linkLabel": "Class 1 admission notice"
   },
   {
     "school": "Sacred Heart CMI Public School",
@@ -287,11 +287,12 @@
       }
     ],
     "status": "check",
-    "statusNote": "Children who turn 3 by June can join Pre-KG, 4 by June LKG. UKG admissions happen only in March and only if seats are free (child must turn 5 by June). 2027-28 dates not published — check with the school.",
-    "link": "https://www.tochschool.com/admission_eligibility.php",
+    "statusNote": "The school has posted an 'Admission Notice – Nursery 2027-2028' (PDF linked on its homepage). Children who turn 3 by June can join Pre-KG, 4 by June LKG. UKG admissions happen only in March, if seats are free (child must turn 5 by June).",
+    "link": "https://www.tochschool.com/",
     "source": "https://www.tochschool.com/admission_eligibility.php",
     "sourceType": "official",
-    "checkedOn": "2026-11-11"
+    "checkedOn": "2026-11-11",
+    "linkLabel": "School website (see Nursery notice)"
   },
   {
     "school": "Assisi Vidyaniketan (Alphadale kindergarten)",

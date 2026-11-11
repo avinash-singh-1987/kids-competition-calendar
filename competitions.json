@@ -152,5 +152,37 @@
     "sourceType": "official",
     "addedOn": "2026-11-10",
     "note": "Through your school: offline exam on 20 Nov or 2 Dec 2026. Without the school: parents can register directly on unifiedcouncil.com and the child takes an online exam on 24 Jan 2027 (practice test 17 Jan)."
+  },
+  {
+    "name": "SilverZone Smart Kid GK Olympiad (SKGKO)",
+    "organiser": "SilverZone Foundation",
+    "classes": [1, 2, 3, 4, 5],
+    "type": "GK",
+    "registrationLastDate": "2026-11-15",
+    "examDates": ["2026-11-30"],
+    "fee": "Ask your school",
+    "mode": "School-based",
+    "individual": "no",
+    "link": "https://www.silverzone.org/skgko",
+    "source": "https://www.silverzone.org/olympiadsdates",
+    "sourceType": "official",
+    "addedOn": "2026-11-11",
+    "note": "Held in school during school hours; the school registers students (at least 20 from the school). Register up to 15 days before the exam — by 15 Nov for the 30 Nov date. Earlier dates (28 Sep, 27 Oct) have closed."
+  },
+  {
+    "name": "SilverZone International Olympiad of Science (iOS)",
+    "organiser": "SilverZone Foundation",
+    "classes": [1, 2, 3, 4, 5],
+    "type": "Olympiad",
+    "registrationLastDate": "2026-11-23",
+    "examDates": ["2026-12-08"],
+    "fee": "Ask your school",
+    "mode": "School-based",
+    "individual": "no",
+    "link": "https://www.silverzone.org/ios",
+    "source": "https://www.silverzone.org/olympiadsdates",
+    "sourceType": "official",
+    "addedOn": "2026-11-11",
+    "note": "Held in school; the school registers students. Register up to 15 days before the exam — by 23 Nov for the 8 Dec date. Earlier dates (14 Oct, 19 Nov) have closed."
   }
 ]
