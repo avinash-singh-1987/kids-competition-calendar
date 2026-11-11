@@ -495,12 +495,15 @@ function openCard(id) {
 }
 
 // "#no-school": show only competitions parents can apply for without the school.
-function showNoSchool() {
+// "#direct" (used by the /no-school/ share link) does the same but stays at the top,
+// so the announcement bar and its registration button are the first thing people see.
+function showNoSchool(scroll = true) {
   filters.cls = "all";
   filters.type = "all";
   filters.who = "yes";
   buildFilters();
   renderList();
+  if (!scroll) return;
   const target = document.getElementById("who-label") || document.getElementById("all-title");
   if (target) target.scrollIntoView({ behavior: "smooth", block: "start" });
 }
@@ -509,6 +512,7 @@ function showNoSchool() {
 window.addEventListener("hashchange", () => {
   const id = decodeURIComponent(location.hash.slice(1));
   if (id === "no-school") return showNoSchool();
+  if (id === "direct") return showNoSchool(false);
   if (id && document.querySelector(".card")) openCard(id);
 });
 
@@ -516,6 +520,7 @@ function scrollToLinkedCard() {
   const id = decodeURIComponent(location.hash.slice(1));
   if (!id) return;
   if (id === "no-school") return showNoSchool();
+  if (id === "direct") return showNoSchool(false);
   const card = document.getElementById(id);
   if (!card) return;
   card.classList.add("highlight");
