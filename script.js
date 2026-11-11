@@ -255,8 +255,21 @@ function renderDeadlines(list) {
     else label = days === 1 ? "1 day" : `${days} days`;
 
     metaRow.appendChild(el("span", "days-left" + (urgent ? " urgent" : ""), label));
-    li.appendChild(tile);
-    li.appendChild(body);
+
+    // The whole row is a link to the full card further down the page.
+    const id = slugify(c.name);
+    const link = el("a", "deadline-link");
+    link.href = "#" + id;
+    link.setAttribute("aria-label", c.name + " — see full details");
+    link.appendChild(tile);
+    link.appendChild(body);
+    link.appendChild(el("span", "deadline-chevron", "›"));
+    link.addEventListener("click", e => {
+      e.preventDefault();
+      openCard(id);
+      track("click-coming-up");
+    });
+    li.appendChild(link);
     ul.appendChild(li);
   });
 }
@@ -452,6 +465,25 @@ function showLastUpdated(data, lastModified) {
 }
 
 // When someone opens a shared link (…#competition-name), jump to that card and highlight it.
+// Scroll to a competition's card and highlight it. If the class/type filters
+// are hiding it, reset them first so the card is always found.
+function openCard(id) {
+  let card = document.getElementById(id);
+  if (!card) {
+    filters.cls = "all";
+    filters.type = "all";
+    buildFilters();
+    renderList();
+    card = document.getElementById(id);
+  }
+  if (!card) return;
+  document.querySelectorAll(".card.highlight").forEach(c => c.classList.remove("highlight"));
+  void card.offsetWidth; // restart the highlight animation
+  card.classList.add("highlight");
+  card.scrollIntoView({ behavior: "smooth", block: "center" });
+  try { history.replaceState(null, "", "#" + id); } catch (e) { /* not important */ }
+}
+
 function scrollToLinkedCard() {
   const id = decodeURIComponent(location.hash.slice(1));
   if (!id) return;
