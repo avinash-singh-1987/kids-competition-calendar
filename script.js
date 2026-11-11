@@ -413,6 +413,11 @@ function buildFilters() {
   const direct = allCompetitions.filter(c => c.individual === "yes").length;
   const whoGroup = document.getElementById("who-group");
   if (whoGroup) whoGroup.hidden = direct === 0;
+  const statDirect = document.getElementById("stat-direct");
+  if (statDirect) {
+    statDirect.textContent = direct;
+    document.getElementById("stat-direct-item").hidden = direct === 0;
+  }
   buildChips("who-chips", [["all", "Any"], ["yes", `✓ No school needed (${direct})`]], "who");
 }
 
@@ -507,6 +512,14 @@ function showNoSchool(scroll = true) {
   const target = document.getElementById("who-label") || document.getElementById("all-title");
   if (target) target.scrollIntoView({ behavior: "smooth", block: "start" });
 }
+
+// Hero pill "N without school registration": works even when #no-school is already in the address.
+const statDirectLink = document.getElementById("stat-direct-link");
+if (statDirectLink) statDirectLink.addEventListener("click", e => {
+  e.preventDefault();
+  if (location.hash !== "#no-school") history.replaceState(null, "", "#no-school");
+  showNoSchool();
+});
 
 // Links to a card on the same page (e.g. from the announcement bar) open it too.
 window.addEventListener("hashchange", () => {
