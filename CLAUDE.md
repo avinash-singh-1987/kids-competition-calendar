@@ -42,3 +42,8 @@
   KV and EducationWorld sites block cloud servers — use news/search for those.
 - Script/CSS links carry a version (`?v=YYYYMMDD`) to beat browser caches: when you change
   script.js, admissions.js or style.css, bump the `?v=` date in index.html / admissions.html.
+- Announcement bar (top of both pages): edit `announcement.json` — `active`, `id` (change it
+  for a new announcement so visitors who closed the old one see it), `showUntil` (auto-hide
+  date), `text`, `linkText`, `link`, `detailsLink`. Only announce things confirmed on the
+  organiser's site or by the owner; switch it off (`"active": false`) when registration closes.
+

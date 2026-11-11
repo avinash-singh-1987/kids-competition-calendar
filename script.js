@@ -214,7 +214,7 @@ function actionLink(className, href, iconSvg, label, trackName) {
 
 // ---------- Rendering ----------
 
-const filters = { cls: "all", type: "all" };
+const filters = { cls: "all", type: "all", who: "all" };
 
 function renderDeadlines(list) {
   const ul = document.getElementById("deadline-list");
@@ -248,6 +248,7 @@ function renderDeadlines(list) {
     body.appendChild(el("div", "deadline-name", c.name));
     const meta = (isExam ? "Exam" : "Registration closes") + " · " + formatClasses(c.classes);
     const metaRow = el("div", "deadline-meta", meta + " ");
+    if (c.individual === "yes") body.appendChild(el("div", "direct-tag", "✓ No school needed"));
     body.appendChild(metaRow);
 
     let label;
@@ -294,6 +295,7 @@ function renderCard(c, i) {
   const badges = el("div", "badges");
   if (c.sample) badges.appendChild(el("span", "badge sample", "SAMPLE – not real"));
   if (c.type) badges.appendChild(el("span", "badge", c.type));
+  if (c.individual === "yes" && !c.sample) badges.appendChild(el("span", "badge direct", "✓ Apply directly — no school needed"));
   if (!c.sample) {
     badges.appendChild(c.unverified
       ? el("span", "badge unverified", "Not yet confirmed")
@@ -363,7 +365,8 @@ function renderList() {
   const filtered = allCompetitions.filter(c => {
     const classOk = filters.cls === "all" || (Array.isArray(c.classes) && c.classes.map(String).includes(filters.cls));
     const typeOk = filters.type === "all" || c.type === filters.type;
-    return classOk && typeOk;
+    const whoOk = filters.who === "all" || c.individual === "yes";
+    return classOk && typeOk && whoOk;
   });
 
   const container = document.getElementById("competition-list");
@@ -405,6 +408,12 @@ function buildFilters() {
   const present = new Set(allCompetitions.map(c => c.type).filter(Boolean));
   const types = [...BASE_TYPES.filter(t => present.has(t)), ...[...present].filter(t => !BASE_TYPES.includes(t))];
   buildChips("type-chips", [["all", "All"], ...types.map(t => [t, t])], "type");
+
+  // "Who can apply": highlight competitions parents can register for directly.
+  const direct = allCompetitions.filter(c => c.individual === "yes").length;
+  const whoGroup = document.getElementById("who-group");
+  if (whoGroup) whoGroup.hidden = direct === 0;
+  buildChips("who-chips", [["all", "Any"], ["yes", `✓ No school needed (${direct})`]], "who");
 }
 
 function showError(message) {
@@ -472,6 +481,7 @@ function openCard(id) {
   if (!card) {
     filters.cls = "all";
     filters.type = "all";
+    filters.who = "all";
     buildFilters();
     renderList();
     card = document.getElementById(id);
@@ -483,6 +493,12 @@ function openCard(id) {
   card.scrollIntoView({ behavior: "smooth", block: "center" });
   try { history.replaceState(null, "", "#" + id); } catch (e) { /* not important */ }
 }
+
+// Links to a card on the same page (e.g. from the announcement bar) open it too.
+window.addEventListener("hashchange", () => {
+  const id = decodeURIComponent(location.hash.slice(1));
+  if (id && document.querySelector(".card")) openCard(id);
+});
 
 function scrollToLinkedCard() {
   const id = decodeURIComponent(location.hash.slice(1));

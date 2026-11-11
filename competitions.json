@@ -151,7 +151,8 @@
     "source": "https://www.unifiedcouncil.com/about-nstse.html",
     "sourceType": "official",
     "addedOn": "2026-11-10",
-    "note": "Through your school: offline exam on 20 Nov or 2 Dec 2026. Without the school: parents can register directly on unifiedcouncil.com and the child takes an online exam on 24 Jan 2027 (practice test 17 Jan)."
+    "note": "Through your school: offline exam on 20 Nov or 2 Dec 2026. Without the school: parents can register directly online and the child takes the exam from home — practice test 17 Jan 2027, final 24 Jan 2027. Time (both days): Class 2 & 3: 10–11 am · Class 1: 11:45 am–12:45 pm · Class 4 & 5: 2–3 pm. Registration was open as of 12 Nov 2026.",
+    "updatedOn": "2026-11-12"
   },
   {
     "name": "SilverZone Smart Kid GK Olympiad (SKGKO)",
@@ -184,5 +185,39 @@
     "sourceType": "official",
     "addedOn": "2026-11-11",
     "note": "Held in school; the school registers students. Register up to 15 days before the exam — by 23 Nov for the 8 Dec date. Earlier dates (14 Oct, 19 Nov) have closed."
+  },
+  {
+    "name": "Unified International Mathematics Olympiad (UIMO) – Online",
+    "organiser": "Unified Council",
+    "classes": [1, 2, 3, 4, 5],
+    "type": "Olympiad",
+    "registrationLastDate": "",
+    "examDates": ["2027-01-10"],
+    "fee": "See website",
+    "mode": "Online (from home)",
+    "individual": "yes",
+    "link": "https://register.unifiedcouncil.com/options",
+    "linkLabel": "Register online",
+    "source": "https://www.unifiedcouncil.com/exams-schedule.html",
+    "sourceType": "official",
+    "addedOn": "2026-11-12",
+    "note": "Online exam taken from home — parents can register directly, no school needed. Same dates for all classes, time depends on class. Practice (mock) test 3 Jan 2027 and final test 10 Jan 2027 — Class 1: mock 5–6 pm, final 2–3 pm · Class 2 & 3: mock 2–3 pm, final 10–11 am · Class 4 & 5: mock 3:30–4:30 pm, final 11:30 am–12:30 pm. Registration was open as of 12 Nov 2026."
+  },
+  {
+    "name": "Unified International English Olympiad (UIEO) – Online",
+    "organiser": "Unified Council",
+    "classes": [1, 2, 3, 4, 5],
+    "type": "Olympiad",
+    "registrationLastDate": "",
+    "examDates": ["2027-01-03"],
+    "fee": "See website",
+    "mode": "Online (from home)",
+    "individual": "yes",
+    "link": "https://register.unifiedcouncil.com/options",
+    "linkLabel": "Register online",
+    "source": "https://www.unifiedcouncil.com/exams-schedule.html",
+    "sourceType": "official",
+    "addedOn": "2026-11-12",
+    "note": "Online exam taken from home — parents can register directly, no school needed. Same dates for all classes, time depends on class. Practice (mock) test 27 Dec 2026 and final test 3 Jan 2027 — Class 1, 2 & 5: mock 2–3 pm, final 10–11 am · Class 3 & 4: mock 3:30–4:30 pm, final 11:30 am–12:30 pm. Registration was open as of 12 Nov 2026."
   }
 ]

@@ -319,6 +319,8 @@ h2[id] { scroll-margin-top: 16px; }
 .badge.sample { background: var(--sample); color: #fff; }
 .badge.closed { background: #eef0f3; color: var(--muted); }
 .badge.unverified { background: var(--warn-soft); color: var(--warn-text); }
+.badge.direct { background: #1b7a36; color: #fff; }
+.direct-tag { display: inline-block; margin: 2px 0; font-size: 0.75rem; font-weight: 700; color: #1b7a36; }
 .badge.confirmed { background: #e3f6e8; color: #1b7a36; }
 
 .source-line { margin: 0 0 12px; font-size: 0.8rem; color: var(--muted); }
@@ -407,6 +409,43 @@ h2[id] { scroll-margin-top: 16px; }
 @keyframes rise {
   from { opacity: 0; transform: translateY(12px); }
   to { opacity: 1; transform: translateY(0); }
+}
+
+/* ---------- Announcement bar (announcement.json) ---------- */
+.announce { background: #fff1e6; border-bottom: 1px solid #ffd8bd; color: #7a2e0e; }
+.announce-inner { display: flex; align-items: center; gap: 10px; padding-top: 10px; padding-bottom: 10px; }
+.announce-icon { flex: none; font-size: 1.1rem; }
+.announce-text { margin: 0; flex: 1; font-size: 0.9rem; font-weight: 600; line-height: 1.4; }
+.announce-text a { color: inherit; text-decoration: none; }
+.announce-text a:hover { text-decoration: underline; }
+.announce-btn {
+  flex: none;
+  background: var(--urgent);
+  color: #fff;
+  text-decoration: none;
+  font-weight: 700;
+  font-size: 0.88rem;
+  padding: 7px 12px;
+  border-radius: 999px;
+  white-space: nowrap;
+}
+.announce-btn:hover, .announce-btn:focus-visible { filter: brightness(0.92); }
+.announce-close {
+  flex: none;
+  border: none;
+  background: none;
+  color: #7a2e0e;
+  font-size: 1rem;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  cursor: pointer;
+}
+.announce-close:hover { background: rgba(122, 46, 14, 0.08); }
+@media (max-width: 520px) {
+  .announce-inner { display: grid; grid-template-columns: auto 1fr auto; row-gap: 8px; align-items: start; }
+  .announce-btn { grid-column: 2; justify-self: start; }
+  .announce-close { grid-column: 3; grid-row: 1; margin-top: -4px; }
 }
 
 /* ---------- Section tabs (Competitions / School admissions) ---------- */

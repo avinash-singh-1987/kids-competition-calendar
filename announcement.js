@@ -1,0 +1,82 @@
+// Announcement bar shown at the top of every page.
+// Edit announcement.json to change or switch it off ("active": false).
+// It hides itself after "showUntil", and a visitor can close it (remembered per announcement id).
+(function () {
+  const KEY = "kcc-closed-announcement";
+
+  function parseDate(text) {
+    if (typeof text !== "string" || !/^\d{4}-\d{2}-\d{2}$/.test(text)) return null;
+    const [y, m, d] = text.split("-").map(Number);
+    return new Date(y, m - 1, d, 23, 59, 59);
+  }
+  function safeLink(url) {
+    return typeof url === "string" && /^(https?:\/\/|\.\/|\/)/i.test(url) ? url : null;
+  }
+  function closedId() { try { return localStorage.getItem(KEY); } catch (e) { return null; } }
+  function rememberClosed(id) { try { localStorage.setItem(KEY, id); } catch (e) { /* fine */ } }
+  function track(name) {
+    try { if (window.goatcounter && window.goatcounter.count) window.goatcounter.count({ path: name, title: name, event: true }); } catch (e) {}
+  }
+
+  fetch("announcement.json", { cache: "no-cache" })
+    .then(r => (r.ok ? r.json() : null))
+    .then(a => {
+      if (!a || !a.active || !a.text) return;
+      const until = parseDate(a.showUntil);
+      if (until && until < new Date()) return;
+      if (a.id && closedId() === a.id) return;
+
+      const bar = document.createElement("div");
+      bar.className = "announce";
+      bar.setAttribute("role", "region");
+      bar.setAttribute("aria-label", "Announcement");
+
+      const inner = document.createElement("div");
+      inner.className = "wrap announce-inner";
+
+      const icon = document.createElement("span");
+      icon.className = "announce-icon";
+      icon.setAttribute("aria-hidden", "true");
+      icon.textContent = "🔔";
+
+      const text = document.createElement("p");
+      text.className = "announce-text";
+      const details = safeLink(a.detailsLink);
+      if (details) {
+        const t = document.createElement("a");
+        t.href = details;
+        t.textContent = a.text;
+        t.addEventListener("click", () => track("click-announcement-details"));
+        text.appendChild(t);
+      } else {
+        text.textContent = a.text;
+      }
+
+      inner.appendChild(icon);
+      inner.appendChild(text);
+
+      const link = safeLink(a.link);
+      if (link) {
+        const btn = document.createElement("a");
+        btn.className = "announce-btn";
+        btn.href = link;
+        btn.target = "_blank";
+        btn.rel = "noopener noreferrer";
+        btn.textContent = (a.linkText || "Open") + " →";
+        btn.addEventListener("click", () => track("click-announcement"));
+        inner.appendChild(btn);
+      }
+
+      const close = document.createElement("button");
+      close.type = "button";
+      close.className = "announce-close";
+      close.setAttribute("aria-label", "Close announcement");
+      close.textContent = "✕";
+      close.addEventListener("click", () => { bar.remove(); if (a.id) rememberClosed(a.id); });
+      inner.appendChild(close);
+
+      bar.appendChild(inner);
+      document.body.insertBefore(bar, document.body.firstChild);
+    })
+    .catch(() => { /* no announcement — page works as normal */ });
+})();
