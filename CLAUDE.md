@@ -50,10 +50,12 @@
   KV and EducationWorld sites block cloud servers — use news/search for those.
 - Script/CSS links carry a version (`?v=YYYYMMDD`) to beat browser caches: when you change
   script.js, admissions.js or style.css, bump the `?v=` date in index.html / admissions.html.
-- Announcement bar (top of both pages): edit `announcement.json` — `active`, `title`, `points`
+- Announcement bar: edit `announcement.json` — `active`, `title`, `points`
   (list of {text, detailsLink, showUntil}; a dated point should have showUntil so it disappears
-  when it's out of date), `linkText`, `link` (`./#no-school` shows the "no school needed" list). Owner wants it
-  ALWAYS visible: keep `closable` false and no `showUntil`. Current message: Unified Council
-  lets parents register directly (no school) — the site's key differentiator. Don't put
-  class-specific dates in it.
+  when it's out of date), `linkText`, `link`, `onlyWithHash`. Since Nov 2026 the owner wants it
+  shown ONLY to visitors from the WhatsApp share link (`onlyWithHash: ["direct"]`): a permanent
+  bar for everyone looked unprofessional and like promotion of one organiser. Normal visitors
+  instead see a neutral hero pill "N without school registration ↓" (opens the filtered list).
+  Keep `closable` false. Wording must stay mild: "school registration not required" /
+  "parents can register directly", not "no school needed". Don't put class-specific dates in it.
 

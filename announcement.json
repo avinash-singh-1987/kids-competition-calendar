@@ -2,6 +2,9 @@
   "active": true,
   "id": "unified-council-direct",
   "closable": false,
+  "onlyWithHash": [
+    "direct"
+  ],
   "title": "Olympiads without school registration",
   "points": [
     {

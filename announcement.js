@@ -1,7 +1,9 @@
 // Announcement bar shown at the top of every page.
 // Edit announcement.json to change or switch it off ("active": false).
 // Optional: "showUntil" (YYYY-MM-DD) hides it after that date; "closable": true adds a ✕ button
-// (a visitor's close is remembered per announcement id). By default it always shows.
+// (a visitor's close is remembered per announcement id).
+// "onlyWithHash": ["direct"] shows the bar only when the page is opened with that #hash
+// (e.g. from the /no-school/ share link); without it the bar shows to every visitor.
 (function () {
   const KEY = "kcc-closed-announcement";
 
@@ -23,6 +25,7 @@
     .then(r => (r.ok ? r.json() : null))
     .then(a => {
       if (!a || !a.active) return;
+      if (Array.isArray(a.onlyWithHash) && !a.onlyWithHash.includes(decodeURIComponent(location.hash.slice(1)))) return;
       const until = parseDate(a.showUntil);
       if (until && until < new Date()) return;
       // Either one "text", or several "points" (each can have its own showUntil / detailsLink).
