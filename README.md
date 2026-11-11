@@ -109,5 +109,9 @@ join each school and when to apply. The date of birth is kept only in the visito
 ## Announcement bar
 
 The orange bar at the top of both pages comes from `announcement.json`. Set `"active": false`
-to hide it. It also hides itself after `showUntil`. Give a new announcement a new `id`.
+to hide it. Fields: `title` (bold line) and `points` — a list of `{"text", "detailsLink", "showUntil"}`;
+a point with `showUntil` disappears by itself after that date, a point without it stays. `linkText` + `link`
+make the button. Optional for the whole bar: `showUntil` and `closable: true` (adds a ✕; the owner wants
+the bar always visible, so keep it `false`). The link `./#no-school` opens the competitions page filtered
+to "no school needed".
 

@@ -1,6 +1,7 @@
 // Announcement bar shown at the top of every page.
 // Edit announcement.json to change or switch it off ("active": false).
-// It hides itself after "showUntil", and a visitor can close it (remembered per announcement id).
+// Optional: "showUntil" (YYYY-MM-DD) hides it after that date; "closable": true adds a ✕ button
+// (a visitor's close is remembered per announcement id). By default it always shows.
 (function () {
   const KEY = "kcc-closed-announcement";
 
@@ -21,10 +22,15 @@
   fetch("announcement.json", { cache: "no-cache" })
     .then(r => (r.ok ? r.json() : null))
     .then(a => {
-      if (!a || !a.active || !a.text) return;
+      if (!a || !a.active) return;
       const until = parseDate(a.showUntil);
       if (until && until < new Date()) return;
-      if (a.id && closedId() === a.id) return;
+      // Either one "text", or several "points" (each can have its own showUntil / detailsLink).
+      const now = new Date();
+      const points = (Array.isArray(a.points) ? a.points : (a.text ? [{ text: a.text, detailsLink: a.detailsLink }] : []))
+        .filter(p => p && p.text && !(parseDate(p.showUntil) && parseDate(p.showUntil) < now));
+      if (!points.length) return;
+      if (a.closable && a.id && closedId() === a.id) return;
 
       const bar = document.createElement("div");
       bar.className = "announce";
@@ -39,17 +45,33 @@
       icon.setAttribute("aria-hidden", "true");
       icon.textContent = "🔔";
 
-      const text = document.createElement("p");
+      const text = document.createElement("div");
       text.className = "announce-text";
-      const details = safeLink(a.detailsLink);
-      if (details) {
-        const t = document.createElement("a");
-        t.href = details;
-        t.textContent = a.text;
-        t.addEventListener("click", () => track("click-announcement-details"));
-        text.appendChild(t);
+      if (a.title) {
+        const h = document.createElement("strong");
+        h.className = "announce-title";
+        h.textContent = a.title;
+        text.appendChild(h);
+      }
+      const addLine = (parent, p) => {
+        const details = safeLink(p.detailsLink);
+        if (details) {
+          const t = document.createElement("a");
+          t.href = details;
+          t.textContent = p.text;
+          t.addEventListener("click", () => track("click-announcement-details"));
+          parent.appendChild(t);
+        } else {
+          parent.appendChild(document.createTextNode(p.text));
+        }
+      };
+      if (points.length === 1 && !a.title) {
+        addLine(text, points[0]);
       } else {
-        text.textContent = a.text;
+        const ul = document.createElement("ul");
+        ul.className = "announce-points";
+        points.forEach(p => { const li = document.createElement("li"); addLine(li, p); ul.appendChild(li); });
+        text.appendChild(ul);
       }
 
       inner.appendChild(icon);
@@ -67,13 +89,15 @@
         inner.appendChild(btn);
       }
 
-      const close = document.createElement("button");
-      close.type = "button";
-      close.className = "announce-close";
-      close.setAttribute("aria-label", "Close announcement");
-      close.textContent = "✕";
-      close.addEventListener("click", () => { bar.remove(); if (a.id) rememberClosed(a.id); });
-      inner.appendChild(close);
+      if (a.closable) {
+        const close = document.createElement("button");
+        close.type = "button";
+        close.className = "announce-close";
+        close.setAttribute("aria-label", "Close announcement");
+        close.textContent = "✕";
+        close.addEventListener("click", () => { bar.remove(); if (a.id) rememberClosed(a.id); });
+        inner.appendChild(close);
+      }
 
       bar.appendChild(inner);
       document.body.insertBefore(bar, document.body.firstChild);
