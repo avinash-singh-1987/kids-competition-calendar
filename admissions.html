@@ -22,7 +22,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700&family=Nunito+Sans:wght@400;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css?v=20261111">
+  <link rel="stylesheet" href="style.css?v=20261111c">
 </head>
 <body>
   <header class="hero">
@@ -37,8 +37,8 @@
         <h1>School Admissions</h1>
         <p class="tagline">When do popular Kochi schools open <strong>Pre-KG, LKG and UKG</strong> admissions, and what age does your child need to be?</p>
         <ul class="hero-stats" aria-label="Summary">
-          <li><span id="stat-schools">–</span> schools</li>
-          <li><span id="stat-open">–</span> open or opening soon</li>
+          <li><a class="stat-link" href="#all-title" data-show="all"><span id="stat-schools">–</span> schools <span class="stat-arrow" aria-hidden="true">↓</span></a></li>
+          <li><a class="stat-link" href="#all-title" data-show="open"><span id="stat-open">–</span> open or opening soon <span class="stat-arrow" aria-hidden="true">↓</span></a></li>
         </ul>
       </div>
 
@@ -141,6 +141,10 @@
       <div class="section-head plain">
         <h2 id="all-title">Schools <span id="count" class="count-pill"></span></h2>
       </div>
+      <div class="chips status-filter" id="status-filter" role="group" aria-label="Show schools">
+        <button type="button" class="chip" data-show="all" aria-pressed="true">All schools</button>
+        <button type="button" class="chip" data-show="open" aria-pressed="false">Open or opening soon</button>
+      </div>
       <div id="school-list" class="card-list"></div>
     </section>
 
@@ -173,7 +177,7 @@
     </div>
   </footer>
 
-  <script src="admissions.js?v=20261111b"></script>
+  <script src="admissions.js?v=20261111c"></script>
   <script data-goatcounter="https://kochikidscalendar.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>
 </body>
 </html>
