@@ -42,8 +42,9 @@
   KV and EducationWorld sites block cloud servers — use news/search for those.
 - Script/CSS links carry a version (`?v=YYYYMMDD`) to beat browser caches: when you change
   script.js, admissions.js or style.css, bump the `?v=` date in index.html / admissions.html.
-- Announcement bar (top of both pages): edit `announcement.json` — `active`, `text`, `linkText`,
-  `link`, `detailsLink` (`./#no-school` shows the "no school needed" list). Owner wants it
+- Announcement bar (top of both pages): edit `announcement.json` — `active`, `title`, `points`
+  (list of {text, detailsLink, showUntil}; a dated point should have showUntil so it disappears
+  when it's out of date), `linkText`, `link` (`./#no-school` shows the "no school needed" list). Owner wants it
   ALWAYS visible: keep `closable` false and no `showUntil`. Current message: Unified Council
   lets parents register directly (no school) — the site's key differentiator. Don't put
   class-specific dates in it.

@@ -22,9 +22,14 @@
   fetch("announcement.json", { cache: "no-cache" })
     .then(r => (r.ok ? r.json() : null))
     .then(a => {
-      if (!a || !a.active || !a.text) return;
+      if (!a || !a.active) return;
       const until = parseDate(a.showUntil);
       if (until && until < new Date()) return;
+      // Either one "text", or several "points" (each can have its own showUntil / detailsLink).
+      const now = new Date();
+      const points = (Array.isArray(a.points) ? a.points : (a.text ? [{ text: a.text, detailsLink: a.detailsLink }] : []))
+        .filter(p => p && p.text && !(parseDate(p.showUntil) && parseDate(p.showUntil) < now));
+      if (!points.length) return;
       if (a.closable && a.id && closedId() === a.id) return;
 
       const bar = document.createElement("div");
@@ -40,17 +45,33 @@
       icon.setAttribute("aria-hidden", "true");
       icon.textContent = "🔔";
 
-      const text = document.createElement("p");
+      const text = document.createElement("div");
       text.className = "announce-text";
-      const details = safeLink(a.detailsLink);
-      if (details) {
-        const t = document.createElement("a");
-        t.href = details;
-        t.textContent = a.text;
-        t.addEventListener("click", () => track("click-announcement-details"));
-        text.appendChild(t);
+      if (a.title) {
+        const h = document.createElement("strong");
+        h.className = "announce-title";
+        h.textContent = a.title;
+        text.appendChild(h);
+      }
+      const addLine = (parent, p) => {
+        const details = safeLink(p.detailsLink);
+        if (details) {
+          const t = document.createElement("a");
+          t.href = details;
+          t.textContent = p.text;
+          t.addEventListener("click", () => track("click-announcement-details"));
+          parent.appendChild(t);
+        } else {
+          parent.appendChild(document.createTextNode(p.text));
+        }
+      };
+      if (points.length === 1 && !a.title) {
+        addLine(text, points[0]);
       } else {
-        text.textContent = a.text;
+        const ul = document.createElement("ul");
+        ul.className = "announce-points";
+        points.forEach(p => { const li = document.createElement("li"); addLine(li, p); ul.appendChild(li); });
+        text.appendChild(ul);
       }
 
       inner.appendChild(icon);
