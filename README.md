@@ -44,6 +44,10 @@ An entry looks like this:
 
 - `"examDates": ["2026-11-19", "2026-12-03"]` — use this **instead of** `examDate` when the
   school picks one of several dates (SOF, SilverZone). Past dates are hidden automatically.
+- `"schoolLeadDays": 30` — for school-only Olympiads (SOF) with no fixed registration date: the school
+  must register this many days before the exam date it picks. The card then shows "Ask your school
+  before <date>", and once every date's deadline has passed it shows "Closed" and moves to the end
+  of the list (and leaves "Coming up soon").
 - `"note": "..."` — a short message shown on the card (e.g. "Register through your school").
 - `"linkLabel": "Read news article"` — changes the button text (default: "Official website").
 - `"source": "https://..."` — the page where the information was found (shown as "Source" on the card).
