@@ -285,9 +285,13 @@ function renderCard(s, i) {
 
 function render() {
   const list = document.getElementById("school-list");
+  if (!list) return;
   list.innerHTML = "";
   document.getElementById("count").textContent = schools.length;
-  schools.forEach((s, i) => list.appendChild(renderCard(s, i)));
+  schools.forEach((s, i) => {
+    try { list.appendChild(renderCard(s, i)); }
+    catch (e) { console.error("Could not show school card:", s.school, e); }
+  });
 }
 
 // ---------- Date of birth box ----------
@@ -385,7 +389,14 @@ async function start() {
   const open = schools.filter(s => s.status === "open" || s.status === "expected").length;
   document.getElementById("stat-schools").textContent = schools.length;
   document.getElementById("stat-open").textContent = open;
-  setupDob();
+  // Always show the school cards first (general information), then set up the
+  // optional date-of-birth box. A problem in that box must never hide the cards.
+  render();
+  try {
+    setupDob();
+  } catch (e) {
+    console.error("Date-of-birth box failed; school cards are still shown.", e);
+  }
   const id = decodeURIComponent(location.hash.slice(1));
   const card = id && document.getElementById(id);
   if (card) {
