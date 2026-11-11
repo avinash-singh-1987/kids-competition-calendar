@@ -12,6 +12,9 @@
    if the previous pull request was already merged).
 2. Test the site in a browser (phone width) before committing.
 3. Commit, push, and **always create the pull request yourself** — do not ask first.
+3b. After the owner merges, check that the GitHub Pages deployment's commit (sha) equals the new
+   `main` commit. GitHub sometimes redeploys the previous commit right after a merge; if so, the
+   new files are not live and another commit to `main` (a small PR) is needed to rebuild.
 4. Give the owner the pull request link and tell them: open it → "Merge pull request"
    → "Confirm merge".
 
