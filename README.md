@@ -132,3 +132,11 @@ Share link for WhatsApp: `https://kochikidscalendar.com/no-school/` (folder `no-
 link-preview picture (`og-no-school.jpg`) and opens the competitions page at the top with the
 "No school needed" filter on (`#direct`).
 
+## One page per competition and school (for Google and WhatsApp)
+
+`tools/build-pages.js` creates `competitions/<name>/`, `schools/<name>/`, the two list pages
+(`/competitions/`, `/schools/`) and `sitemap.xml` from the JSON files. Run it after every data change:
+
+    node tools/build-pages.js
+
+Don't edit those generated files by hand — they are rewritten each time.

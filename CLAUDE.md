@@ -11,6 +11,9 @@
 1. Make the change on the designated `claude/...` branch (restart it from `main`
    if the previous pull request was already merged).
 2. Test the site in a browser (phone width) before committing.
+2b. Whenever competitions.json or admissions.json changes, run `node tools/build-pages.js`
+   (one page per competition/school + sitemap.xml) and commit the result;
+   `node tools/build-pages.js --check` must pass before committing.
 3. Commit, push, and **always create the pull request yourself** — do not ask first.
 3b. After the owner merges, check that the GitHub Pages deployment's commit (sha) equals the new
    `main` commit. GitHub sometimes redeploys the previous commit right after a merge; if so, the

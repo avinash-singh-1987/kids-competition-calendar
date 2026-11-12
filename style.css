@@ -562,6 +562,32 @@ h2[id] { scroll-margin-top: 16px; }
 }
 .site-footer p { margin: 2px 0; }
 
+.site-footer a { color: var(--primary-dark); font-weight: 700; }
+
+/* ---------- One page per competition / school (built by tools/build-pages.js) ---------- */
+.hero-compact { padding: 24px 0 28px; }
+.hero-compact h1 { font-size: clamp(1.6rem, 5.5vw, 2.4rem); }
+.hero-compact .tagline { margin-bottom: 0; }
+.static-page { max-width: 760px; padding-top: 22px; }
+.static-card:hover { transform: none; }
+.static-card .details dd { max-width: 62%; }
+.static-card .card-actions .btn-secondary { padding: 11px 8px; }
+.static-foot { margin: 16px 0 0; }
+.static-foot a { color: var(--primary-dark); font-weight: 700; }
+.hub-list { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; }
+.hub-list a {
+  display: block;
+  padding: 14px 16px;
+  background: var(--card);
+  border-radius: 12px;
+  box-shadow: var(--shadow);
+  color: var(--text);
+  text-decoration: none;
+}
+.hub-list a:hover, .hub-list a:focus-visible { box-shadow: var(--shadow-hover); }
+.hub-list strong { display: block; }
+.hub-list span { display: block; color: var(--muted); font-size: 0.88rem; }
+
 /* Respect people who prefer less motion */
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }

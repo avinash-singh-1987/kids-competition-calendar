@@ -246,8 +246,9 @@ function slugify(text) {
   return String(text || "").toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-+|-+$/g, "").slice(0, 60);
 }
 
+// Each competition has its own page (built by tools/build-pages.js) — nicer to share.
 function pageUrl(c) {
-  return location.origin + location.pathname + "#" + slugify(c.name);
+  return location.origin + "/competitions/" + slugify(c.name) + "/";
 }
 
 function ymd(d) {
