@@ -146,14 +146,18 @@ function actionLink(href, icon, label, trackName) {
   return a;
 }
 
+function schoolPageUrl(s) {
+  return location.origin + "/schools/" + slugify(s.school) + "/";
+}
+
+// Google Calendar reminder at 9 am India time on the 1st of the month applications usually open.
 function reminderUrl(s, when, title) {
-  const end = new Date(when);
-  end.setDate(end.getDate() + 1);
   const params = new URLSearchParams({
     action: "TEMPLATE",
     text: title,
-    dates: ymd(when) + "/" + ymd(end),
-    details: `${s.school} (${s.area}) usually opens admissions around this month. Check the school's notice: ${s.link}\n\nKochi Kids Calendar: ${location.origin + location.pathname}#${slugify(s.school)}`,
+    dates: ymd(when) + "T090000/" + ymd(when) + "T093000",
+    ctz: "Asia/Kolkata",
+    details: `${s.school} (${s.area}) usually opens admissions around ${MONTHS[when.getMonth()]}. Check the school's notice: ${s.link}\n\nKochi Kids Calendar: ${schoolPageUrl(s)}`,
   });
   return "https://calendar.google.com/calendar/render?" + params.toString();
 }
@@ -162,7 +166,7 @@ function whatsappUrl(s) {
   const lines = [`*${s.school}* (${s.area}) – admissions`];
   s.entry.forEach(r => lines.push(`${r.class}: ${ruleText(r)}`));
   if (s.applyMonth) lines.push(`Applications usually open: ${MONTHS[s.applyMonth - 1]}`);
-  lines.push("", "Details: " + location.origin + location.pathname + "#" + slugify(s.school));
+  lines.push("", "Details: " + schoolPageUrl(s));
   return "https://wa.me/?text=" + encodeURIComponent(lines.join("\n"));
 }
 
@@ -278,14 +282,18 @@ function renderCard(s, i) {
     actions.appendChild(a);
   }
   const row = el("div", "secondary-actions");
+  // "Remind me in <Month Year>": a phone calendar alert when applications usually open.
+  let remind = null;
   if (reminder) {
-    row.appendChild(actionLink(
-      reminderUrl(s, reminder.when, `Apply: ${s.school} ${reminder.cls} (${reminder.year}-${String(reminder.year + 1).slice(2)})`),
-      CAL_ICON, "Remind me", "click-admission-reminder"));
+    remind = { when: reminder.when, title: `Apply: ${s.school} ${reminder.cls} (${reminder.year}-${String(reminder.year + 1).slice(2)})` };
   } else if (s.applyMonth) {
     const next = applyDate(s, firstPlannableYear(s.sessionMonth));
     const when = next && next >= today() ? next : applyDate(s, firstPlannableYear(s.sessionMonth) + 1);
-    row.appendChild(actionLink(reminderUrl(s, when, `Check admissions: ${s.school}`), CAL_ICON, "Remind me", "click-admission-reminder"));
+    remind = { when, title: `Admissions usually open: ${s.school}` };
+  }
+  if (remind) {
+    const label = `Remind me in ${MONTHS[remind.when.getMonth()].slice(0, 3)} ${remind.when.getFullYear()}`;
+    row.appendChild(actionLink(reminderUrl(s, remind.when, remind.title), CAL_ICON, label, "click-admission-reminder"));
   }
   row.appendChild(actionLink(whatsappUrl(s), SHARE_ICON, "WhatsApp", "click-whatsapp"));
   actions.appendChild(row);
