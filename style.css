@@ -525,6 +525,7 @@ h2[id] { scroll-margin-top: 16px; }
 .near-row { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; }
 .near-row select { font: inherit; padding: 7px 10px; border: 1px solid var(--border); border-radius: 10px; background: var(--card); color: var(--text); max-width: 100%; }
 .near-me .dob-summary { margin: 0; }
+.near-credit { font-size: 0.75rem; }
 .distance-line { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin: -2px 0 10px; font-size: 0.88rem; }
 .distance-line strong { color: var(--primary-dark); }
 .distance-line a { color: var(--primary-dark); font-weight: 700; }
