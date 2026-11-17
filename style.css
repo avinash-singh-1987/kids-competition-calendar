@@ -620,6 +620,36 @@ h2[id] { scroll-margin-top: 16px; }
 .guide-cta { margin-top: 26px; }
 .guide-link { display: inline-block; margin-top: 10px; color: #fff; font-weight: 700; text-decoration: underline; text-underline-offset: 3px; }
 
+.guide-table-narrow { min-width: 0; }
+
+/* ---------- Printable admission calendar (/admission-calendar/) ---------- */
+.print-actions { margin: 0 0 14px; }
+.cal-sheet { background: #fff; border-radius: 12px; box-shadow: var(--shadow); padding: 16px; }
+.cal-head { display: flex; justify-content: space-between; align-items: flex-start; gap: 12px; margin-bottom: 10px; }
+.cal-title { margin: 0; font-family: var(--heading-font); font-size: 1.25rem; font-weight: 700; color: var(--primary-dark); line-height: 1.2; }
+.cal-sub { margin: 4px 0 0; font-size: 0.8rem; color: var(--muted); }
+.cal-qr { flex: none; width: 84px; height: 84px; }
+.cal-table { width: 100%; border-collapse: collapse; font-size: 0.82rem; }
+.cal-table th, .cal-table td { padding: 5px 6px; border-bottom: 1px solid var(--border); text-align: left; vertical-align: top; }
+.cal-table thead th { font-size: 0.75rem; color: var(--muted); }
+.cal-table .muted { font-size: 0.75rem; }
+.cal-month th { background: var(--primary-soft); color: var(--primary-dark); font-family: var(--heading-font); font-size: 0.95rem; padding-top: 6px; }
+.cal-foot { margin: 10px 0 0; font-size: 0.75rem; color: var(--muted); }
+@media print {
+  @page { size: A4; margin: 10mm; }
+  body.print-page { background: #fff; font-size: 11px; }
+  .print-page .hero, .print-page .site-footer, .print-page .print-actions { display: none !important; }
+  .print-page .static-page { max-width: none; padding: 0; }
+  .print-page .cal-sheet { box-shadow: none; padding: 0; }
+  .print-page .cal-table { font-size: 10px; }
+  .print-page .cal-table th, .print-page .cal-table td { padding: 2px 5px; }
+  .print-page .cal-month th { padding-top: 4px; font-size: 11px; }
+  .print-page .cal-qr { width: 70px; height: 70px; }
+  .print-page .cal-month { break-after: avoid; }
+  .print-page tr { break-inside: avoid; }
+  .print-page script { display: none; }
+}
+
 /* Respect people who prefer less motion */
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
