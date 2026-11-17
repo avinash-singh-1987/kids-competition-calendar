@@ -48,8 +48,13 @@
   the top (announcement bar visible) with the "Register directly" filter on. `#no-school` does the same
   but scrolls down to the list.
 - Visitor counter: GoatCounter, site code `kochikidscalendar`
-  (dashboard https://kochikidscalendar.goatcounter.com). Button clicks are counted as
-  events `click-whatsapp`, `click-calendar`, `click-official-link`.
+  (dashboard https://kochikidscalendar.goatcounter.com). Since Nov 2026 button clicks are counted
+  PER ENTRY as `<event>/<slug>` (slug = same as the card id / page name), so we can later show a
+  playschool or organiser how many parents acted on their card: playschools `ps-maps/…`, `ps-site/…`,
+  `ps-nearby-school/…`; schools `school-maps/…`, `school-site/…`, `school-directions/…`,
+  `school-reminder/…`, `school-whatsapp/…`; competitions `official-link/…`, `calendar/…`,
+  `whatsapp/…`, `coming-up/…`, `remind-next-year/…`, `my-child-item/…`. Older totals used the
+  names `click-whatsapp`, `click-calendar`, `click-official-link` etc.
 - School admissions page: `admissions.html` + `admissions.js`, data in `admissions.json`
   (see README). Keep schools in popularity order (Rajagiri Kalamassery first). Never rate or
   rank schools ourselves; status/age rules only from the school's own notice when possible.

@@ -377,7 +377,7 @@ function renderDeadlines(list) {
     link.addEventListener("click", e => {
       e.preventDefault();
       openCard(id);
-      track("click-coming-up");
+      track("coming-up/" + id);
     });
     li.appendChild(link);
     ul.appendChild(li);
@@ -456,14 +456,14 @@ function renderCard(c, i) {
     a.href = url;
     a.target = "_blank";
     a.rel = "noopener noreferrer";
-    a.addEventListener("click", () => track("click-official-link"));
+    a.addEventListener("click", () => track("official-link/" + slugify(c.name)));
     actions.appendChild(a);
   }
   if (!c.sample) {
     const row = el("div", "secondary-actions");
     const cal = calendarUrl(c);
-    if (cal) row.appendChild(actionLink("btn-secondary", cal, ACTION_ICONS.calendar, "Add to calendar", "click-calendar"));
-    row.appendChild(actionLink("btn-secondary", whatsappUrl(c), ACTION_ICONS.share, "WhatsApp", "click-whatsapp"));
+    if (cal) row.appendChild(actionLink("btn-secondary", cal, ACTION_ICONS.calendar, "Add to calendar", "calendar/" + slugify(c.name)));
+    row.appendChild(actionLink("btn-secondary", whatsappUrl(c), ACTION_ICONS.share, "WhatsApp", "whatsapp/" + slugify(c.name)));
     actions.appendChild(row);
   }
   card.appendChild(actions);
@@ -553,7 +553,7 @@ function renderNextYearCard(c, i) {
     a.href = remind;
     a.target = "_blank";
     a.rel = "noopener noreferrer";
-    a.addEventListener("click", () => track("click-remind-next-year"));
+    a.addEventListener("click", () => track("remind-next-year/" + slugify(c.name)));
     actions.appendChild(a);
   }
   const url = safeLink(c.link);
@@ -562,7 +562,7 @@ function renderNextYearCard(c, i) {
     o.href = url;
     o.target = "_blank";
     o.rel = "noopener noreferrer";
-    o.addEventListener("click", () => track("click-official-link"));
+    o.addEventListener("click", () => track("official-link/" + slugify(c.name)));
     actions.appendChild(o);
   }
   card.appendChild(actions);
@@ -755,7 +755,7 @@ function renderMyChild() {
       a.appendChild(el("strong", null, c.name));
       a.appendChild(el("span", "my-child-action" + (daysBetween(today(), ev.date) <= 7 ? " urgent" : ""), myChildAction(c, ev)));
       if (c.individual === "yes") a.appendChild(el("span", "direct-tag", "✓ Parents can register directly"));
-      a.addEventListener("click", e => { e.preventDefault(); openCard(slugify(c.name)); track("click-my-child-item"); });
+      a.addEventListener("click", e => { e.preventDefault(); openCard(slugify(c.name)); track("my-child-item/" + slugify(c.name)); });
       li.appendChild(a);
       ul.appendChild(li);
     });
