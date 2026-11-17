@@ -212,7 +212,9 @@
   "link": "https://www.footprintseducation.in/pre-school-daycare-kathrikadavu-kaloor-kochi",
   "source": "https://www.footprintseducation.in/pre-school-daycare-kathrikadavu-kaloor-kochi",
   "sourceType": "official",
-  "checkedOn": "2026-11-17"
+  "checkedOn": "2026-11-18",
+  "ages": "Toddlers 12–24 months · Play Group 2–3 yrs · Pre-Nursery 3–4 · LKG 4–5 · UKG 5–6 · After-school",
+  "liveCamera": true
  },
  {
   "name": "The Backyard Academy",
@@ -905,13 +907,23 @@
   ],
   "locations": [
    {
-    "lat": 9.99512,
-    "lng": 76.29204,
+    "name": "Kaloor (Stadium Link Road)",
+    "lat": 9.98542,
+    "lng": 76.30359,
+    "approx": true
+   },
+   {
+    "name": "Kakkanad (Kunnumpuram)",
+    "lat": 10.0155,
+    "lng": 76.3361,
     "approx": true
    }
   ],
-  "source": "https://campuspro.co.in/schools/3549/little-britain-preschool",
-  "sourceType": "listing",
-  "checkedOn": "2026-11-17"
+  "source": "https://littlebritain.in/",
+  "sourceType": "official",
+  "checkedOn": "2026-11-18",
+  "ages": "Playgroup 1.8–2.5 yrs · Nursery 2.5–3.5 · LKG 3.5–4.5 · UKG 4.5–6",
+  "liveCamera": true,
+  "note": "Two branches: Kaloor Stadium Link Road and Kunnumpuram, Kakkanad. Timings (as on its website): daycare 9:30 am–6 pm (Mon–Sat), kindergarten 9:30 am–1 pm."
  }
 ]
