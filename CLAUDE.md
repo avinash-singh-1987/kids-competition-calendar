@@ -58,6 +58,13 @@
   (nominatim.openstreetmap.org is in Allowed domains; max 1 request/second, send a User-Agent) or the
   school's own map embed — check each point lands in the right locality. A new school must get `locations`.
   The parent's GPS position is never stored or sent; only the chosen area name is saved on the phone.
+- Playschools page: `playschools.html` + `playschools.js`, data in `playschools.json` (name, area, kinds,
+  chain/partOf, ages, locations[{lat,lng,approx}], link, source, sourceType "official"|"listing", checkedOn).
+  Owner's rule (Nov 2026): include playschools with their own/chain website, kindergartens of our schools,
+  and well-known local ones that appear in at least two public directories or that a parent suggested.
+  Listing-only entries show "From public listings — confirm with the playschool". Never show ratings, fees
+  or directory phone numbers; the card's Google Maps button gives reviews/phone/route. Never rank:
+  without a location the list is by area, then name. `approx` points show "In the X area" / "(area)".
 - School websites reachable from the cloud environment (owner added them to Allowed domains):
   rajagiri.ac.in, christujayanthi.ac.in, bhavanskochikendra.com, choiceschool.com,
   tochschool.com, assisi.ac.in, ncskochi.nesnavy.in, sanskaraschool.com, vidyodayaschool.ac.in,

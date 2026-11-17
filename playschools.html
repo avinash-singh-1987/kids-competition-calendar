@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Playschools near you in Kochi – preschool &amp; daycare | Kochi Kids Calendar</title>
+  <meta name="description" content="Well-known playschools, preschools and daycares in Kochi, sorted by distance from your home — with Google Maps reviews and the nearest schools for LKG.">
+  <link rel="canonical" href="https://kochikidscalendar.com/playschools.html">
+  <meta name="theme-color" content="#0f766e">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Kochi Kids Calendar">
+  <meta property="og:title" content="Playschools near you in Kochi – preschool &amp; daycare">
+  <meta property="og:description" content="Well-known playschools and daycares in Kochi, nearest first, with Google Maps reviews and the nearby schools for LKG. Free.">
+  <meta property="og:url" content="https://kochikidscalendar.com/playschools.html">
+  <meta property="og:image" content="https://kochikidscalendar.com/og-admissions.jpg">
+  <meta property="og:image:type" content="image/jpeg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700&family=Nunito+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css?v=20261123">
+</head>
+<body>
+  <header class="hero hero-short">
+    <nav class="wrap tabs" aria-label="Sections">
+      <a class="brand" href="./">Kochi Kids Calendar</a>
+        <a href="./">Competitions</a>
+        <a href="admissions.html">School admissions</a>
+        <a href="playschools.html" aria-current="page">Playschools</a>
+    </nav>
+    <div class="wrap hero-inner">
+      <div class="hero-text">
+        <p class="eyebrow">Kochi · Ernakulam · Kerala</p>
+        <h1>Playschools near you</h1>
+        <p class="tagline">Well-known <strong>playschools, preschools and daycares</strong> in Kochi — nearest first, with Google Maps reviews and the schools nearby for LKG.</p>
+        <ul class="hero-stats" aria-label="Summary">
+          <li><a class="stat-link" href="#all-title" data-kind="all"><span id="stat-ps">–</span> playschools <span class="stat-arrow" aria-hidden="true">↓</span></a></li>
+          <li><a class="stat-link" href="#all-title" data-kind="Daycare"><span id="stat-daycare">–</span> with daycare <span class="stat-arrow" aria-hidden="true">↓</span></a></li>
+        </ul>
+      </div>
+    </div>
+    <svg class="hero-wave" viewBox="0 0 1440 60" preserveAspectRatio="none" aria-hidden="true" focusable="false">
+      <path d="M0 30c240 30 480 30 720 0s480-30 720 0v30H0z" fill="currentColor"/>
+    </svg>
+  </header>
+
+  <main class="wrap">
+    <div id="error" class="error" hidden></div>
+
+    <section class="panel age-checker" aria-labelledby="near-title">
+      <div class="section-head">
+        <span class="section-icon" aria-hidden="true">📍</span>
+        <div>
+          <h2 id="near-title">Which are closest to you?</h2>
+          <p class="muted">Use your location or pick your area — the list is sorted nearest first.</p>
+        </div>
+      </div>
+      <div class="near-me" id="near-me">
+        <div class="near-row" role="group" aria-label="Your location">
+          <button type="button" id="use-location" class="chip">📍 Use my location</button>
+          <select id="area-select" aria-label="Or choose your area"><option value="">or choose your area…</option></select>
+          <button type="button" id="clear-near" class="chip" hidden>Clear</button>
+        </div>
+        <p id="near-summary" class="dob-summary" aria-live="polite"></p>
+        <p class="muted near-credit">Your location stays on this phone. Locations: © OpenStreetMap contributors and the playschools' own websites.</p>
+      </div>
+    </section>
+
+    <section aria-labelledby="all-title">
+      <div class="section-head plain">
+        <h2 id="all-title">Playschools <span id="count" class="count-pill"></span></h2>
+      </div>
+      <div class="chips status-filter" id="kind-filter" role="group" aria-label="Show playschools">
+        <button type="button" class="chip" data-kind="all" aria-pressed="true">All</button>
+        <button type="button" class="chip" data-kind="Daycare" aria-pressed="false">With daycare</button>
+        <button type="button" class="chip" data-kind="school" aria-pressed="false">Part of a school</button>
+      </div>
+      <div id="ps-list" class="card-list"></div>
+    </section>
+
+    <section class="about" id="about" aria-labelledby="about-title">
+      <h2 id="about-title">About this list</h2>
+      <div class="about-grid">
+        <div class="about-item">
+          <div class="about-icon" aria-hidden="true">🧸</div>
+          <h3>How playschools were chosen</h3>
+          <p>Playschools whose own website or chain website lists them, kindergartens run by the schools on our admissions page, and well-known local playschools that appear in at least two public directories or were suggested by Kochi parents. It is not a complete list of every playschool.</p>
+        </div>
+        <div class="about-item">
+          <div class="about-icon" aria-hidden="true">🔎</div>
+          <h3>How to read the cards</h3>
+          <p><strong>From its own website ✓</strong> means we read the details on the playschool's or chain's site. <strong>From public listings</strong> means directory sites only — please confirm with the playschool. Distances are straight-line; "(area)" means we only know the area, not the exact building.</p>
+        </div>
+        <div class="about-item">
+          <div class="about-icon" aria-hidden="true">⚖️</div>
+          <h3>No ratings from us</h3>
+          <p>We never rate or rank playschools. Tap <strong>Google Maps</strong> on any card for reviews, photos, phone and directions.</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap footer-inner">
+      <div class="footer-icon" aria-hidden="true">✏️</div>
+      <p>Kochi Kids Calendar · A free guide for parents in Kochi, Kerala · <a href="lkg-admission-guide/">LKG admission guide</a> · <a href="olympiad-guide/">Parent's guide to Olympiads</a> · <a href="schools/">All schools</a></p>
+    </div>
+  </footer>
+
+  <script src="playschools.js?v=20261123"></script>
+  <script data-goatcounter="https://kochikidscalendar.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>
+</body>
+</html>

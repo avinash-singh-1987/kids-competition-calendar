@@ -145,3 +145,10 @@ Don't edit those generated files by hand — they are rewritten each time.
 
 The same script also builds the parent's guides (`/olympiad-guide/`, `/lkg-admission-guide/`) and the
 printable one-page admission calendar (`/admission-calendar/`, with "Print / save as PDF").
+
+## Playschools page (`playschools.html`)
+
+Data is in `playschools.json`, one entry per centre: `name`, `area` (one of the names in `areas.json`),
+`kinds` (e.g. `["Preschool", "Daycare"]`), optional `chain` or `partOf` (school), optional `ages`,
+`locations` (`[{"lat", "lng", "approx": true}]` — `approx` when only the area or road is known),
+optional `link` (official website), `source`, `sourceType` (`official` or `listing`), `checkedOn`, optional `note`.
