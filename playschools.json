@@ -1,0 +1,917 @@
+[
+ {
+  "name": "EuroKids – Aluva (Thottakkattukara)",
+  "area": "Aluva",
+  "kinds": [
+   "Preschool"
+  ],
+  "chain": "EuroKids",
+  "ages": "From 2 years (Playgroup 2–3, Nursery 3–4, Euro Junior 4–5, Euro Senior 5–6)",
+  "locations": [
+   {
+    "lat": 10.11902,
+    "lng": 76.34588
+   }
+  ],
+  "link": "https://www.eurokidsindia.com/preschool-in-aluva/thottakkattukara/",
+  "source": "https://www.eurokidsindia.com/preschool-in-aluva/thottakkattukara/",
+  "sourceType": "official",
+  "checkedOn": "2026-11-17"
+ },
+ {
+  "name": "EuroKids – Angamaly",
+  "area": "Angamaly",
+  "kinds": [
+   "Preschool"
+  ],
+  "chain": "EuroKids",
+  "ages": "From 2 years (Playgroup 2–3, Nursery 3–4, Euro Junior 4–5, Euro Senior 5–6)",
+  "locations": [
+   {
+    "lat": 10.18805,
+    "lng": 76.39624,
+    "approx": true
+   }
+  ],
+  "link": "https://www.eurokidsindia.com/preschool-in-kochi/angamaly/",
+  "source": "https://www.eurokidsindia.com/preschool-in-kochi/angamaly/",
+  "sourceType": "official",
+  "checkedOn": "2026-11-17"
+ },
+ {
+  "name": "EuroKids – Edappally (Chembumukku)",
+  "area": "Edappally",
+  "kinds": [
+   "Preschool"
+  ],
+  "chain": "EuroKids",
+  "ages": "From 2 years (Playgroup 2–3, Nursery 3–4, Euro Junior 4–5, Euro Senior 5–6)",
+  "locations": [
+   {
+    "lat": 10.01333,
+    "lng": 76.32089
+   }
+  ],
+  "link": "https://www.eurokidsindia.com/preschool-in-kochi/chembumukku/",
+  "source": "https://www.eurokidsindia.com/preschool-in-kochi/chembumukku/",
+  "sourceType": "official",
+  "checkedOn": "2026-11-17"
+ },
+ {
+  "name": "EuroKids – Chottanikkara",
+  "area": "Chottanikkara",
+  "kinds": [
+   "Preschool"
+  ],
+  "chain": "EuroKids",
+  "ages": "From 2 years (Playgroup 2–3, Nursery 3–4, Euro Junior 4–5, Euro Senior 5–6)",
+  "locations": [
+   {
+    "lat": 9.93257,
+    "lng": 76.38976,
+    "approx": true
+   }
+  ],
+  "link": "https://www.eurokidsindia.com/preschool-in-kochi/chottanikkara/",
+  "source": "https://www.eurokidsindia.com/preschool-in-kochi/chottanikkara/",
+  "sourceType": "official",
+  "checkedOn": "2026-11-17"
+ },
+ {
+  "name": "EuroKids – Kadavanthra",
+  "area": "Kadavanthra",
+  "kinds": [
+   "Preschool"
+  ],
+  "chain": "EuroKids",
+  "ages": "From 2 years (Playgroup 2–3, Nursery 3–4, Euro Junior 4–5, Euro Senior 5–6)",
+  "locations": [
+   {
+    "lat": 9.9584,
+    "lng": 76.30054
+   }
+  ],
+  "link": "https://www.eurokidsindia.com/preschool-in-kochi/kadavanthara/",
+  "source": "https://www.eurokidsindia.com/preschool-in-kochi/kadavanthara/",
+  "sourceType": "official",
+  "checkedOn": "2026-11-17"
+ },
+ {
+  "name": "EuroKids – Kalamassery",
+  "area": "Kalamassery",
+  "kinds": [
+   "Preschool"
+  ],
+  "chain": "EuroKids",
+  "ages": "From 2 years (Playgroup 2–3, Nursery 3–4, Euro Junior 4–5, Euro Senior 5–6)",
+  "locations": [
+   {
+    "lat": 10.05217,
+    "lng": 76.3199,
+    "approx": true
+   }
+  ],
+  "link": "https://www.eurokidsindia.com/preschool-in-kochi/kalamassery/",
+  "source": "https://www.eurokidsindia.com/preschool-in-kochi/kalamassery/",
+  "sourceType": "official",
+  "checkedOn": "2026-11-17"
+ },
+ {
+  "name": "EuroKids – Kaloor",
+  "area": "Kaloor",
+  "kinds": [
+   "Preschool"
+  ],
+  "chain": "EuroKids",
+  "ages": "From 2 years (Playgroup 2–3, Nursery 3–4, Euro Junior 4–5, Euro Senior 5–6)",
+  "locations": [
+   {
+    "lat": 9.99861,
+    "lng": 76.29664,
+    "approx": true
+   }
+  ],
+  "link": "https://www.eurokidsindia.com/preschool-in-kochi/kaloor/",
+  "source": "https://www.eurokidsindia.com/preschool-in-kochi/kaloor/",
+  "sourceType": "official",
+  "checkedOn": "2026-11-17"
+ },
+ {
+  "name": "EuroKids – Kakkanad (Kusumagiri)",
+  "area": "Kakkanad",
+  "kinds": [
+   "Preschool"
+  ],
+  "chain": "EuroKids",
+  "ages": "From 2 years (Playgroup 2–3, Nursery 3–4, Euro Junior 4–5, Euro Senior 5–6)",
+  "locations": [
+   {
+    "lat": 10.0155,
+    "lng": 76.35895
+   }
+  ],
+  "link": "https://www.eurokidsindia.com/preschool-in-kochi/kusumagiri/",
+  "source": "https://www.eurokidsindia.com/preschool-in-kochi/kusumagiri/",
+  "sourceType": "official",
+  "checkedOn": "2026-11-17"
+ },
+ {
+  "name": "EuroKids – Thrikkakara",
+  "area": "Thrikkakara",
+  "kinds": [
+   "Preschool"
+  ],
+  "chain": "EuroKids",
+  "ages": "From 2 years (Playgroup 2–3, Nursery 3–4, Euro Junior 4–5, Euro Senior 5–6)",
+  "locations": [
+   {
+    "lat": 10.03494,
+    "lng": 76.32936,
+    "approx": true
+   }
+  ],
+  "link": "https://www.eurokidsindia.com/preschool-in-kochi/thrikkakkara/",
+  "source": "https://www.eurokidsindia.com/preschool-in-kochi/thrikkakkara/",
+  "sourceType": "official",
+  "checkedOn": "2026-11-17"
+ },
+ {
+  "name": "EuroKids – Tripunithura",
+  "area": "Tripunithura",
+  "kinds": [
+   "Preschool"
+  ],
+  "chain": "EuroKids",
+  "ages": "From 2 years (Playgroup 2–3, Nursery 3–4, Euro Junior 4–5, Euro Senior 5–6)",
+  "locations": [
+   {
+    "lat": 9.94487,
+    "lng": 76.34732,
+    "approx": true
+   }
+  ],
+  "link": "https://www.eurokidsindia.com/preschool-in-kochi/thrippunithura/",
+  "source": "https://www.eurokidsindia.com/preschool-in-kochi/thrippunithura/",
+  "sourceType": "official",
+  "checkedOn": "2026-11-17"
+ },
+ {
+  "name": "Footprints Play School & Day Care – Kathrikadavu",
+  "area": "Kaloor",
+  "kinds": [
+   "Preschool",
+   "Daycare"
+  ],
+  "chain": "Footprints",
+  "locations": [
+   {
+    "lat": 9.98838,
+    "lng": 76.29433
+   }
+  ],
+  "link": "https://www.footprintseducation.in/pre-school-daycare-kathrikadavu-kaloor-kochi",
+  "source": "https://www.footprintseducation.in/pre-school-daycare-kathrikadavu-kaloor-kochi",
+  "sourceType": "official",
+  "checkedOn": "2026-11-17"
+ },
+ {
+  "name": "The Backyard Academy",
+  "area": "Kakkanad",
+  "kinds": [
+   "Preschool",
+   "After-school"
+  ],
+  "locations": [
+   {
+    "lat": 10.04384,
+    "lng": 76.35701
+   }
+  ],
+  "link": "https://thebackyardacademy.com/",
+  "source": "https://thebackyardacademy.com/contact/",
+  "sourceType": "official",
+  "checkedOn": "2026-11-17",
+  "note": "At Kangarappady (Thevakkal), north of Kakkanad."
+ },
+ {
+  "name": "Bhavan's Bala Mandir (Bhavan's Kakkanad kindergarten)",
+  "area": "Kakkanad",
+  "kinds": [
+   "Kindergarten"
+  ],
+  "partOf": "Bhavan's Adarsha Vidyalaya",
+  "locations": [
+   {
+    "lat": 9.99842,
+    "lng": 76.34586
+   }
+  ],
+  "link": "https://balamandir.bhavanskakkanad.ac.in/",
+  "source": "https://balamandir.bhavanskakkanad.ac.in/about-us",
+  "sourceType": "official",
+  "checkedOn": "2026-11-17"
+ },
+ {
+  "name": "Mar Thoma Kindergarten (Play Group)",
+  "area": "Kakkanad",
+  "kinds": [
+   "Preschool",
+   "Daycare"
+  ],
+  "partOf": "Mar Thoma Public School",
+  "ages": "Play Group from 2½ years, then Pre-KG, LKG, UKG",
+  "locations": [
+   {
+    "name": "Edachira, Kakkanad",
+    "lat": 10.01872,
+    "lng": 76.37011
+   },
+   {
+    "name": "Ponnurunni, Vyttila",
+    "lat": 9.97864,
+    "lng": 76.31578
+   }
+  ],
+  "link": "https://marthomapublicschool.edu.in/marthoma/kinder-facilities.php",
+  "source": "https://marthomapublicschool.edu.in/marthoma/kinder-facilities.php",
+  "sourceType": "official",
+  "checkedOn": "2026-11-17",
+  "note": "Kakkanad: after-school care 1–6:30 pm. Vyttila: daycare available (as on the school's website)."
+ },
+ {
+  "name": "Stepping Stones (Global Public School kindergarten)",
+  "area": "Thiruvankulam",
+  "kinds": [
+   "Kindergarten"
+  ],
+  "partOf": "Global Public School",
+  "ages": "Toddler from 2 years, then Step 1–3 (Pre-KG to UKG)",
+  "locations": [
+   {
+    "lat": 9.9292,
+    "lng": 76.41344
+   }
+  ],
+  "link": "https://globalpublicschool.org/kochi/stepping-stones",
+  "source": "https://www.globalpublicschool.org/",
+  "sourceType": "official",
+  "checkedOn": "2026-11-17",
+  "note": "On the Global Public School campus, Thiruvaniyoor."
+ },
+ {
+  "name": "Kidzee – Kakkanad",
+  "area": "Kakkanad",
+  "kinds": [
+   "Preschool",
+   "Daycare"
+  ],
+  "chain": "Kidzee",
+  "locations": [
+   {
+    "lat": 10.03253,
+    "lng": 76.33612,
+    "approx": true
+   }
+  ],
+  "source": "https://www.sulekha.com/playschools/cochin",
+  "sourceType": "listing",
+  "checkedOn": "2026-11-17"
+ },
+ {
+  "name": "Kidzee – Kadavanthra",
+  "area": "Kadavanthra",
+  "kinds": [
+   "Preschool"
+  ],
+  "chain": "Kidzee",
+  "locations": [
+   {
+    "lat": 9.96732,
+    "lng": 76.30005,
+    "approx": true
+   }
+  ],
+  "source": "https://www.sulekha.com/playschools/cochin",
+  "sourceType": "listing",
+  "checkedOn": "2026-11-17"
+ },
+ {
+  "name": "Kidzee – Kaloor",
+  "area": "Kaloor",
+  "kinds": [
+   "Preschool"
+  ],
+  "chain": "Kidzee",
+  "locations": [
+   {
+    "lat": 9.99512,
+    "lng": 76.29204,
+    "approx": true
+   }
+  ],
+  "source": "https://www.sulekha.com/playschools/cochin",
+  "sourceType": "listing",
+  "checkedOn": "2026-11-17"
+ },
+ {
+  "name": "Kidzee – Edappally",
+  "area": "Edappally",
+  "kinds": [
+   "Preschool"
+  ],
+  "chain": "Kidzee",
+  "locations": [
+   {
+    "lat": 10.02516,
+    "lng": 76.31136,
+    "approx": true
+   }
+  ],
+  "source": "https://www.sulekha.com/playschools/cochin",
+  "sourceType": "listing",
+  "checkedOn": "2026-11-17"
+ },
+ {
+  "name": "Kidzee – Aluva",
+  "area": "Aluva",
+  "kinds": [
+   "Preschool"
+  ],
+  "chain": "Kidzee",
+  "locations": [
+   {
+    "lat": 10.10777,
+    "lng": 76.35685,
+    "approx": true
+   }
+  ],
+  "source": "https://www.sulekha.com/playschools/cochin",
+  "sourceType": "listing",
+  "checkedOn": "2026-11-17"
+ },
+ {
+  "name": "Kidzee – Tripunithura",
+  "area": "Tripunithura",
+  "kinds": [
+   "Preschool"
+  ],
+  "chain": "Kidzee",
+  "locations": [
+   {
+    "lat": 9.94487,
+    "lng": 76.34732,
+    "approx": true
+   }
+  ],
+  "source": "https://www.sulekha.com/playschools/cochin",
+  "sourceType": "listing",
+  "checkedOn": "2026-11-17"
+ },
+ {
+  "name": "TIME Kids – Panampilly Nagar",
+  "area": "Panampilly Nagar",
+  "kinds": [
+   "Preschool"
+  ],
+  "chain": "TIME Kids",
+  "locations": [
+   {
+    "lat": 9.95861,
+    "lng": 76.29543
+   }
+  ],
+  "source": "https://www.edustoke.com/pre-schools-in-kochi",
+  "sourceType": "listing",
+  "checkedOn": "2026-11-17"
+ },
+ {
+  "name": "TIME Kids – Kaloor",
+  "area": "Kaloor",
+  "kinds": [
+   "Preschool"
+  ],
+  "chain": "TIME Kids",
+  "locations": [
+   {
+    "lat": 9.98076,
+    "lng": 76.29627,
+    "approx": true
+   }
+  ],
+  "source": "https://www.edustoke.com/pre-schools-in-kochi",
+  "sourceType": "listing",
+  "checkedOn": "2026-11-17"
+ },
+ {
+  "name": "TIME Kids – Vyttila",
+  "area": "Vyttila",
+  "kinds": [
+   "Preschool"
+  ],
+  "chain": "TIME Kids",
+  "locations": [
+   {
+    "lat": 9.96734,
+    "lng": 76.31753,
+    "approx": true
+   }
+  ],
+  "source": "https://www.edustoke.com/pre-schools-in-kochi",
+  "sourceType": "listing",
+  "checkedOn": "2026-11-17"
+ },
+ {
+  "name": "TIME Kids – Kalamassery",
+  "area": "Kalamassery",
+  "kinds": [
+   "Preschool"
+  ],
+  "chain": "TIME Kids",
+  "locations": [
+   {
+    "lat": 10.05578,
+    "lng": 76.32212,
+    "approx": true
+   }
+  ],
+  "source": "https://www.edustoke.com/pre-schools-in-kochi",
+  "sourceType": "listing",
+  "checkedOn": "2026-11-17"
+ },
+ {
+  "name": "TIME Kids – Tripunithura",
+  "area": "Tripunithura",
+  "kinds": [
+   "Preschool"
+  ],
+  "chain": "TIME Kids",
+  "locations": [
+   {
+    "lat": 9.94487,
+    "lng": 76.34732,
+    "approx": true
+   }
+  ],
+  "source": "https://www.edustoke.com/pre-schools-in-kochi",
+  "sourceType": "listing",
+  "checkedOn": "2026-11-17"
+ },
+ {
+  "name": "TIME Kids – Aluva",
+  "area": "Aluva",
+  "kinds": [
+   "Preschool"
+  ],
+  "chain": "TIME Kids",
+  "locations": [
+   {
+    "lat": 10.08697,
+    "lng": 76.38324,
+    "approx": true
+   }
+  ],
+  "source": "https://www.edustoke.com/pre-schools-in-kochi",
+  "sourceType": "listing",
+  "checkedOn": "2026-11-17"
+ },
+ {
+  "name": "Bachpan Play School – Panampilly Nagar",
+  "area": "Panampilly Nagar",
+  "kinds": [
+   "Preschool"
+  ],
+  "chain": "Bachpan",
+  "locations": [
+   {
+    "lat": 9.95621,
+    "lng": 76.2997
+   }
+  ],
+  "source": "https://www.edustoke.com/pre-schools-in-kochi",
+  "sourceType": "listing",
+  "checkedOn": "2026-11-17"
+ },
+ {
+  "name": "Kangaroo Kids – Kaloor",
+  "area": "Kaloor",
+  "kinds": [
+   "Preschool",
+   "Daycare"
+  ],
+  "chain": "Kangaroo Kids",
+  "locations": [
+   {
+    "lat": 9.99512,
+    "lng": 76.29204,
+    "approx": true
+   }
+  ],
+  "source": "https://www.quickerala.com/ernakulam/day-care-play-school/play-school/sbct-1980-dt-3",
+  "sourceType": "listing",
+  "checkedOn": "2026-11-17"
+ },
+ {
+  "name": "SAM Kids International Preschool – Palarivattom",
+  "area": "Palarivattom",
+  "kinds": [
+   "Preschool"
+  ],
+  "chain": "SAM Kids",
+  "locations": [
+   {
+    "lat": 10.00253,
+    "lng": 76.30621,
+    "approx": true
+   }
+  ],
+  "source": "https://www.sulekha.com/playschools/cochin",
+  "sourceType": "listing",
+  "checkedOn": "2026-11-17"
+ },
+ {
+  "name": "Western Montessori Playschool & Daycare",
+  "area": "Palarivattom",
+  "kinds": [
+   "Preschool",
+   "Daycare"
+  ],
+  "locations": [
+   {
+    "lat": 10.00982,
+    "lng": 76.31263
+   }
+  ],
+  "source": "https://www.sulekha.com/playschools/cochin",
+  "sourceType": "listing",
+  "checkedOn": "2026-11-17"
+ },
+ {
+  "name": "Sydney Montessori School",
+  "area": "Palarivattom",
+  "kinds": [
+   "Preschool",
+   "Daycare"
+  ],
+  "locations": [
+   {
+    "lat": 10.00253,
+    "lng": 76.30621,
+    "approx": true
+   }
+  ],
+  "source": "https://www.edustoke.com/pre-schools-in-kochi",
+  "sourceType": "listing",
+  "checkedOn": "2026-11-17"
+ },
+ {
+  "name": "Caterpillarz Preschool",
+  "area": "Edappally",
+  "kinds": [
+   "Preschool"
+  ],
+  "locations": [
+   {
+    "lat": 10.02403,
+    "lng": 76.29454,
+    "approx": true
+   }
+  ],
+  "source": "https://www.edustoke.com/pre-schools-in-kochi",
+  "sourceType": "listing",
+  "checkedOn": "2026-11-17"
+ },
+ {
+  "name": "Roots Preschool",
+  "area": "Kakkanad",
+  "kinds": [
+   "Preschool"
+  ],
+  "locations": [
+   {
+    "lat": 10.01585,
+    "lng": 76.33788
+   }
+  ],
+  "source": "https://www.edustoke.com/pre-schools-in-kochi",
+  "sourceType": "listing",
+  "checkedOn": "2026-11-17"
+ },
+ {
+  "name": "Sunbeams Day Care and Playschool",
+  "area": "Edappally",
+  "kinds": [
+   "Preschool",
+   "Daycare"
+  ],
+  "locations": [
+   {
+    "lat": 10.02097,
+    "lng": 76.32791
+   }
+  ],
+  "source": "https://www.edustoke.com/pre-schools-in-kochi",
+  "sourceType": "listing",
+  "checkedOn": "2026-11-17"
+ },
+ {
+  "name": "Enfance Play School",
+  "area": "Edappally",
+  "kinds": [
+   "Preschool",
+   "Daycare"
+  ],
+  "locations": [
+   {
+    "lat": 10.0151,
+    "lng": 76.30245,
+    "approx": true
+   }
+  ],
+  "source": "https://www.edustoke.com/pre-schools-in-kochi",
+  "sourceType": "listing",
+  "checkedOn": "2026-11-17",
+  "note": "Behind Changampuzha Park, Elamakkara Road (as listed)."
+ },
+ {
+  "name": "Fluffy Rabbits Preschool",
+  "area": "Edappally",
+  "kinds": [
+   "Preschool"
+  ],
+  "locations": [
+   {
+    "lat": 10.01591,
+    "lng": 76.30046,
+    "approx": true
+   }
+  ],
+  "source": "https://www.edustoke.com/pre-schools-in-kochi",
+  "sourceType": "listing",
+  "checkedOn": "2026-11-17"
+ },
+ {
+  "name": "Raindrops Play School",
+  "area": "Edappally",
+  "kinds": [
+   "Preschool"
+  ],
+  "locations": [
+   {
+    "lat": 10.01854,
+    "lng": 76.30659,
+    "approx": true
+   }
+  ],
+  "source": "https://www.sulekha.com/playschools/cochin",
+  "sourceType": "listing",
+  "checkedOn": "2026-11-17",
+  "note": "Listings also mention branches in Kakkanad and Vyttila."
+ },
+ {
+  "name": "Totto School (preschool & daycare)",
+  "area": "Kakkanad",
+  "kinds": [
+   "Preschool",
+   "Daycare"
+  ],
+  "locations": [
+   {
+    "lat": 10.01657,
+    "lng": 76.34275,
+    "approx": true
+   }
+  ],
+  "source": "https://www.sulekha.com/playschools/cochin",
+  "sourceType": "listing",
+  "checkedOn": "2026-11-17",
+  "note": "Listings also mention branches in Edappally and Vyttila."
+ },
+ {
+  "name": "Kidhops",
+  "area": "Ernakulam North",
+  "kinds": [
+   "Preschool"
+  ],
+  "locations": [
+   {
+    "lat": 9.98817,
+    "lng": 76.27932
+   }
+  ],
+  "source": "https://www.edustoke.com/pre-schools-in-kochi",
+  "sourceType": "listing",
+  "checkedOn": "2026-11-17",
+  "note": "Old Railway Station Road, Pullepady (as listed)."
+ },
+ {
+  "name": "Learning Age Preschool & Child Care",
+  "area": "Kadavanthra",
+  "kinds": [
+   "Preschool",
+   "Daycare"
+  ],
+  "locations": [
+   {
+    "lat": 9.9495,
+    "lng": 76.29927
+   }
+  ],
+  "source": "https://www.edustoke.com/pre-schools-in-kochi",
+  "sourceType": "listing",
+  "checkedOn": "2026-11-17"
+ },
+ {
+  "name": "Twinkle Play School & Daycare",
+  "area": "Panampilly Nagar",
+  "kinds": [
+   "Preschool",
+   "Daycare"
+  ],
+  "locations": [
+   {
+    "lat": 9.96128,
+    "lng": 76.29723
+   }
+  ],
+  "source": "https://www.sulekha.com/playschools/cochin",
+  "sourceType": "listing",
+  "checkedOn": "2026-11-17"
+ },
+ {
+  "name": "Rhym's & Funs Kindergarten",
+  "area": "Kadavanthra",
+  "kinds": [
+   "Preschool"
+  ],
+  "locations": [
+   {
+    "lat": 9.96486,
+    "lng": 76.29879
+   }
+  ],
+  "source": "https://www.edustoke.com/pre-schools-in-kochi",
+  "sourceType": "listing",
+  "checkedOn": "2026-11-17"
+ },
+ {
+  "name": "Building Blocks Play School",
+  "area": "Kadavanthra",
+  "kinds": [
+   "Preschool"
+  ],
+  "locations": [
+   {
+    "lat": 9.96732,
+    "lng": 76.30005,
+    "approx": true
+   }
+  ],
+  "source": "https://www.sulekha.com/playschools/cochin",
+  "sourceType": "listing",
+  "checkedOn": "2026-11-17"
+ },
+ {
+  "name": "Choice Kinderland",
+  "area": "Kadavanthra",
+  "kinds": [
+   "Preschool"
+  ],
+  "locations": [
+   {
+    "lat": 9.96416,
+    "lng": 76.29929
+   }
+  ],
+  "source": "https://www.edustoke.com/pre-schools-in-kochi",
+  "sourceType": "listing",
+  "checkedOn": "2026-11-17"
+ },
+ {
+  "name": "Nature Kids",
+  "area": "Vyttila",
+  "kinds": [
+   "Preschool"
+  ],
+  "locations": [
+   {
+    "lat": 9.96734,
+    "lng": 76.31753,
+    "approx": true
+   }
+  ],
+  "source": "https://www.edustoke.com/pre-schools-in-kochi",
+  "sourceType": "listing",
+  "checkedOn": "2026-11-17"
+ },
+ {
+  "name": "Mickey Mouse Play School",
+  "area": "Vyttila",
+  "kinds": [
+   "Preschool"
+  ],
+  "locations": [
+   {
+    "lat": 9.96734,
+    "lng": 76.31753,
+    "approx": true
+   }
+  ],
+  "source": "https://www.sulekha.com/playschools/cochin",
+  "sourceType": "listing",
+  "checkedOn": "2026-11-17"
+ },
+ {
+  "name": "Anna's Play School",
+  "area": "Vyttila",
+  "kinds": [
+   "Preschool"
+  ],
+  "locations": [
+   {
+    "lat": 9.96734,
+    "lng": 76.31753,
+    "approx": true
+   }
+  ],
+  "source": "https://www.sulekha.com/playschools/cochin",
+  "sourceType": "listing",
+  "checkedOn": "2026-11-17"
+ },
+ {
+  "name": "Amaan's Jungle Book Day Care & Play School",
+  "area": "Kaloor",
+  "kinds": [
+   "Preschool",
+   "Daycare"
+  ],
+  "locations": [
+   {
+    "lat": 9.99512,
+    "lng": 76.29204,
+    "approx": true
+   }
+  ],
+  "source": "https://www.justdial.com/Ernakulam/Amaans-Jungle-Book-Day-Care-Play-School-Opposite-Marvel-Mansion-Flat-Kaloor/0484PX484-X484-100112115042-I8A1DC_BZDET",
+  "sourceType": "listing",
+  "checkedOn": "2026-11-17",
+  "note": "Kathrikadavu / Pullepady, Kaloor (as listed)."
+ },
+ {
+  "name": "Little Britain Preschool",
+  "area": "Kaloor",
+  "kinds": [
+   "Preschool",
+   "Daycare"
+  ],
+  "locations": [
+   {
+    "lat": 9.99512,
+    "lng": 76.29204,
+    "approx": true
+   }
+  ],
+  "source": "https://campuspro.co.in/schools/3549/little-britain-preschool",
+  "sourceType": "listing",
+  "checkedOn": "2026-11-17"
+ }
+]

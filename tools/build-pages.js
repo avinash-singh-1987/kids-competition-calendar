@@ -99,6 +99,7 @@ function page({ title, description, url, image, active, h1, eyebrow, intro, body
       <a class="brand" href="/">Kochi Kids Calendar</a>
       <a href="/"${active === "competitions" ? ' aria-current="page"' : ""}>Competitions</a>
       <a href="/admissions.html"${active === "schools" ? ' aria-current="page"' : ""}>School admissions</a>
+      <a href="/playschools.html">Playschools</a>
     </nav>
     <div class="wrap">
       ${eyebrow ? `<p class="eyebrow">${esc(eyebrow)}</p>` : ""}
@@ -115,6 +116,7 @@ ${body}
       <p>Kochi Kids Calendar · A free, independent guide for parents in Kochi, Kerala ·
         <a href="/olympiad-guide/">Parent's guide to Olympiads</a> ·
         <a href="/lkg-admission-guide/">LKG admission guide</a> ·
+        <a href="/playschools.html">Playschools near you</a> ·
         <a href="/competitions/">All competitions</a> · <a href="/schools/">All schools</a></p>
     </div>
   </footer>
@@ -260,6 +262,7 @@ const files = new Map(); // relative path -> content
 const sitemap = [
   { loc: `${SITE}/`, lastmod: null, priority: "1.0" },
   { loc: `${SITE}/admissions.html`, lastmod: null, priority: "0.9" },
+  { loc: `${SITE}/playschools.html`, lastmod: null, priority: "0.9" },
 ];
 
 function addPages(list, kind, make) {

@@ -316,6 +316,13 @@ function renderCard(s, i) {
   }
   row.appendChild(actionLink(whatsappUrl(s), SHARE_ICON, "WhatsApp", "click-whatsapp"));
   actions.appendChild(row);
+  // Reviews, photos and phone on Google Maps itself (we never show ratings on our site).
+  const g = el("a", "maps-link", "Reviews & photos on Google Maps ↗");
+  g.href = "https://www.google.com/maps/search/?api=1&query=" + encodeURIComponent(`${s.school} ${s.area} Kochi`);
+  g.target = "_blank";
+  g.rel = "noopener noreferrer";
+  g.addEventListener("click", () => track("click-school-maps"));
+  actions.appendChild(g);
   card.appendChild(actions);
   return card;
 }
