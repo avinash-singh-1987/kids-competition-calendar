@@ -521,6 +521,13 @@ h2[id] { scroll-margin-top: 16px; }
 .dob-selects #dob-month { min-width: 130px; }
 .dob-summary { margin: 10px 0 0; color: var(--primary-dark); font-weight: 600; font-size: 0.92rem; }
 .dob-summary:empty { display: none; }
+.near-me { margin-top: 16px; padding-top: 14px; border-top: 1px dashed var(--border); display: grid; gap: 10px; }
+.near-row { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; }
+.near-row select { font: inherit; padding: 7px 10px; border: 1px solid var(--border); border-radius: 10px; background: var(--card); color: var(--text); max-width: 100%; }
+.near-me .dob-summary { margin: 0; }
+.distance-line { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin: -2px 0 10px; font-size: 0.88rem; }
+.distance-line strong { color: var(--primary-dark); }
+.distance-line a { color: var(--primary-dark); font-weight: 700; }
 .card.t-school { --accent: #0e7490; --accent-soft: #e3f2f6; }
 .why { margin: -4px 0 10px; font-size: 0.85rem; color: var(--muted); font-style: italic; }
 .status { display: inline-block; font-size: 0.74rem; font-weight: 700; padding: 3px 9px; border-radius: 999px; }
