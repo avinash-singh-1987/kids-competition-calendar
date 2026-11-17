@@ -342,5 +342,106 @@
     "sourceType": "news",
     "checkedOn": "2026-11-11",
     "unverified": true
+  },
+  {
+    "school": "Mar Thoma Public School",
+    "area": "Edachira, Kakkanad (KG also at Vyttila)",
+    "board": "CBSE",
+    "why": "CBSE school by Infopark, with kindergartens at Kakkanad and Vyttila",
+    "entry": [
+      {
+        "class": "Pre-KG",
+        "minAge": 3,
+        "maxAge": 4,
+        "cutoff": "06-01"
+      },
+      {
+        "class": "LKG",
+        "minAge": 4,
+        "maxAge": 5,
+        "cutoff": "06-01"
+      },
+      {
+        "class": "UKG",
+        "minAge": 5,
+        "maxAge": 6,
+        "cutoff": "06-01"
+      }
+    ],
+    "applyMonth": 7,
+    "sessionMonth": 6,
+    "status": "open",
+    "statusNote": "Kindergarten admissions for 2027-28 opened on 1 July 2026 (online form, ₹500 application fee) for Play Group, Pre-KG, LKG and UKG at the Kakkanad and Vyttila campuses. Seats are given mainly first-come, first-served (siblings get preference), so apply early. There is a friendly interaction, not an entrance test. KG admission contact: 70252 53024 (as given in the school's notice).",
+    "link": "https://marthomapublicschool.edu.in/marthoma/admission-procedure.php",
+    "source": "https://marthomapublicschool.edu.in/marthoma/doc2026/KINDERGARTEN%20ADMISSION%20NOTICE.pdf",
+    "sourceType": "official",
+    "checkedOn": "2026-11-17"
+  },
+  {
+    "school": "Delhi Public School Kochi",
+    "area": "Nedumbassery",
+    "board": "CBSE & Cambridge",
+    "why": "Delhi Public School Society school, near the airport",
+    "entry": [],
+    "applyMonth": 7,
+    "sessionMonth": 6,
+    "status": "open",
+    "statusNote": "Admissions for 2027-28 are open (CBSE and Cambridge). The school's age guide for 2027-28: Pre-KG 3 to 3½ years, LKG 4 to 4½ years, UKG 5 to 5½ years — it does not say on which date, so ask the school. Registration fee ₹2,000 (non-refundable). No entrance test up to Grade 4, only an interaction with the Principal. Online registration usually opens in July.",
+    "link": "https://www.dpskochi.com/admission/",
+    "source": "https://www.dpskochi.com/admission/",
+    "sourceType": "official",
+    "checkedOn": "2026-11-17"
+  },
+  {
+    "school": "Campion School",
+    "area": "Edappally",
+    "board": "CBSE",
+    "why": "CBSE school in Edappally, kindergarten to Class 12",
+    "entry": [],
+    "status": "check",
+    "statusNote": "The school's website has an online pre-registration form for Nursery to Class X, but it does not publish dates or age rules for 2027-28. Contact the office: 0484 2347613 (as given on the school's website).",
+    "link": "https://www.campioncochin.edu.in/procedure",
+    "source": "https://www.campioncochin.edu.in/procedure",
+    "sourceType": "official",
+    "checkedOn": "2026-11-17"
+  },
+  {
+    "school": "The Indian Public School (TIPS Globeducate)",
+    "area": "Edachira, Kakkanad",
+    "board": "IB & Cambridge (separate CBSE campus)",
+    "why": "International-curriculum school near Infopark",
+    "entry": [],
+    "status": "check",
+    "statusNote": "Admissions start with an enquiry form on the school's website, then a campus visit. There is no entrance exam for the early years (Pre-KG to UKG). Dates and age rules are not published — ask the admissions team. TIPS also runs a separate CBSE campus in Kochi.",
+    "link": "https://kochi.tipsglobeducate.com/admissions/",
+    "source": "https://kochi.tipsglobeducate.com/admissions/",
+    "sourceType": "official",
+    "checkedOn": "2026-11-17"
+  },
+  {
+    "school": "Gregorian Public School",
+    "area": "Maradu",
+    "board": "CBSE",
+    "why": "CBSE school in Maradu, kindergarten to Class 12",
+    "entry": [],
+    "status": "open",
+    "statusNote": "Kindergarten registration for 2027-28 is open on the school's website. Age rules and the last date are not published — contact the school: 93888 83310 (as given on the school's website).",
+    "link": "https://www.gregorianpublicschool.org/",
+    "source": "https://www.gregorianpublicschool.org/",
+    "sourceType": "official",
+    "checkedOn": "2026-11-17"
+  },
+  {
+    "school": "Greets Public School",
+    "area": "Kaloor",
+    "board": "CBSE",
+    "why": "CBSE school in Kaloor with its own kindergarten (Ding Dong Kindergarten)",
+    "entry": [],
+    "status": "open",
+    "statusNote": "Admission is open from Kindergarten to Std XI for 2027-28. Get the form from the school office or apply online on the school's admission site. Age rules are not published — ask the school.",
+    "link": "https://gps.ac.in/",
+    "source": "https://gps.ac.in/",
+    "sourceType": "official",
+    "checkedOn": "2026-11-17"
   }
 ]

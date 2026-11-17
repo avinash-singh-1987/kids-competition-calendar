@@ -54,7 +54,9 @@
   rajagiri.ac.in, christujayanthi.ac.in, bhavanskochikendra.com, choiceschool.com,
   tochschool.com, assisi.ac.in, ncskochi.nesnavy.in, sanskaraschool.com, vidyodayaschool.ac.in,
   gemsmodernacademy-kochi.in, globalpublicschool.org, chinmayavidyalaya.edu.in (Tripunithura),
-  shpublicschool.com, chinmayavaduthala.edu.in (Chinmaya Vaduthala).
+  shpublicschool.com, chinmayavaduthala.edu.in (Chinmaya Vaduthala),
+  marthomapublicschool.edu.in, dpskochi.com, campioncochin.edu.in, kochi.tipsglobeducate.com +
+  kochicbse.tipsglobeducate.com (TIPS), gregorianpublicschool.org, gps.ac.in (Greets) — added Nov 2026.
   KV and EducationWorld sites block cloud servers — use news/search for those.
 - Script/CSS links carry a version (`?v=YYYYMMDD`) to beat browser caches: when you change
   script.js, admissions.js or style.css, bump the `?v=` date in index.html / admissions.html.
