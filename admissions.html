@@ -22,7 +22,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700&family=Nunito+Sans:wght@400;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css?v=20261121">
+  <link rel="stylesheet" href="style.css?v=20261122">
 </head>
 <body>
   <header class="hero">
@@ -136,6 +136,18 @@
         <button type="button" id="clear-dob" class="chip" hidden>Clear</button>
       </div>
       <p id="dob-summary" class="dob-summary" aria-live="polite"></p>
+
+      <!-- Sort by distance (filled in by admissions.js; the location never leaves this phone) -->
+      <div class="near-me" id="near-me" hidden>
+        <span class="dob-label" id="near-label">Schools near you</span>
+        <div class="near-row" role="group" aria-labelledby="near-label">
+          <button type="button" id="use-location" class="chip">📍 Use my location</button>
+          <select id="area-select" aria-label="Or choose your area"><option value="">or choose your area…</option></select>
+          <button type="button" id="clear-near" class="chip" hidden>Clear</button>
+        </div>
+        <p id="near-summary" class="dob-summary" aria-live="polite"></p>
+        <p class="muted near-credit">Your location stays on this phone. School and area locations: © OpenStreetMap contributors.</p>
+      </div>
     </section>
 
     <section aria-labelledby="all-title">
@@ -178,8 +190,8 @@
     </div>
   </footer>
 
-  <script src="admissions.js?v=20261121"></script>
-  <script src="announcement.js?v=20261121"></script>
+  <script src="admissions.js?v=20261122"></script>
+  <script src="announcement.js?v=20261122"></script>
   <script data-goatcounter="https://kochikidscalendar.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>
 </body>
 </html>

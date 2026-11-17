@@ -114,6 +114,8 @@ Data is in `admissions.json`, one entry per school, most popular first. Fields:
 - `applyMonth` (1–12) when applications usually open, `sessionMonth` (6 = June, 4 = April for KV)
 - `status`: `open` / `expected` (+ `expectedText`) / `check` / `closed`, and `statusNote`
 - `link`, optional `linkLabel`, `source`, `sourceType` (official/news/blog), `checkedOn`, `unverified`
+- `locations`: `[{"name": "Kalamassery", "lat": 10.05243, "lng": 76.31616}]` — one entry per campus, used to
+  sort schools by distance ("Schools near you"). The area list for that feature is in `areas.json`.
 
 The "When can my child join?" box uses the age rules to tell parents the year their child can
 join each school and when to apply. The date of birth is kept only in the visitor's browser.

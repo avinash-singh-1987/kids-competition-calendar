@@ -123,6 +123,9 @@ const CAL_ICON = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" str
 const SHARE_ICON = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12a8 8 0 0 1-11.6 7.1L4 21l1.9-5.4A8 8 0 1 1 21 12z"/><path d="M9 10.5c.5 1.8 2.2 3.5 4.5 4.3l1.3-1.2 1.7.8"/></svg>';
 
 let schools = [];
+let areas = [];          // [{name, lat, lng}] from areas.json
+let origin = null;       // {lat, lng, label} — the parent's location or chosen area; never sent anywhere
+const AREA_KEY = "kcc-area";
 let childDob = null;
 let showOnly = "all"; // "all" or "open" (open + opening soon)
 
@@ -194,6 +197,22 @@ function renderCard(s, i) {
   card.appendChild(badges);
 
   if (s.why) card.appendChild(el("p", "why", s.why));
+
+  const near = nearestCampus(s);
+  if (near) {
+    const line = el("p", "distance-line");
+    line.appendChild(el("strong", null, `≈ ${near.km < 10 ? near.km.toFixed(1) : Math.round(near.km)} km away`));
+    if (near.name) line.appendChild(el("span", "muted", near.name));
+    const d = el("a", null, "Directions ↗");
+    d.href = directionsUrl(near);
+    d.target = "_blank";
+    d.rel = "noopener noreferrer";
+    d.addEventListener("click", () => track("click-directions"));
+    line.appendChild(d);
+    card.appendChild(line);
+  } else if (origin) {
+    card.appendChild(el("p", "distance-line muted", "Location not added yet"));
+  }
 
   const details = el("dl", "details");
   const rows = [];
@@ -301,11 +320,91 @@ function renderCard(s, i) {
   return card;
 }
 
+// ---------- Distance ----------
+
+// Straight-line distance in km between two points.
+function kmBetween(a, b) {
+  const R = 6371, rad = x => x * Math.PI / 180;
+  const dLat = rad(b.lat - a.lat), dLng = rad(b.lng - a.lng);
+  const h = Math.sin(dLat / 2) ** 2 + Math.cos(rad(a.lat)) * Math.cos(rad(b.lat)) * Math.sin(dLng / 2) ** 2;
+  return 2 * R * Math.asin(Math.sqrt(h));
+}
+
+// Nearest campus of a school to the chosen point, or null if we don't know where the school is.
+function nearestCampus(s) {
+  if (!origin || !Array.isArray(s.locations) || !s.locations.length) return null;
+  return s.locations
+    .filter(l => typeof l.lat === "number" && typeof l.lng === "number")
+    .map(l => ({ ...l, km: kmBetween(origin, l) }))
+    .sort((a, b) => a.km - b.km)[0] || null;
+}
+
+function directionsUrl(l) {
+  return "https://www.google.com/maps/dir/?api=1&destination=" + encodeURIComponent(l.lat + "," + l.lng);
+}
+
+function setOrigin(o) {
+  origin = o;
+  const summary = document.getElementById("near-summary");
+  const clear = document.getElementById("clear-near");
+  if (summary) summary.textContent = o ? `Nearest first, from ${o.label}. Distances are straight-line — tap Directions for the road route.` : "";
+  if (clear) clear.hidden = !o;
+  render();
+}
+
+function setupNearMe() {
+  const box = document.getElementById("near-me");
+  const select = document.getElementById("area-select");
+  const useLoc = document.getElementById("use-location");
+  const clear = document.getElementById("clear-near");
+  if (!box || !areas.length || !schools.some(s => Array.isArray(s.locations) && s.locations.length)) return;
+  areas.forEach(a => select.appendChild(new Option(a.name, a.name)));
+  box.hidden = false;
+
+  select.addEventListener("change", () => {
+    const a = areas.find(x => x.name === select.value);
+    try { if (a) localStorage.setItem(AREA_KEY, a.name); else localStorage.removeItem(AREA_KEY); } catch (e) { /* fine */ }
+    if (a) track("used-area-select");
+    setOrigin(a ? { lat: a.lat, lng: a.lng, label: a.name } : null);
+  });
+
+  if (!("geolocation" in navigator)) useLoc.hidden = true;
+  useLoc.addEventListener("click", () => {
+    const summary = document.getElementById("near-summary");
+    summary.textContent = "Finding your location…";
+    navigator.geolocation.getCurrentPosition(pos => {
+      select.value = "";
+      track("used-my-location");
+      setOrigin({ lat: pos.coords.latitude, lng: pos.coords.longitude, label: "your location" });
+    }, () => {
+      summary.textContent = "Couldn't get your location (permission off?). Choose your area from the list instead.";
+    }, { enableHighAccuracy: false, timeout: 15000, maximumAge: 600000 });
+  });
+
+  clear.addEventListener("click", () => {
+    select.value = "";
+    try { localStorage.removeItem(AREA_KEY); } catch (e) { /* fine */ }
+    setOrigin(null);
+  });
+
+  // Remember the chosen area (never the exact location) on this phone.
+  let saved = null;
+  try { saved = localStorage.getItem(AREA_KEY); } catch (e) { /* fine */ }
+  const a = saved && areas.find(x => x.name === saved);
+  if (a) { select.value = a.name; setOrigin({ lat: a.lat, lng: a.lng, label: a.name }); }
+}
+
 function render() {
   const list = document.getElementById("school-list");
   if (!list) return;
   list.innerHTML = "";
-  const shown = showOnly === "open" ? schools.filter(isOpenish) : schools;
+  let shown = showOnly === "open" ? schools.filter(isOpenish) : schools;
+  if (origin) {
+    // Nearest first; schools whose location we don't know go last, in the usual order.
+    shown = shown.map((s, i) => ({ s, i, near: nearestCampus(s) }))
+      .sort((a, b) => (a.near ? a.near.km : 1e9) - (b.near ? b.near.km : 1e9) || a.i - b.i)
+      .map(x => x.s);
+  }
   document.getElementById("count").textContent = shown.length;
   shown.forEach((s, i) => {
     try { list.appendChild(renderCard(s, i)); }
@@ -419,6 +518,13 @@ async function start() {
     setupDob();
   } catch (e) {
     console.error("Date-of-birth box failed; school cards are still shown.", e);
+  }
+  try {
+    const r = await fetch("areas.json", { cache: "no-cache" });
+    if (r.ok) areas = (await r.json()).filter(a => a && a.name && typeof a.lat === "number" && typeof a.lng === "number");
+    setupNearMe();
+  } catch (e) {
+    console.error("Distance sorting is unavailable; the page still works.", e);
   }
   const id = decodeURIComponent(location.hash.slice(1));
   const card = id && document.getElementById(id);

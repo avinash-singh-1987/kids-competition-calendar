@@ -53,6 +53,11 @@
 - School admissions page: `admissions.html` + `admissions.js`, data in `admissions.json`
   (see README). Keep schools in popularity order (Rajagiri Kalamassery first). Never rate or
   rank schools ourselves; status/age rules only from the school's own notice when possible.
+- "Schools near you" (admissions page): each school has `locations` [{name, lat, lng}] (one per campus);
+  `areas.json` holds ~30 Kochi areas for the dropdown. Points come from OpenStreetMap Nominatim
+  (nominatim.openstreetmap.org is in Allowed domains; max 1 request/second, send a User-Agent) or the
+  school's own map embed — check each point lands in the right locality. A new school must get `locations`.
+  The parent's GPS position is never stored or sent; only the chosen area name is saved on the phone.
 - School websites reachable from the cloud environment (owner added them to Allowed domains):
   rajagiri.ac.in, christujayanthi.ac.in, bhavanskochikendra.com, choiceschool.com,
   tochschool.com, assisi.ac.in, ncskochi.nesnavy.in, sanskaraschool.com, vidyodayaschool.ac.in,
