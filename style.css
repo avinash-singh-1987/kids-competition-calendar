@@ -161,6 +161,21 @@ h2[id] { scroll-margin-top: 16px; }
 
 /* ---------- Coming up soon ---------- */
 .deadlines { margin-top: -8px; position: relative; }
+.my-child { margin-top: -8px; position: relative; }
+.my-child:not([hidden]) + .deadlines { margin-top: 18px; }
+.my-child-list { list-style: none; margin: 0 0 12px; padding: 0; display: grid; gap: 8px; }
+.my-child-item {
+  display: flex; flex-direction: column; gap: 2px;
+  padding: 10px 12px; border: 1px solid var(--border); border-radius: 12px;
+  color: var(--text); text-decoration: none; background: var(--card);
+}
+.my-child-item:hover, .my-child-item:focus-visible { border-color: var(--primary); }
+.my-child-item strong { font-size: 0.95rem; }
+.my-child-action { font-size: 0.85rem; font-weight: 700; color: var(--primary-dark); }
+.my-child-action.urgent { color: var(--urgent); }
+.my-child-empty { margin: 0 0 12px; color: var(--muted); }
+.my-child-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; }
+.link-button { background: none; border: 0; padding: 6px 4px; font: inherit; font-size: 0.88rem; color: var(--muted); text-decoration: underline; cursor: pointer; }
 .deadline-list {
   list-style: none;
   margin: 0;
@@ -587,6 +602,23 @@ h2[id] { scroll-margin-top: 16px; }
 .hub-list a:hover, .hub-list a:focus-visible { box-shadow: var(--shadow-hover); }
 .hub-list strong { display: block; }
 .hub-list span { display: block; color: var(--muted); font-size: 0.88rem; }
+
+/* ---------- Parent's guide (/olympiad-guide/) ---------- */
+.guide h2 { font-size: 1.3rem; margin: 30px 0 10px; }
+.guide .guide-box h2 { margin-top: 0; }
+.guide p, .guide li { font-size: 0.98rem; }
+.guide a { color: var(--primary-dark); font-weight: 700; }
+.guide-points, .guide-links, .guide-steps { margin: 0; padding-left: 20px; display: grid; gap: 8px; }
+.guide-table-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; background: var(--card); border-radius: 12px; box-shadow: var(--shadow); }
+.guide-table { border-collapse: collapse; width: 100%; min-width: 620px; font-size: 0.88rem; }
+.guide-table th, .guide-table td { padding: 10px 12px; border-bottom: 1px solid var(--border); text-align: left; vertical-align: top; }
+.guide-table thead th { background: var(--primary-soft); color: var(--primary-dark); font-family: var(--heading-font); font-size: 1rem; }
+.guide-table tbody th { color: var(--muted); font-weight: 700; white-space: nowrap; }
+.guide-small { font-size: 0.82rem; margin-top: 8px; }
+.guide-quote { margin: 0; padding: 12px 14px; background: var(--primary-soft); border-left: 4px solid var(--primary); border-radius: 0 10px 10px 0; font-style: italic; }
+.guide .badge { vertical-align: middle; }
+.guide-cta { margin-top: 26px; }
+.guide-link { display: inline-block; margin-top: 10px; color: #fff; font-weight: 700; text-decoration: underline; text-underline-offset: 3px; }
 
 /* Respect people who prefer less motion */
 @media (prefers-reduced-motion: reduce) {

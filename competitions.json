@@ -160,7 +160,7 @@
     "type": "Olympiad",
     "registrationLastDate": "",
     "examDates": ["2026-11-20", "2026-12-02", "2027-01-24"],
-    "fee": "₹150 via school · ₹354 direct",
+    "fee": "₹150 via school · ₹350 direct",
     "mode": "Offline via school, or online direct",
     "repeatsYearly": true,
     "individual": "yes",
@@ -169,7 +169,7 @@
     "sourceType": "official",
     "addedOn": "2026-11-10",
     "note": "Through your school: offline exam on 20 Nov or 2 Dec 2026. Without the school: parents can register directly online and the child takes the exam from home — practice test 17 Jan 2027, final 24 Jan 2027. Time (both days): Class 2 & 3: 10–11 am · Class 1: 11:45 am–12:45 pm · Class 4 & 5: 2–3 pm. Registration was open as of 12 Nov 2026.",
-    "updatedOn": "2026-11-12"
+    "updatedOn": "2026-11-17"
   },
   {
     "name": "SilverZone Smart Kid GK Olympiad (SKGKO)",

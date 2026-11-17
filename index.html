@@ -22,7 +22,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700&family=Nunito+Sans:wght@400;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css?v=20261119">
+  <link rel="stylesheet" href="style.css?v=20261120">
 </head>
 <body>
   <header class="hero">
@@ -41,6 +41,7 @@
           <li><a class="stat-link" href="#deadlines-title"><span id="stat-soon">–</span> coming up in 30 days <span class="stat-arrow" aria-hidden="true">↓</span></a></li>
           <li id="stat-direct-item" hidden><a class="stat-link" id="stat-direct-link" href="#no-school"><span id="stat-direct">–</span> without school registration <span class="stat-arrow" aria-hidden="true">↓</span></a></li>
         </ul>
+        <p><a class="guide-link" href="olympiad-guide/">New to Olympiads? Read the 5-minute parent's guide →</a></p>
         <p class="updated" id="updated-line" hidden>Last updated: <span id="last-updated"></span> · <a href="#about">How this works</a></p>
       </div>
 
@@ -120,6 +121,9 @@
     <!-- Shown only if something goes wrong while loading the data -->
     <div id="error" class="error" hidden></div>
 
+    <!-- "For your child": filled in by script.js (the class is saved only on this phone) -->
+    <section class="panel my-child" id="my-child" aria-labelledby="my-child-title" hidden></section>
+
     <section class="panel deadlines" aria-labelledby="deadlines-title">
       <div class="section-head">
         <span class="section-icon" aria-hidden="true">⏰</span>
@@ -186,13 +190,13 @@
   <footer class="site-footer">
     <div class="wrap footer-inner">
       <div class="footer-icon" aria-hidden="true">✏️</div>
-      <p>Kochi Kids Calendar · A free guide for parents in Kochi, Kerala · <a href="competitions/">All competitions</a> · <a href="schools/">All schools</a></p>
+      <p>Kochi Kids Calendar · A free guide for parents in Kochi, Kerala · <a href="olympiad-guide/">Parent's guide to Olympiads</a> · <a href="competitions/">All competitions</a> · <a href="schools/">All schools</a></p>
     </div>
   </footer>
 
-  <script src="script.js?v=20261119"></script>
+  <script src="script.js?v=20261120"></script>
   <!-- Anonymous visitor counter (GoatCounter: no cookies, no personal data) -->
-  <script src="announcement.js?v=20261119"></script>
+  <script src="announcement.js?v=20261120"></script>
   <script data-goatcounter="https://kochikidscalendar.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>
 </body>
 </html>
