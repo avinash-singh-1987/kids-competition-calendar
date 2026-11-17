@@ -140,3 +140,6 @@ link-preview picture (`og-no-school.jpg`) and opens the competitions page at the
     node tools/build-pages.js
 
 Don't edit those generated files by hand — they are rewritten each time.
+
+The same script also builds the parent's guides (`/olympiad-guide/`, `/lkg-admission-guide/`) and the
+printable one-page admission calendar (`/admission-calendar/`, with "Print / save as PDF").

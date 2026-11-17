@@ -13,7 +13,10 @@
 2. Test the site in a browser (phone width) before committing.
 2b. Whenever competitions.json or admissions.json changes, run `node tools/build-pages.js`
    (one page per competition/school + sitemap.xml) and commit the result;
-   `node tools/build-pages.js --check` must pass before committing.
+   `node tools/build-pages.js --check` must pass before committing. The same script builds the
+   guides: /olympiad-guide/ (text in tools/guide-content.html), /lkg-admission-guide/ and the
+   printable /admission-calendar/ (both from admissions.json; the calendar's QR is qr-admissions.svg,
+   pointing to admissions.html?ref=print-calendar). Facts in guides only from official sites.
 3. Commit, push, and **always create the pull request yourself** — do not ask first.
 3b. After the owner merges, check that the GitHub Pages deployment's commit (sha) equals the new
    `main` commit. GitHub sometimes redeploys the previous commit right after a merge; if so, the

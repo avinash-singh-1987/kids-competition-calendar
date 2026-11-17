@@ -69,7 +69,7 @@ const CSS_VERSION = (indexHtml.match(/style\.css\?v=([\w]+)/) || [])[1] || "1";
 
 // ---------- Page shell ----------
 
-function page({ title, description, url, image, active, h1, eyebrow, intro, body }) {
+function page({ title, description, url, image, active, h1, eyebrow, intro, body, bodyClass }) {
   return `<!DOCTYPE html>
 <html lang="en">
 <head>
@@ -93,7 +93,7 @@ function page({ title, description, url, image, active, h1, eyebrow, intro, body
   <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700&family=Nunito+Sans:wght@400;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="/style.css?v=${CSS_VERSION}">
 </head>
-<body>
+<body${bodyClass ? ` class="${bodyClass}"` : ""}>
   <header class="hero hero-compact">
     <nav class="wrap tabs" aria-label="Sections">
       <a class="brand" href="/">Kochi Kids Calendar</a>
@@ -114,6 +114,7 @@ ${body}
       <div class="footer-icon" aria-hidden="true">✏️</div>
       <p>Kochi Kids Calendar · A free, independent guide for parents in Kochi, Kerala ·
         <a href="/olympiad-guide/">Parent's guide to Olympiads</a> ·
+        <a href="/lkg-admission-guide/">LKG admission guide</a> ·
         <a href="/competitions/">All competitions</a> · <a href="/schools/">All schools</a></p>
     </div>
   </footer>
@@ -296,6 +297,161 @@ const schoolHub = hubPage({
 files.set("schools/index.html", schoolHub.html);
 sitemap.push({ loc: schoolHub.url, lastmod: null, priority: "0.8" });
 
+// ---------- LKG admission guide + printable admission calendar (built from admissions.json) ----------
+
+const SHORT_MONTHS = MONTHS.map(m => m.slice(0, 3));
+const TODAY = new Date();
+// Next school year that has not started yet (sessions start in June).
+const NEXT_SESSION = TODAY.getMonth() + 1 >= 6 ? TODAY.getFullYear() + 1 : TODAY.getFullYear();
+
+function lkgRule(s) {
+  return (s.entry || []).find(r => /\bLKG\b|Balvatika-2/i.test(r.class)) || null;
+}
+function statusShort(s) {
+  return s.status === "open" ? "Open now" : s.status === "closed" ? "Closed for 2027-28"
+    : s.status === "expected" ? `Expected ${s.expectedText || "soon"}` : "Check with school";
+}
+// Schools grouped by the month applications usually open, in school-year order (July first).
+function byApplyMonth(list) {
+  const order = [7, 8, 9, 10, 11, 12, 1, 2, 3, 4, 5, 6];
+  const groups = order.map(m => ({ month: m, schools: list.filter(s => s.applyMonth === m) })).filter(g => g.schools.length);
+  return { groups, unknown: list.filter(s => !s.applyMonth) };
+}
+const latestCheck = schools.map(s => parseDate(s.checkedOn)).filter(Boolean).sort((a, b) => b - a)[0];
+const checkedText = latestCheck ? formatDate(latestCheck) : "";
+
+function schoolLink(s) {
+  return `<a href="/schools/${esc(slugify(s.school))}/">${esc(s.school)}</a>`;
+}
+
+function lkgGuideBody() {
+  const { groups, unknown } = byApplyMonth(schools);
+  const rows = [0, 1, 2].map(k => {
+    const y = NEXT_SESSION + k;
+    return `<tr><td>June ${y - 5} – May ${y - 4}</td><td><strong>June ${y}</strong> (${y}-${String(y + 1).slice(2)})</td><td>Jul–Oct ${y - 1}</td></tr>`;
+  }).join("\n            ");
+  const months = groups.map(g => `        <li><strong>${MONTHS[g.month - 1]}:</strong> ${g.schools.map(s => `${schoolLink(s)} <span class="muted">(${esc(statusShort(s))})</span>`).join(", ")}</li>`).join("\n");
+  const ruleRows = schools.map(s => ({ s, r: lkgRule(s) })).filter(x => x.r).map(({ s, r }) => {
+    const [m, d] = r.cutoff.split("-").map(Number);
+    return `<tr><td>${schoolLink(s)}</td><td>${esc(r.class)}</td><td>${esc(r.minAge)} to under ${esc(r.maxAge)} years on ${d} ${SHORT_MONTHS[m - 1]}</td></tr>`;
+  }).join("\n            ");
+  return `    <article class="guide">
+      <section class="panel guide-box">
+        <h2>In 30 seconds</h2>
+        <ul class="guide-points">
+          <li>Most popular Kochi schools take children into <strong>LKG at 4 to under 5 years of age</strong>, counted on <strong>1 June</strong> (some use 31 May; Kendriya Vidyalayas use 31 March).</li>
+          <li>Applications open <strong>8–11 months before</strong> the June start — for most schools between <strong>July and October</strong> of the year before.</li>
+          <li>Some schools give seats <strong>first-come, first-served</strong> — apply as soon as applications open.</li>
+          <li>Keep the <strong>birth certificate</strong> ready. Rajagiri's notice says applications with any date-of-birth mismatch are rejected.</li>
+        </ul>
+      </section>
+
+      <h2>When does my child join LKG?</h2>
+      <p>For schools with the common rule (4 to under 5 years on 1 June):</p>
+      <div class="guide-table-wrap">
+        <table class="guide-table guide-table-narrow">
+          <thead><tr><th>Child born</th><th>Joins LKG in</th><th>Apply around</th></tr></thead>
+          <tbody>
+            ${rows}
+          </tbody>
+        </table>
+      </div>
+      <p class="muted guide-small">Children born right at the start or end of a range: check the exact dates in the school's notice. For every school at once, use the <a href="/admissions.html">"When can my child join?" checker</a> — enter the date of birth and each school card shows the year and when to apply.</p>
+
+      <h2>When each school takes applications</h2>
+      <p>Usual month applications open, and the status when we last checked (${esc(checkedText)}):</p>
+      <ul class="guide-points">
+${months}
+        <li><strong>Month not published:</strong> ${unknown.map(s => `${schoolLink(s)} <span class="muted">(${esc(statusShort(s))})</span>`).join(", ")}</li>
+      </ul>
+      <p><a href="/admission-calendar/">Printable one-page admission calendar →</a></p>
+
+      <h2>LKG age rule, school by school</h2>
+      <div class="guide-table-wrap">
+        <table class="guide-table guide-table-narrow">
+          <thead><tr><th>School</th><th>Class name</th><th>Age</th></tr></thead>
+          <tbody>
+            ${ruleRows}
+          </tbody>
+        </table>
+      </div>
+      <p class="muted guide-small">Only schools that publish their rule are listed. Note that some schools name their classes differently — for example, The Choice School's "KG (LKG)" starts at 3 years.</p>
+
+      <h2>Documents to keep ready</h2>
+      <ul class="guide-points">
+        <li><strong>Birth certificate</strong> — asked by every school (Rajagiri wants the page showing the child's name, date of birth and parents' names).</li>
+        <li><strong>Passport-size photo</strong> of the child (Rajagiri, Mar Thoma).</li>
+        <li><strong>Immunisation / vaccination card</strong> (Mar Thoma, Delhi Public School).</li>
+        <li><strong>Aadhaar</strong> — of the child, and at some schools also the parents (Mar Thoma, Delhi Public School).</li>
+      </ul>
+
+      <h2>How schools choose</h2>
+      <ul class="guide-points">
+        <li><strong>First-come, first-served:</strong> Mar Thoma says KG seats are given mainly in order of application (siblings get preference).</li>
+        <li><strong>A friendly interaction, not a test:</strong> Mar Thoma and Delhi Public School (no entrance test up to Grade 4); TIPS says there is no entrance exam for the early years.</li>
+        <li><strong>Strict age check:</strong> Rajagiri rejects applications that don't meet its age rule.</li>
+      </ul>
+
+      <h2>Never miss the date</h2>
+      <p>On the <a href="/admissions.html">school admissions page</a>, each school card has a <strong>Remind me</strong> button: it puts a reminder in your phone's calendar for the month that school usually opens applications.</p>
+
+      <p class="muted guide-small">Kochi Kids Calendar is an independent, free guide — not connected to any school. We never rate or rank schools. Details come from each school's own website or notice; always confirm with the school before applying.</p>
+
+      <div class="card-actions guide-cta">
+        <a class="btn" href="/admissions.html">See all ${schools.length} schools and check your child's age</a>
+      </div>
+    </article>`;
+}
+
+const lkgUrl = `${SITE}/lkg-admission-guide/`;
+files.set("lkg-admission-guide/index.html", page({
+  title: `LKG admission in Kochi ${NEXT_SESSION}-${String(NEXT_SESSION + 1).slice(2)}: age rules, dates and documents | Kochi Kids Calendar`,
+  description: `When popular Kochi schools take LKG applications, the age rule (4 to under 5 years on 1 June), which year your child joins, documents to keep ready — for ${schools.length} schools.`,
+  url: lkgUrl, image: "og-admissions.jpg", active: "schools",
+  h1: "LKG admission in Kochi: a parent's guide", eyebrow: "Kochi Kids Calendar · Guide",
+  intro: "Age rules, when each school takes applications, documents to keep ready — in 5 minutes.",
+  body: lkgGuideBody(),
+}));
+sitemap.push({ loc: lkgUrl, lastmod: latestCheck || null, priority: "0.9" });
+
+function calendarBody() {
+  const { groups, unknown } = byApplyMonth(schools);
+  const line = s => {
+    const r = lkgRule(s);
+    return `<tr><td><strong>${esc(s.school)}</strong> <span class="muted">· ${esc(s.area)}</span></td><td>${r ? esc(`${r.minAge}–${r.maxAge} yrs on ${Number(r.cutoff.split("-")[1])} ${SHORT_MONTHS[Number(r.cutoff.split("-")[0]) - 1]}`) : "Ask school"}</td><td>${esc(statusShort(s))}</td></tr>`;
+  };
+  const sections = groups.map(g => `          <tr class="cal-month"><th colspan="3">${MONTHS[g.month - 1]}</th></tr>\n          ${g.schools.map(line).join("\n          ")}`).join("\n");
+  return `    <div class="print-actions"><button type="button" class="btn" onclick="window.print()">Print / save as PDF</button></div>
+    <section class="cal-sheet">
+      <div class="cal-head">
+        <div>
+          <p class="cal-title">School admissions in Kochi — when to apply</p>
+          <p class="cal-sub">Pre-KG / LKG / UKG · ${esc(String(NEXT_SESSION))}-${esc(String(NEXT_SESSION + 1).slice(2))} and later · LKG age rule and status as of ${esc(checkedText)}</p>
+        </div>
+        <img class="cal-qr" src="/qr-admissions.svg" alt="QR code: kochikidscalendar.com/admissions.html" width="96" height="96">
+      </div>
+      <table class="cal-table">
+        <thead><tr><th>Applications usually open · School</th><th>LKG age</th><th>Status</th></tr></thead>
+        <tbody>
+${sections}
+          <tr class="cal-month"><th colspan="3">Month not published — ask the school</th></tr>
+          ${unknown.map(line).join("\n          ")}
+        </tbody>
+      </table>
+      <p class="cal-foot">Scan the QR code or open <strong>kochikidscalendar.com/admissions.html</strong> — enter your child's date of birth to see the year your child can join each school, and set reminders. Free, independent guide by a Kochi parent; not connected to any school. Always confirm with the school.</p>
+    </section>`;
+}
+const calUrl = `${SITE}/admission-calendar/`;
+files.set("admission-calendar/index.html", page({
+  title: "Kochi school admission calendar (printable) – when to apply for Pre-KG, LKG, UKG | Kochi Kids Calendar",
+  description: `One page: the month each of ${schools.length} popular Kochi schools usually opens Pre-KG/LKG/UKG applications, the LKG age rule and current status. Free to print and share.`,
+  url: calUrl, image: "og-admissions.jpg", active: "schools", bodyClass: "print-page",
+  h1: "Admission calendar (printable)", eyebrow: "Kochi Kids Calendar",
+  intro: "One page to print, save as PDF or share with other parents.",
+  body: calendarBody(),
+}));
+sitemap.push({ loc: calUrl, lastmod: latestCheck || null, priority: "0.7" });
+
 // Parent's guide (hand-written body in tools/guide-content.html)
 const guideUrl = `${SITE}/olympiad-guide/`;
 files.set("olympiad-guide/index.html", page({
@@ -317,7 +473,7 @@ ${sitemap.map(u => `  <url><loc>${esc(u.loc)}</loc>${u.lastmod ? `<lastmod>${iso
 // Existing generated files (so removed entries lose their page)
 function listGenerated() {
   const out = new Set(["sitemap.xml"]);
-  for (const dir of ["competitions", "schools", "olympiad-guide"]) {
+  for (const dir of ["competitions", "schools", "olympiad-guide", "lkg-admission-guide", "admission-calendar"]) {
     const base = path.join(ROOT, dir);
     if (!fs.existsSync(base)) continue;
     (function walk(d) {
