@@ -118,7 +118,7 @@ function renderCard(p, i) {
     nearby.forEach(({ s, near: n }, k) => {
       const a = el("a", null, s.school);
       a.href = "schools/" + slugify(s.school) + "/";
-      a.addEventListener("click", () => track("click-ps-nearby-school"));
+      a.addEventListener("click", () => track("ps-nearby-school/" + slugify(p.name)));
       box.appendChild(a);
       box.appendChild(document.createTextNode(` (${kmText(n.km)} km${s.applyMonth ? ", applies " + SHORT_MONTHS[s.applyMonth - 1] : ""})${k < nearby.length - 1 ? " · " : ""}`));
     });
@@ -142,13 +142,13 @@ function renderCard(p, i) {
   const actions = el("div", "card-actions");
   const g = el("a", "btn", "Google Maps — reviews, phone, route ↗");
   g.href = mapsUrl(p); g.target = "_blank"; g.rel = "noopener noreferrer";
-  g.addEventListener("click", () => track("click-playschool-maps"));
+  g.addEventListener("click", () => track("ps-maps/" + slugify(p.name)));
   actions.appendChild(g);
   const site = safeLink(p.link);
   if (site) {
     const w = el("a", "btn-secondary", "Website ↗");
     w.href = site; w.target = "_blank"; w.rel = "noopener noreferrer";
-    w.addEventListener("click", () => track("click-playschool-site"));
+    w.addEventListener("click", () => track("ps-site/" + slugify(p.name)));
     actions.appendChild(w);
   }
   card.appendChild(actions);

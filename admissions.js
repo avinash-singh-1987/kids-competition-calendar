@@ -207,7 +207,7 @@ function renderCard(s, i) {
     d.href = directionsUrl(near);
     d.target = "_blank";
     d.rel = "noopener noreferrer";
-    d.addEventListener("click", () => track("click-directions"));
+    d.addEventListener("click", () => track("school-directions/" + slugify(s.school)));
     line.appendChild(d);
     card.appendChild(line);
   } else if (origin) {
@@ -297,7 +297,7 @@ function renderCard(s, i) {
     a.href = url;
     a.target = "_blank";
     a.rel = "noopener noreferrer";
-    a.addEventListener("click", () => track("click-school-link"));
+    a.addEventListener("click", () => track("school-site/" + slugify(s.school)));
     actions.appendChild(a);
   }
   const row = el("div", "secondary-actions");
@@ -312,16 +312,16 @@ function renderCard(s, i) {
   }
   if (remind) {
     const label = `Remind me in ${MONTHS[remind.when.getMonth()].slice(0, 3)} ${remind.when.getFullYear()}`;
-    row.appendChild(actionLink(reminderUrl(s, remind.when, remind.title), CAL_ICON, label, "click-admission-reminder"));
+    row.appendChild(actionLink(reminderUrl(s, remind.when, remind.title), CAL_ICON, label, "school-reminder/" + slugify(s.school)));
   }
-  row.appendChild(actionLink(whatsappUrl(s), SHARE_ICON, "WhatsApp", "click-whatsapp"));
+  row.appendChild(actionLink(whatsappUrl(s), SHARE_ICON, "WhatsApp", "school-whatsapp/" + slugify(s.school)));
   actions.appendChild(row);
   // Reviews, photos and phone on Google Maps itself (we never show ratings on our site).
   const g = el("a", "maps-link", "Reviews & photos on Google Maps ↗");
   g.href = "https://www.google.com/maps/search/?api=1&query=" + encodeURIComponent(`${s.school} ${s.area} Kochi`);
   g.target = "_blank";
   g.rel = "noopener noreferrer";
-  g.addEventListener("click", () => track("click-school-maps"));
+  g.addEventListener("click", () => track("school-maps/" + slugify(s.school)));
   actions.appendChild(g);
   card.appendChild(actions);
   return card;
