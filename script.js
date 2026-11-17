@@ -651,6 +651,7 @@ async function start() {
   buildFilters();
   renderDeadlines(allCompetitions);
   renderList();
+  try { renderMyChild(); } catch (e) { console.error("For-your-child box failed; the rest of the page still works.", e); }
   scrollToLinkedCard();
 }
 
@@ -686,6 +687,96 @@ function openCard(id) {
   card.classList.add("highlight");
   card.scrollIntoView({ behavior: "smooth", block: "center" });
   try { history.replaceState(null, "", "#" + id); } catch (e) { /* not important */ }
+}
+
+// ---------- "For your child" box ----------
+// The parent picks the child's class once (saved only in this browser); the box then shows
+// the next few things to act on for that class.
+
+const CHILD_CLASS_KEY = "kcc-child-class";
+function loadChildClass() { try { return localStorage.getItem(CHILD_CLASS_KEY) || ""; } catch (e) { return ""; } }
+function saveChildClass(v) { try { if (v) localStorage.setItem(CHILD_CLASS_KEY, v); else localStorage.removeItem(CHILD_CLASS_KEY); } catch (e) { /* fine */ } }
+
+function myChildItems(cls) {
+  return allCompetitions
+    .filter(c => Array.isArray(c.classes) && c.classes.map(String).includes(cls))
+    .filter(c => !isRegistrationClosed(c))
+    .map(c => ({ c, ev: nextEvent(c) }))
+    .filter(x => x.ev)
+    .sort((a, b) => a.ev.date - b.ev.date)
+    .slice(0, 3);
+}
+
+function myChildAction(c, ev) {
+  if (ev.kind === "register") return (isAskSchool(c) ? "Ask your school by " : "Register by ") + formatDate(ev.date);
+  return "Next exam date: " + formatDate(ev.date);
+}
+
+function renderMyChild() {
+  const box = document.getElementById("my-child");
+  if (!box) return;
+  box.hidden = false;
+  box.innerHTML = "";
+  const cls = loadChildClass();
+
+  const head = el("div", "section-head");
+  const icon = el("span", "section-icon", "🧒");
+  icon.setAttribute("aria-hidden", "true");
+  const titles = el("div");
+  const h2 = el("h2", null, cls ? `For your child in Class ${cls}` : "What's coming up for your child?");
+  h2.id = "my-child-title";
+  titles.appendChild(h2);
+  titles.appendChild(el("p", "muted", cls ? "The next things to do, nearest first." : "Pick your child's class — saved only on this phone."));
+  head.appendChild(icon);
+  head.appendChild(titles);
+  box.appendChild(head);
+
+  if (!cls) {
+    const chips = el("div", "chips");
+    ["1", "2", "3", "4", "5"].forEach(n => {
+      const b = el("button", "chip", "Class " + n);
+      b.type = "button";
+      b.addEventListener("click", () => { saveChildClass(n); track("set-child-class"); renderMyChild(); });
+      chips.appendChild(b);
+    });
+    box.appendChild(chips);
+    return;
+  }
+
+  const items = myChildItems(cls);
+  if (!items.length) {
+    box.appendChild(el("p", "my-child-empty", `Nothing to act on for Class ${cls} right now. New competitions are added every week.`));
+  } else {
+    const ul = el("ul", "my-child-list");
+    items.forEach(({ c, ev }) => {
+      const li = el("li");
+      const a = el("a", "my-child-item");
+      a.href = "#" + slugify(c.name);
+      a.appendChild(el("strong", null, c.name));
+      a.appendChild(el("span", "my-child-action" + (daysBetween(today(), ev.date) <= 7 ? " urgent" : ""), myChildAction(c, ev)));
+      if (c.individual === "yes") a.appendChild(el("span", "direct-tag", "✓ Parents can register directly"));
+      a.addEventListener("click", e => { e.preventDefault(); openCard(slugify(c.name)); track("click-my-child-item"); });
+      li.appendChild(a);
+      ul.appendChild(li);
+    });
+    box.appendChild(ul);
+  }
+
+  const row = el("div", "my-child-actions");
+  const all = el("button", "chip", `Show everything for Class ${cls}`);
+  all.type = "button";
+  all.addEventListener("click", () => {
+    filters.cls = cls; filters.type = "all"; filters.who = "all";
+    buildFilters(); renderList();
+    const t = document.getElementById("all-title");
+    if (t) t.scrollIntoView({ behavior: "smooth", block: "start" });
+  });
+  const change = el("button", "link-button", "Change class");
+  change.type = "button";
+  change.addEventListener("click", () => { saveChildClass(""); renderMyChild(); });
+  row.appendChild(all);
+  row.appendChild(change);
+  box.appendChild(row);
 }
 
 // "#no-school": show only competitions parents can apply for without the school.

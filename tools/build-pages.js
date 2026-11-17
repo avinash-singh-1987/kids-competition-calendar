@@ -113,6 +113,7 @@ ${body}
     <div class="wrap footer-inner">
       <div class="footer-icon" aria-hidden="true">✏️</div>
       <p>Kochi Kids Calendar · A free, independent guide for parents in Kochi, Kerala ·
+        <a href="/olympiad-guide/">Parent's guide to Olympiads</a> ·
         <a href="/competitions/">All competitions</a> · <a href="/schools/">All schools</a></p>
     </div>
   </footer>
@@ -179,6 +180,7 @@ function competitionPage(c) {
         <a class="btn-secondary" href="/#${esc(slug)}">See it in the calendar (with reminders)</a>
       </div>
     </article>
+    ${c.type === "Olympiad" ? '<p class="static-foot"><a href="/olympiad-guide/">New to Olympiads? Read the 5-minute parent\'s guide →</a></p>' : ""}
     <p class="muted static-foot">Dates change sometimes — always confirm with the organiser or your school. This page was last updated ${esc(updated ? formatDate(updated) : "recently")}.
       <a href="/competitions/">See all competitions</a>.</p>`;
   return {
@@ -294,6 +296,18 @@ const schoolHub = hubPage({
 files.set("schools/index.html", schoolHub.html);
 sitemap.push({ loc: schoolHub.url, lastmod: null, priority: "0.8" });
 
+// Parent's guide (hand-written body in tools/guide-content.html)
+const guideUrl = `${SITE}/olympiad-guide/`;
+files.set("olympiad-guide/index.html", page({
+  title: "Olympiads for Class 1–5: a guide for Kochi parents – SOF, SilverZone, Unified Council | Kochi Kids Calendar",
+  description: "Which Olympiads can Class 1–5 children in Kochi take, which go only through the school and which parents can register for directly, fees, dates, Level 2 and free sample papers.",
+  url: guideUrl, image: "og-image.jpg", active: "competitions",
+  h1: "Olympiads for Class 1–5: a parent's guide", eyebrow: "Kochi Kids Calendar · Guide",
+  intro: "SOF, SilverZone and Unified Council explained in 5 minutes — who registers, what it costs, when the exams are and how to prepare.",
+  body: fs.readFileSync(path.join(__dirname, "guide-content.html"), "utf8").replace(/\s+$/, ""),
+}));
+sitemap.push({ loc: guideUrl, lastmod: null, priority: "0.9" });
+
 files.set("sitemap.xml", `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 ${sitemap.map(u => `  <url><loc>${esc(u.loc)}</loc>${u.lastmod ? `<lastmod>${isoDay(u.lastmod)}</lastmod>` : ""}<changefreq>weekly</changefreq><priority>${u.priority}</priority></url>`).join("\n")}
@@ -303,7 +317,7 @@ ${sitemap.map(u => `  <url><loc>${esc(u.loc)}</loc>${u.lastmod ? `<lastmod>${iso
 // Existing generated files (so removed entries lose their page)
 function listGenerated() {
   const out = new Set(["sitemap.xml"]);
-  for (const dir of ["competitions", "schools"]) {
+  for (const dir of ["competitions", "schools", "olympiad-guide"]) {
     const base = path.join(ROOT, dir);
     if (!fs.existsSync(base)) continue;
     (function walk(d) {
