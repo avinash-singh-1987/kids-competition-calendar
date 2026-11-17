@@ -84,6 +84,7 @@ function renderCard(p, i) {
 
   const badges = el("div", "badges");
   (p.kinds || []).forEach(k => badges.appendChild(el("span", "badge", k)));
+  if (p.liveCamera) badges.appendChild(el("span", "badge live-cam", "📹 Live camera for parents"));
   badges.appendChild(p.sourceType === "official"
     ? el("span", "badge confirmed", "From its own website ✓")
     : el("span", "badge unverified", "From public listings — confirm with the playschool"));
@@ -93,14 +94,16 @@ function renderCard(p, i) {
   if (near) {
     const line = el("p", "distance-line");
     // Only the area is known for some playschools: don't pretend to be exact.
-    const text = near.approx && near.km < 1.5 ? `In the ${p.area} area` : `≈ ${kmText(near.km)} km away${near.approx ? " (area)" : ""}`;
+    const inArea = near.approx && near.km < 1.5;
+    const text = inArea ? `In the ${near.name || p.area} area` : `≈ ${kmText(near.km)} km away${near.approx ? " (area)" : ""}`;
     line.appendChild(el("strong", null, text));
-    if (near.name) line.appendChild(el("span", "muted", near.name));
+    if (near.name && !inArea) line.appendChild(el("span", "muted", near.name));
     card.appendChild(line);
   }
 
   const rows = [];
   if (p.ages) rows.push(["Ages", p.ages]);
+  if (p.liveCamera) rows.push(["Live camera", "Parents can watch a live CCTV view on their phone (as stated by the playschool)"]);
   const nearby = nearbySchools(p, 3);
   if (rows.length) {
     const dl = el("dl", "details");
