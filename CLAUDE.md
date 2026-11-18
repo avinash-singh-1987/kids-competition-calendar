@@ -78,6 +78,10 @@
   marthomapublicschool.edu.in, dpskochi.com, campioncochin.edu.in, kochi.tipsglobeducate.com +
   kochicbse.tipsglobeducate.com (TIPS), gregorianpublicschool.org, gps.ac.in (Greets) — added Nov 2026.
   KV and EducationWorld sites block cloud servers — use news/search for those.
+- Playschool websites in Allowed domains (Nov 2026): eurokidsindia.com (centre pages listed in its
+  preschool-pages-sitemap.xml), timekidspreschools.in, kidzee.com (blocks us: 406), bachpanglobal.com
+  (unreachable), footprintseducation.in, thebackyardacademy.com, balamandir.bhavanskakkanad.ac.in,
+  littlebritain.in (site carries injected spam links — don't link it), caterpillarz.in (4 Kochi campuses).
 - Script/CSS links carry a version (`?v=YYYYMMDD`) to beat browser caches: when you change
   script.js, admissions.js or style.css, bump the `?v=` date in index.html / admissions.html.
 - Announcement bar: edit `announcement.json` — `active`, `title`, `points`
