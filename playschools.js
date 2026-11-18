@@ -241,6 +241,22 @@ async function start() {
 
   render();
   if (areas.length) setupNearMe(); else document.getElementById("near-me").hidden = true;
+  openLinkedCard();
 }
+
+// A link like playschools.html#<playschool-name> opens straight at that playschool's card.
+function openLinkedCard() {
+  const id = decodeURIComponent(location.hash.slice(1));
+  const card = id && document.getElementById(id);
+  if (!card) return;
+  card.classList.add("highlight");
+  // Wait until fonts and the list have settled, then jump to the card.
+  setTimeout(() => {
+    const y = card.getBoundingClientRect().top + window.scrollY - 80;
+    window.scrollTo({ top: Math.max(0, y), behavior: "auto" });
+  }, 400);
+  track("ps-linked-card/" + id);
+}
+window.addEventListener("hashchange", openLinkedCard);
 
 start();
