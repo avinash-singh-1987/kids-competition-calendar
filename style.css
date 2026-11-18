@@ -320,7 +320,7 @@ h2[id] { scroll-margin-top: 16px; }
   color: var(--accent);
 }
 .type-icon svg { width: 26px; height: 26px; }
-.card h3 { margin: 2px 0 0; font-size: 1.15rem; }
+.card h3, .card .card-title { margin: 2px 0 0; font-size: 1.15rem; }
 .organiser { margin: 2px 0 0; color: var(--muted); font-size: 0.9rem; }
 
 .badges { display: flex; flex-wrap: wrap; gap: 6px; margin: 4px 0 12px; }
@@ -684,3 +684,14 @@ h2[id] { scroll-margin-top: 16px; }
 }
 .btn-soft:hover, .btn-soft:focus-visible { border-color: var(--accent); }
 .btn-soft:active { transform: scale(0.98); }
+
+/* Playschool area pages (/playschools/<area>/) */
+.area-facts { margin: 0 0 12px; color: var(--muted); font-weight: 600; }
+.area-map-btn { display: inline-flex; margin: 0 0 18px; padding: 11px 18px; background: #0e7490; color: #fff; }
+.area-cards { margin-bottom: 8px; }
+.area-tips { margin-top: 24px; padding: 16px 18px; background: var(--card); border: 1px solid var(--border); border-radius: 14px; }
+.area-tips h2 { margin: 0 0 8px; font-size: 1.15rem; }
+.area-tips ul { margin: 0; padding-left: 20px; }
+.area-tips li { margin: 4px 0; }
+.area-links { margin: 18px 0 0; font-size: 0.92rem; line-height: 1.8; }
+.area-links a { color: var(--primary-dark); font-weight: 700; }
