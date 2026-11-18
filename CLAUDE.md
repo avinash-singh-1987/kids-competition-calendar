@@ -47,6 +47,8 @@
   holds its own preview tags (noindex) and forwards to `/#direct`, which opens the competitions page at
   the top (announcement bar visible) with the "Register directly" filter on. `#no-school` does the same
   but scrolls down to the list.
+- Google Search Console is already set up by the owner (Nov 2026; verified outside the repo, e.g. DNS) —
+  don't suggest it again. For search data, ask the owner for a screenshot of Performance / Pages.
 - Visitor counter: GoatCounter, site code `kochikidscalendar`
   (dashboard https://kochikidscalendar.goatcounter.com). Since Nov 2026 button clicks are counted
   PER ENTRY as `<event>/<slug>` (slug = same as the card id / page name), so we can later show a

@@ -307,7 +307,12 @@ function renderCard(s, i) {
     remind = { when: reminder.when, title: `Apply: ${s.school} ${reminder.cls} (${reminder.year}-${String(reminder.year + 1).slice(2)})` };
   } else if (s.applyMonth) {
     const next = applyDate(s, firstPlannableYear(s.sessionMonth));
-    const when = next && next >= today() ? next : applyDate(s, firstPlannableYear(s.sessionMonth) + 1);
+    let when = next && next >= today() ? next : applyDate(s, firstPlannableYear(s.sessionMonth) + 1);
+    // Opening is expected THIS month but hasn't happened yet: remind in a week, not next year.
+    const t = today();
+    if (s.status === "expected" && next && next < t && next.getFullYear() === t.getFullYear() && next.getMonth() === t.getMonth()) {
+      when = new Date(t.getFullYear(), t.getMonth(), t.getDate() + 7);
+    }
     remind = { when, title: `Admissions usually open: ${s.school}` };
   }
   if (remind) {
