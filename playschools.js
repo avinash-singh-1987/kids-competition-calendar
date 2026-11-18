@@ -1,6 +1,6 @@
 // Playschools near you – Kochi
-// Reads playschools.json (the list), areas.json (areas for the dropdown) and admissions.json
-// (to show the nearest schools for LKG). The parent's location is only used on this phone.
+// Reads playschools.json (the list) and areas.json (areas for the dropdown).
+// The parent's location is only used on this phone.
 
 const AREA_KEY = "kcc-area"; // shared with the admissions page
 
@@ -23,7 +23,6 @@ function formatDate(d) { return d.toLocaleDateString("en-IN", { day: "numeric", 
 function track(name) {
   try { if (window.goatcounter && window.goatcounter.count) window.goatcounter.count({ path: name, title: name, event: true }); } catch (e) { /* never break the page */ }
 }
-const SHORT_MONTHS = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
 
 function kmBetween(a, b) {
   const R = 6371, rad = x => x * Math.PI / 180;
@@ -35,7 +34,6 @@ function kmText(km) { return km < 10 ? km.toFixed(1) : String(Math.round(km)); }
 
 let playschools = [];
 let areas = [];
-let schools = [];
 let origin = null;
 let kind = "all";
 
@@ -48,14 +46,6 @@ function nearest(locations, from) {
 // Google Maps search for this playschool: reviews, photos, phone and directions — on Google itself.
 function mapsUrl(p) {
   return "https://www.google.com/maps/search/?api=1&query=" + encodeURIComponent(`${p.name.replace(/ – /g, " ")} ${p.area} Kochi`);
-}
-
-// The nearest schools on our admissions page, with the month they usually take applications.
-function nearbySchools(p, howMany) {
-  const here = p.locations && p.locations[0];
-  if (!here) return [];
-  return schools.map(s => ({ s, near: nearest(s.locations, here) })).filter(x => x.near)
-    .sort((a, b) => a.near.km - b.near.km).slice(0, howMany);
 }
 
 function matchesKind(p) {
@@ -104,7 +94,6 @@ function renderCard(p, i) {
   const rows = [];
   if (p.ages) rows.push(["Ages", p.ages]);
   if (p.liveCamera) rows.push(["Live camera", "Parents can watch a live CCTV view on their phone (as stated by the playschool)"]);
-  const nearby = nearbySchools(p, 3);
   if (rows.length) {
     const dl = el("dl", "details");
     rows.forEach(([k, v]) => { const r = el("div"); r.appendChild(el("dt", null, k)); r.appendChild(el("dd", null, v)); dl.appendChild(r); });
@@ -112,18 +101,6 @@ function renderCard(p, i) {
   }
   if (p.note) card.appendChild(el("p", "note", p.note));
 
-  if (nearby.length) {
-    const box = el("div", "ps-next");
-    box.appendChild(el("strong", null, "Nearest schools for LKG: "));
-    nearby.forEach(({ s, near: n }, k) => {
-      const a = el("a", null, s.school);
-      a.href = "schools/" + slugify(s.school) + "/";
-      a.addEventListener("click", () => track("ps-nearby-school/" + slugify(p.name)));
-      box.appendChild(a);
-      box.appendChild(document.createTextNode(` (${kmText(n.km)} km${s.applyMonth ? ", applies " + SHORT_MONTHS[s.applyMonth - 1] : ""})${k < nearby.length - 1 ? " · " : ""}`));
-    });
-    card.appendChild(box);
-  }
 
   const src = safeLink(p.source);
   const checked = parseDate(p.checkedOn);
@@ -233,7 +210,6 @@ async function start() {
     return;
   }
   try { areas = (await getJson("areas.json")).filter(a => a && a.name && typeof a.lat === "number"); } catch (e) { areas = []; }
-  try { schools = (await getJson("admissions.json")).filter(s => s && s.school && Array.isArray(s.locations)); } catch (e) { schools = []; }
 
   document.getElementById("stat-ps").textContent = playschools.length;
   document.getElementById("stat-daycare").textContent = playschools.filter(p => (p.kinds || []).includes("Daycare")).length;

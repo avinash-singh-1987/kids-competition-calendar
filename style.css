@@ -530,8 +530,6 @@ h2[id] { scroll-margin-top: 16px; }
 .maps-link:hover, .maps-link:focus-visible { text-decoration: underline; }
 .ps-card .type-icon { font-size: 1.4rem; display: grid; place-items: center; }
 .badge.live-cam { background: #e7f0ff; color: #1d4ed8; }
-.ps-next { margin: 0 0 12px; padding: 10px 12px; background: var(--primary-soft); border-radius: 10px; font-size: 0.86rem; line-height: 1.5; }
-.ps-next a { color: var(--primary-dark); font-weight: 700; }
 .hero-short { padding-bottom: 48px; }
 .distance-line { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin: -2px 0 10px; font-size: 0.88rem; }
 .distance-line strong { color: var(--primary-dark); }
