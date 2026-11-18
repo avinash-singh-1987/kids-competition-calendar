@@ -668,3 +668,19 @@ h2[id] { scroll-margin-top: 16px; }
   html { scroll-behavior: auto; }
   *, *::before, *::after { animation: none !important; transition: none !important; }
 }
+
+/* Playschool card buttons: light and small so the playschool's name stays the most prominent thing */
+.ps-actions { flex-direction: row; flex-wrap: wrap; gap: 8px; }
+.ps-actions > a { white-space: nowrap; }
+.ps-actions .btn-soft { flex: 1 1 auto; }
+.ps-actions .btn-secondary { flex: 1 0 auto; padding: 9px 16px; }
+.btn-soft {
+  display: flex; align-items: center; justify-content: center; gap: 6px;
+  padding: 9px 8px;
+  border: 1px solid transparent; border-radius: 10px;
+  background: var(--accent-soft); color: var(--primary-dark);
+  font-size: 0.85rem; font-weight: 700; text-decoration: none;
+  transition: border-color 0.2s, transform 0.15s;
+}
+.btn-soft:hover, .btn-soft:focus-visible { border-color: var(--accent); }
+.btn-soft:active { transform: scale(0.98); }

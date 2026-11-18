@@ -67,7 +67,8 @@
   Owner's rule (Nov 2026): include playschools with their own/chain website, kindergartens of our schools,
   and well-known local ones that appear in at least two public directories or that a parent suggested.
   Listing-only entries show "From public listings — confirm with the playschool". Never show ratings, fees
-  or directory phone numbers; the card's Google Maps button gives reviews/phone/route. Never rank:
+  or directory phone numbers; the card's Google Maps button gives reviews/phone/route. Owner (Nov 2026): card buttons
+  stay light and small (`btn-soft`, one row with "Website") — the playschool's name must be the most prominent thing. Never rank:
   without a location the list is by area, then name. `approx` points show "In the X area" / "(area)".
 - School websites reachable from the cloud environment (owner added them to Allowed domains):
   rajagiri.ac.in, christujayanthi.ac.in, bhavanskochikendra.com, choiceschool.com,
