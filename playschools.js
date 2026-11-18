@@ -190,10 +190,21 @@ function setupNearMe() {
     try { localStorage.removeItem(AREA_KEY); } catch (e) { /* fine */ }
     setOrigin(null);
   });
+  // playschools.html?area=Kakkanad (from the area pages) starts from that area.
+  let wanted = null;
+  try { wanted = new URLSearchParams(location.search).get("area"); } catch (e) { /* fine */ }
+  const fromLink = wanted && areas.find(x => x.name.toLowerCase() === wanted.toLowerCase());
   let saved = null;
   try { saved = localStorage.getItem(AREA_KEY); } catch (e) { /* fine */ }
-  const a = saved && areas.find(x => x.name === saved);
+  const a = fromLink || (saved && areas.find(x => x.name === saved));
   if (a) { select.value = a.name; setOrigin({ lat: a.lat, lng: a.lng, label: a.name }); }
+  if (fromLink && !location.hash) {
+    track("ps-from-area-page/" + slugify(fromLink.name));
+    setTimeout(() => {
+      const t = document.getElementById("near-title");
+      if (t) window.scrollTo({ top: Math.max(0, t.getBoundingClientRect().top + window.scrollY - 20), behavior: "auto" });
+    }, 400);
+  }
 }
 
 async function getJson(url) {

@@ -9,6 +9,8 @@
 // Output (fully regenerated each time — don't edit by hand):
 //   competitions/index.html, competitions/<slug>/index.html
 //   schools/index.html,      schools/<slug>/index.html
+//   playschools/index.html,  playschools/<area>/index.html  (areas with 3+ playschools)
+//   the "Playschools by area" links inside playschools.html (between the area-links markers)
 //   sitemap.xml
 
 const fs = require("fs");
@@ -99,7 +101,7 @@ function page({ title, description, url, image, active, h1, eyebrow, intro, body
       <a class="brand" href="/">Kochi Kids Calendar</a>
       <a href="/"${active === "competitions" ? ' aria-current="page"' : ""}>Competitions</a>
       <a href="/admissions.html"${active === "schools" ? ' aria-current="page"' : ""}>School admissions</a>
-      <a href="/playschools.html">Playschools</a>
+      <a href="/playschools.html"${active === "playschools" ? ' aria-current="page"' : ""}>Playschools</a>
     </nav>
     <div class="wrap">
       ${eyebrow ? `<p class="eyebrow">${esc(eyebrow)}</p>` : ""}
@@ -116,11 +118,12 @@ ${body}
       <p>Kochi Kids Calendar · A free, independent guide for parents in Kochi, Kerala ·
         <a href="/olympiad-guide/">Parent's guide to Olympiads</a> ·
         <a href="/lkg-admission-guide/">LKG admission guide</a> ·
-        <a href="/playschools.html">Playschools near you</a> ·
+        <a href="/playschools/">Playschools by area</a> ·
         <a href="/competitions/">All competitions</a> · <a href="/schools/">All schools</a></p>
     </div>
   </footer>
   <script data-goatcounter="https://kochikidscalendar.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>
+  <script>document.addEventListener("click", function (e) { var a = e.target.closest && e.target.closest("a[data-track]"); if (!a) return; try { if (window.goatcounter && window.goatcounter.count) window.goatcounter.count({ path: a.dataset.track, title: a.dataset.track, event: true }); } catch (err) { /* never break the page */ } });</script>
 </body>
 </html>
 `;
@@ -300,6 +303,137 @@ const schoolHub = hubPage({
 files.set("schools/index.html", schoolHub.html);
 sitemap.push({ loc: schoolHub.url, lastmod: null, priority: "0.8" });
 
+// ---------- Playschools by area (for Google: "playschool in Kakkanad" etc.) ----------
+// One page per area with at least MIN_PER_AREA playschools. No ranking: cards are in name order.
+
+const MIN_PER_AREA = 3;
+const playschools = JSON.parse(fs.readFileSync(path.join(ROOT, "playschools.json"), "utf8")).filter(p => p && p.name && p.area);
+const areaPoints = JSON.parse(fs.readFileSync(path.join(ROOT, "areas.json"), "utf8")).filter(a => a && a.name);
+
+function kmBetween(a, b) {
+  const R = 6371, rad = x => x * Math.PI / 180;
+  const dLat = rad(b.lat - a.lat), dLng = rad(b.lng - a.lng);
+  const h = Math.sin(dLat / 2) ** 2 + Math.cos(rad(a.lat)) * Math.cos(rad(b.lat)) * Math.sin(dLng / 2) ** 2;
+  return 2 * R * Math.asin(Math.sqrt(h));
+}
+function psMapsUrl(p) {
+  return "https://www.google.com/maps/search/?api=1&query=" + encodeURIComponent(`${p.name.replace(/ – /g, " ")} ${p.area} Kochi`);
+}
+function hasDaycare(p) { return (p.kinds || []).includes("Daycare"); }
+function plural(n, one, many) { return `${n} ${n === 1 ? one : many}`; }
+
+const psAreas = [...new Set(playschools.map(p => p.area))]
+  .map(name => ({ name, slug: slugify(name), list: playschools.filter(p => p.area === name).sort((a, b) => a.name.localeCompare(b.name)) }))
+  .filter(a => a.list.length >= MIN_PER_AREA)
+  .sort((a, b) => b.list.length - a.list.length || a.name.localeCompare(b.name));
+
+function playschoolCard(p) {
+  const slug = slugify(p.name);
+  const sub = [p.area];
+  if (p.partOf) sub.push("part of " + p.partOf);
+  else if (p.chain) sub.push(p.chain + " chain");
+  const badges = (p.kinds || []).map(k => `<span class="badge">${esc(k)}</span>`);
+  if (p.liveCamera) badges.push('<span class="badge live-cam">📹 Live camera for parents</span>');
+  badges.push(p.sourceType === "official"
+    ? '<span class="badge confirmed">From its own website ✓</span>'
+    : '<span class="badge unverified">From public listings — confirm with the playschool</span>');
+  const rows = [];
+  if (p.ages) rows.push(["Ages", p.ages]);
+  if (p.liveCamera) rows.push(["Live camera", "Parents can watch a live CCTV view on their phone (as stated by the playschool)"]);
+  const site = safeLink(p.link);
+  return `      <article class="card t-school ps-card static-card" id="${esc(slug)}">
+        <div class="card-top">
+          <div class="type-icon" aria-hidden="true">🧸</div>
+          <div><h2 class="card-title">${esc(p.name)}</h2><p class="organiser">${esc(sub.join(" · "))}</p></div>
+        </div>
+        <div class="badges">${badges.join("")}</div>
+        ${rows.length ? detailsList(rows) : ""}
+        ${p.note ? `<p class="note">${esc(p.note)}</p>` : ""}
+        ${sourceLine(p.source, p.sourceType, { official: "Official website", listing: "Listing" }, "Checked", parseDate(p.checkedOn))}
+        <div class="card-actions ps-actions">
+          <a class="btn-soft" href="${esc(psMapsUrl(p))}" target="_blank" rel="noopener noreferrer" title="Reviews, photos, phone and route on Google Maps" data-track="ps-maps/${esc(slug)}">📍 Google Maps · reviews ↗</a>
+          ${site ? `<a class="btn-secondary" href="${esc(site)}" target="_blank" rel="noopener noreferrer" data-track="ps-site/${esc(slug)}">Website ↗</a>` : ""}
+        </div>
+      </article>`;
+}
+
+function nearbyAreas(area, count) {
+  const here = areaPoints.find(a => a.name === area.name);
+  const others = psAreas.filter(a => a !== area);
+  if (!here) return others.slice(0, count);
+  const dist = a => { const pt = areaPoints.find(x => x.name === a.name); return pt ? kmBetween(here, pt) : 1e9; };
+  return others.slice().sort((a, b) => dist(a) - dist(b)).slice(0, count);
+}
+
+function areaPage(area) {
+  const url = `${SITE}/playschools/${area.slug}/`;
+  const n = area.list.length;
+  const daycare = area.list.filter(hasDaycare).length;
+  const official = area.list.filter(p => p.sourceType === "official").length;
+  const ofSchools = area.list.filter(p => p.partOf).map(p => p.partOf);
+  const facts = [plural(n, "playschool", "playschools") + " listed"];
+  if (daycare) facts.push(`${daycare} with daycare`);
+  facts.push(`${official} with details from their own website`);
+  if (ofSchools.length) facts.push(`kindergarten of ${[...new Set(ofSchools)].join(", ")}`);
+  const mapLink = `/playschools.html?area=${encodeURIComponent(area.name)}`;
+  const nearby = nearbyAreas(area, 4);
+  const checked = area.list.map(p => parseDate(p.checkedOn)).filter(Boolean).sort((a, b) => b - a)[0] || null;
+  const body = `    <p class="area-facts">${esc(facts.join(" · "))}.</p>
+    <p><a class="btn area-map-btn" href="${esc(mapLink)}" data-track="ps-area-map/${esc(area.slug)}">See them nearest first, from your home →</a></p>
+    <div class="card-list area-cards">
+${area.list.map(playschoolCard).join("\n")}
+    </div>
+    <section class="area-tips" aria-labelledby="tips-title">
+      <h2 id="tips-title">Before you choose</h2>
+      <ul>
+        <li>Visit during class hours and see a normal day.</li>
+        <li>Ask the age rule for each class, and the date on which age is counted.</li>
+        <li>For daycare, ask the exact hours, holidays and who picks up the child.</li>
+        <li>Ask for the full fee in writing — admission, term, transport, uniform.</li>
+        <li>Tap <strong>Google Maps</strong> on a card for reviews, photos, phone and the route from your home.</li>
+      </ul>
+    </section>
+    ${nearby.length ? `<p class="static-foot"><strong>Nearby areas:</strong> ${nearby.map(a => `<a href="/playschools/${esc(a.slug)}/">${esc(a.name)}</a> (${a.list.length})`).join(" · ")} · <a href="/playschools/">All areas</a></p>` : ""}
+    <p class="muted static-foot">We never rate or rank playschools; this list is in name order. It is not a complete list of every playschool in ${esc(area.name)}.
+      <a href="/playschools.html">Find playschools near you</a>.</p>`;
+  return {
+    slug: area.slug, url, lastmod: checked,
+    html: page({
+      title: `Playschools in ${area.name}, Kochi – ${plural(n, "preschool", "preschools")}${daycare ? " & daycares" : ""} | Kochi Kids Calendar`,
+      description: `${plural(n, "playschool", "playschools")} and preschools in ${area.name}, Kochi${daycare ? `, ${daycare} with daycare` : ""}: ages, official websites and Google Maps reviews. No ratings, no ranking — a free guide for parents.`,
+      url, image: "og-admissions.jpg", active: "playschools",
+      h1: `Playschools in ${area.name}, Kochi`, eyebrow: "Playschools · " + area.name,
+      intro: `Playschools, preschools and daycares in and around ${esc(area.name)} — with their ages and official links.`, body,
+    }),
+  };
+}
+
+const areaPages = addPages(psAreas, "playschools", areaPage);
+const psHubUrl = `${SITE}/playschools/`;
+files.set("playschools/index.html", page({
+  title: "Playschools in Kochi by area – preschools & daycares | Kochi Kids Calendar",
+  description: `Playschools, preschools and daycares in ${psAreas.map(a => a.name).join(", ")} and more areas of Kochi — no ratings, no ranking, with official links and Google Maps reviews.`,
+  url: psHubUrl, image: "og-admissions.jpg", active: "playschools",
+  h1: "Playschools in Kochi by area", eyebrow: "Kochi Kids Calendar",
+  intro: `${playschools.length} playschools across Kochi. Pick your area, or see all of them nearest first from your home.`,
+  body: `    <p><a class="btn area-map-btn" href="/playschools.html" data-track="ps-area-map/hub">See all, nearest first →</a></p>
+    <ul class="hub-list">
+${psAreas.map((a, i) => `      <li><a href="/playschools/${esc(a.slug)}/"><strong>Playschools in ${esc(a.name)}</strong><span>${esc(plural(a.list.length, "playschool", "playschools"))}${a.list.some(hasDaycare) ? ` · ${a.list.filter(hasDaycare).length} with daycare` : ""}</span></a></li>`).join("\n")}
+    </ul>
+    <p class="muted static-foot">Areas with fewer than ${MIN_PER_AREA} playschools on our list are on the <a href="/playschools.html">main playschools page</a>.</p>`,
+}));
+sitemap.push({ loc: psHubUrl, lastmod: null, priority: "0.8" });
+
+// Static "Playschools by area" links inside playschools.html, so Google finds the area pages.
+const psHtmlPath = path.join(ROOT, "playschools.html");
+const psHtml = fs.readFileSync(psHtmlPath, "utf8");
+const AREA_START = "<!-- area-links:start (generated by tools/build-pages.js) -->";
+const AREA_END = "<!-- area-links:end -->";
+if (!psHtml.includes(AREA_START) || !psHtml.includes(AREA_END)) throw new Error("playschools.html is missing the area-links markers");
+files.set("playschools.html", psHtml.slice(0, psHtml.indexOf(AREA_START) + AREA_START.length) +
+  `\n      <p class="area-links"><strong>Playschools by area:</strong> ${psAreas.map(a => `<a href="playschools/${esc(a.slug)}/">${esc(a.name)}</a>`).join(" · ")} · <a href="playschools/">All areas</a></p>\n      ` +
+  psHtml.slice(psHtml.indexOf(AREA_END)));
+
 // ---------- LKG admission guide + printable admission calendar (built from admissions.json) ----------
 
 const SHORT_MONTHS = MONTHS.map(m => m.slice(0, 3));
@@ -476,7 +610,7 @@ ${sitemap.map(u => `  <url><loc>${esc(u.loc)}</loc>${u.lastmod ? `<lastmod>${iso
 // Existing generated files (so removed entries lose their page)
 function listGenerated() {
   const out = new Set(["sitemap.xml"]);
-  for (const dir of ["competitions", "schools", "olympiad-guide", "lkg-admission-guide", "admission-calendar"]) {
+  for (const dir of ["competitions", "schools", "playschools", "olympiad-guide", "lkg-admission-guide", "admission-calendar"]) {
     const base = path.join(ROOT, dir);
     if (!fs.existsSync(base)) continue;
     (function walk(d) {
@@ -507,7 +641,7 @@ if (CHECK) {
   console.log(`Pages are up to date (${files.size} files).`);
 } else {
   for (const rel of removed) fs.rmSync(path.join(ROOT, rel));
-  for (const dir of ["competitions", "schools"]) {
+  for (const dir of ["competitions", "schools", "playschools"]) {
     // tidy empty folders left by removed entries
     const base = path.join(ROOT, dir);
     if (fs.existsSync(base)) for (const f of fs.readdirSync(base)) {

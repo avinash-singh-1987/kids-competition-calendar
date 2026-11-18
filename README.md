@@ -153,3 +153,6 @@ Data is in `playschools.json`, one entry per centre: `name`, `area` (one of the 
 `kinds` (e.g. `["Preschool", "Daycare"]`), optional `chain` or `partOf` (school), optional `ages`,
 `locations` (`[{"lat", "lng", "approx": true}]` — `approx` when only the area or road is known),
 optional `link` (official website), `source`, `sourceType` (`official` or `listing`), `checkedOn`, optional `note`.
+
+After changing `playschools.json`, run `node tools/build-pages.js`: it also builds one page per area with 3 or more
+playschools (`/playschools/<area>/`) and the list of areas (`/playschools/`).

@@ -11,7 +11,7 @@
 1. Make the change on the designated `claude/...` branch (restart it from `main`
    if the previous pull request was already merged).
 2. Test the site in a browser (phone width) before committing.
-2b. Whenever competitions.json or admissions.json changes, run `node tools/build-pages.js`
+2b. Whenever competitions.json, admissions.json or playschools.json changes, run `node tools/build-pages.js`
    (one page per competition/school + sitemap.xml) and commit the result;
    `node tools/build-pages.js --check` must pass before committing. The same script builds the
    guides: /olympiad-guide/ (text in tools/guide-content.html), /lkg-admission-guide/ and the
@@ -72,6 +72,10 @@
   or directory phone numbers; the card's Google Maps button gives reviews/phone/route. Owner (Nov 2026): card buttons
   stay light and small (`btn-soft`, one row with "Website") — the playschool's name must be the most prominent thing. Never rank:
   without a location the list is by area, then name. `approx` points show "In the X area" / "(area)".
+- Playschool area pages (Nov 2026, for Google searches like "playschool in Kakkanad"): `tools/build-pages.js` builds
+  `/playschools/<area>/` for every area with 3+ playschools (name order, no ranking), the hub `/playschools/`, and the
+  "Playschools by area" links inside playschools.html (between the area-links markers). Run it whenever
+  playschools.json changes too. `playschools.html?area=<Area>` opens the main page sorted from that area.
 - School websites reachable from the cloud environment (owner added them to Allowed domains):
   rajagiri.ac.in, christujayanthi.ac.in, bhavanskochikendra.com, choiceschool.com,
   tochschool.com, assisi.ac.in, ncskochi.nesnavy.in, sanskaraschool.com, vidyodayaschool.ac.in,
