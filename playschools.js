@@ -116,8 +116,10 @@ function renderCard(p, i) {
     card.appendChild(line);
   }
 
-  const actions = el("div", "card-actions");
-  const g = el("a", "btn", "Google Maps — reviews, phone, route ↗");
+  // Owner (Nov 2026): the buttons must stay quieter than the playschool's name — light, small, one row.
+  const actions = el("div", "card-actions ps-actions");
+  const g = el("a", "btn-soft", "📍 Google Maps · reviews ↗");
+  g.title = "Reviews, photos, phone and route on Google Maps";
   g.href = mapsUrl(p); g.target = "_blank"; g.rel = "noopener noreferrer";
   g.addEventListener("click", () => track("ps-maps/" + slugify(p.name)));
   actions.appendChild(g);

@@ -4,14 +4,15 @@ Competitions and school admissions for young children in Kochi, Kerala.
 Live at **https://kochikidscalendar.com** (domain on Hostinger, served by GitHub Pages via the `CNAME` file).
 The repository keeps the old name `kids-competition-calendar`; old github.io links redirect to the domain.
 
-A simple website for parents in Kochi, Kerala, listing upcoming competitions for
-Class 1–5 students: Olympiads, scholarship tests, and local drawing, GK and quiz contests.
+A simple website for parents in Kochi, Kerala, with three parts: upcoming competitions for
+Class 1–5 students (Olympiads, scholarship tests, local drawing, GK and quiz contests), school
+admissions (`admissions.html`) and playschools (`playschools.html`). Each part has its own JSON data file.
 
 ## The files
 
 | File | What it is | Do you edit it? |
 |---|---|---|
-| `competitions.json` | The list of competitions | **Yes — this is the only file you edit** |
+| `competitions.json` | The list of competitions | **Yes** (also `admissions.json`, `playschools.json`) |
 | `index.html` | The page structure | No |
 | `style.css` | Colours and layout | Only to change colours |
 | `script.js` | Sorting, filtering, deadlines | No |
