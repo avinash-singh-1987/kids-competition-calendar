@@ -441,7 +441,7 @@ ${sections}
           ${unknown.map(line).join("\n          ")}
         </tbody>
       </table>
-      <p class="cal-foot">Scan the QR code or open <strong>kochikidscalendar.com/admissions.html</strong> — enter your child's date of birth to see the year your child can join each school, and set reminders. Free, independent guide by a Kochi parent; not connected to any school. Always confirm with the school.</p>
+      <p class="cal-foot">Scan the QR code or open <strong>kochikidscalendar.com/admissions.html</strong> — enter your child's date of birth to see the year your child can join each school, and set reminders. Kochi Kids Calendar is an independent guide for Kochi parents, not connected to any school. Always confirm with the school.</p>
     </section>`;
 }
 const calUrl = `${SITE}/admission-calendar/`;
