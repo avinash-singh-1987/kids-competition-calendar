@@ -606,21 +606,45 @@
   "checkedOn": "2026-11-17"
  },
  {
-  "name": "Caterpillarz Preschool",
-  "area": "Edappally",
+  "name": "Caterpillarz Preschool & Daycare",
+  "area": "Kakkanad",
   "kinds": [
-   "Preschool"
+   "Preschool",
+   "Daycare"
   ],
+  "chain": "Caterpillarz",
+  "ages": "6 months to 8 years (infant care, toddler, Pre-KG, KG, Grade 1–2)",
   "locations": [
    {
-    "lat": 10.02403,
-    "lng": 76.29454,
+    "name": "Kakkanad (Kusumagiri, Infopark Road)",
+    "lat": 10.01467,
+    "lng": 76.35352,
+    "approx": true
+   },
+   {
+    "name": "Edappally (near Oberon Mall, Padivattom)",
+    "lat": 10.01446,
+    "lng": 76.31231,
+    "approx": true
+   },
+   {
+    "name": "Kalamassery (Kaipadamugal, Thrikkakara)",
+    "lat": 10.04233,
+    "lng": 76.3384,
+    "approx": true
+   },
+   {
+    "name": "Pukkattupady (Wire Ropes Junction)",
+    "lat": 10.06207,
+    "lng": 76.39524,
     "approx": true
    }
   ],
-  "source": "https://www.edustoke.com/pre-schools-in-kochi",
-  "sourceType": "listing",
-  "checkedOn": "2026-11-17"
+  "link": "https://caterpillarz.in/",
+  "source": "https://caterpillarz.in/",
+  "sourceType": "official",
+  "checkedOn": "2026-11-18",
+  "note": "Four campuses (as on its website): Kusumagiri–Kakkanad, Edappally near Oberon Mall, Kaipadamugal–Kalamassery and Pukkattupady. All open Monday–Saturday, 8 am–7 pm; half, full and extended daycare."
  },
  {
   "name": "Roots Preschool",
