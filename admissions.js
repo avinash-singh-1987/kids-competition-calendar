@@ -122,6 +122,21 @@ const SCHOOL_ICON = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" 
 const CAL_ICON = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4M12 13v5M9.5 15.5h5"/></svg>';
 const SHARE_ICON = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12a8 8 0 0 1-11.6 7.1L4 21l1.9-5.4A8 8 0 1 1 21 12z"/><path d="M9 10.5c.5 1.8 2.2 3.5 4.5 4.3l1.3-1.2 1.7.8"/></svg>';
 
+// Numbers in the top pills count up once when the page opens (skipped for people who prefer less motion).
+function setCount(id, n) {
+  const node = document.getElementById(id);
+  if (!node) return;
+  const reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  if (reduce || !(n > 1) || !window.requestAnimationFrame) { node.textContent = n; return; }
+  const start = performance.now(), ms = 700;
+  const step = now => {
+    const t = Math.min(1, (now - start) / ms);
+    node.textContent = Math.round(n * (1 - Math.pow(1 - t, 3)));
+    if (t < 1) requestAnimationFrame(step); else node.textContent = n;
+  };
+  requestAnimationFrame(step);
+}
+
 let schools = [];
 let areas = [];          // [{name, lat, lng}] from areas.json
 let origin = null;       // {lat, lng, label} — the parent's location or chosen area; never sent anywhere
@@ -517,8 +532,8 @@ async function start() {
   }
   // Keep the order from admissions.json (most popular schools first).
   const open = schools.filter(isOpenish).length;
-  document.getElementById("stat-schools").textContent = schools.length;
-  document.getElementById("stat-open").textContent = open;
+  setCount("stat-schools", schools.length);
+  setCount("stat-open", open);
   // Summary pills and filter chips: "15 schools" shows all, "7 open or opening soon" shows only those.
   document.querySelectorAll("[data-show]").forEach(el =>
     el.addEventListener("click", () => { setShow(el.dataset.show); track("click-filter-" + el.dataset.show); }));
