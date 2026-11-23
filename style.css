@@ -695,3 +695,20 @@ h2[id] { scroll-margin-top: 16px; }
 .area-tips li { margin: 4px 0; }
 .area-links { margin: 18px 0 0; font-size: 0.92rem; line-height: 1.8; }
 .area-links a { color: var(--primary-dark); font-weight: 700; }
+
+/* Small purposeful motion (Nov 2026): a live dot on "Open now", a soft pulse when a deadline is 3 days away or less.
+   Both are switched off by the prefers-reduced-motion rule above. */
+.status-open::before {
+  content: ""; display: inline-block; width: 7px; height: 7px; margin: 0 6px 1px 0;
+  border-radius: 50%; background: #1b7a36; vertical-align: middle;
+  animation: live-dot 2s ease-out infinite;
+}
+@keyframes live-dot {
+  0% { box-shadow: 0 0 0 0 rgba(27, 122, 54, 0.45); }
+  70%, 100% { box-shadow: 0 0 0 7px rgba(27, 122, 54, 0); }
+}
+.days-left.pulse { animation: due-pulse 1.8s ease-in-out infinite; }
+@keyframes due-pulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(217, 72, 15, 0.35); }
+  50% { box-shadow: 0 0 0 6px rgba(217, 72, 15, 0); }
+}

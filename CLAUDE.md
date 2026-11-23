@@ -90,6 +90,10 @@
   littlebritain.in (site carries injected spam links — don't link it), caterpillarz.in (4 Kochi campuses).
 - Script/CSS links carry a version (`?v=YYYYMMDD`) to beat browser caches: when you change
   script.js, admissions.js or style.css, bump the `?v=` date in index.html / admissions.html.
+- Motion (Nov 2026): kept small on purpose — the owner wants an attractive site without clutter, and parents use cheap
+  phones. Existing: floating hero picture, cards rising in. Added: pulsing dot on "Open now", soft pulse on a deadline
+  chip when 3 days or less are left, top-pill numbers counting up once (`setCount` in script.js / admissions.js /
+  playschools.js). All off under prefers-reduced-motion. No videos, Lottie, parallax or animation libraries.
 - Announcement bar: edit `announcement.json` — `active`, `title`, `points`
   (list of {text, detailsLink, showUntil}; a dated point should have showUntil so it disappears
   when it's out of date), `linkText`, `link`, `onlyWithHash`. Since Nov 2026 the owner wants it

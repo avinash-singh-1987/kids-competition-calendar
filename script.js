@@ -5,6 +5,21 @@
 const DEADLINE_WINDOW_DAYS = 30;
 const BASE_TYPES = ["Olympiad", "Scholarship", "Drawing", "GK", "Quiz"];
 
+// Numbers in the top pills count up once when the page opens (skipped for people who prefer less motion).
+function setCount(id, n) {
+  const node = document.getElementById(id);
+  if (!node) return;
+  const reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  if (reduce || !(n > 1) || !window.requestAnimationFrame) { node.textContent = n; return; }
+  const start = performance.now(), ms = 700;
+  const step = now => {
+    const t = Math.min(1, (now - start) / ms);
+    node.textContent = Math.round(n * (1 - Math.pow(1 - t, 3)));
+    if (t < 1) requestAnimationFrame(step); else node.textContent = n;
+  };
+  requestAnimationFrame(step);
+}
+
 let allCompetitions = [];
 // Yearly competitions whose exams are over (kept for up to NEXT_YEAR_KEEP_DAYS so parents can plan next year).
 let pastCompetitions = [];
@@ -333,7 +348,7 @@ function renderDeadlines(list) {
     .filter(x => !(x.ev.kind === "exam" && isRegistrationClosed(x.c)))
     .sort((a, b) => a.ev.date - b.ev.date);
 
-  document.getElementById("stat-soon").textContent = upcoming.length;
+  setCount("stat-soon", upcoming.length);
 
   if (upcoming.length === 0) {
     ul.appendChild(el("li", "empty", "Nothing due in the next 30 days."));
@@ -364,7 +379,7 @@ function renderDeadlines(list) {
     if (days === 0) label = isExam ? "Today" : "Last day!";
     else label = days === 1 ? "1 day" : `${days} days`;
 
-    metaRow.appendChild(el("span", "days-left" + (urgent ? " urgent" : ""), label));
+    metaRow.appendChild(el("span", "days-left" + (urgent ? " urgent" : "") + (days <= 3 ? " pulse" : ""), label));
 
     // The whole row is a link to the full card further down the page.
     const id = slugify(c.name);
@@ -602,7 +617,7 @@ function buildFilters() {
   if (whoGroup) whoGroup.hidden = direct === 0;
   const statDirect = document.getElementById("stat-direct");
   if (statDirect) {
-    statDirect.textContent = direct;
+    setCount("stat-direct", direct);
     document.getElementById("stat-direct-item").hidden = direct === 0;
   }
   buildChips("who-chips", [["all", "Any"], ["yes", `✓ Register directly (${direct})`, "No school registration needed"]], "who");
@@ -646,7 +661,7 @@ async function start() {
   allCompetitions = data.filter(c => c && typeof c === "object" && !isFinished(c));
   pastCompetitions = data.filter(c => c && typeof c === "object" && c.repeatsYearly && isFinished(c) &&
     examDates(c).length && daysBetween(examDates(c)[examDates(c).length - 1], today()) <= NEXT_YEAR_KEEP_DAYS);
-  document.getElementById("stat-total").textContent = allCompetitions.length;
+  setCount("stat-total", allCompetitions.length);
   showLastUpdated(data, lastModified);
   buildFilters();
   renderDeadlines(allCompetitions);

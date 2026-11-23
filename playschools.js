@@ -32,6 +32,21 @@ function kmBetween(a, b) {
 }
 function kmText(km) { return km < 10 ? km.toFixed(1) : String(Math.round(km)); }
 
+// Numbers in the top pills count up once when the page opens (skipped for people who prefer less motion).
+function setCount(id, n) {
+  const node = document.getElementById(id);
+  if (!node) return;
+  const reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  if (reduce || !(n > 1) || !window.requestAnimationFrame) { node.textContent = n; return; }
+  const start = performance.now(), ms = 700;
+  const step = now => {
+    const t = Math.min(1, (now - start) / ms);
+    node.textContent = Math.round(n * (1 - Math.pow(1 - t, 3)));
+    if (t < 1) requestAnimationFrame(step); else node.textContent = n;
+  };
+  requestAnimationFrame(step);
+}
+
 let playschools = [];
 let areas = [];
 let origin = null;
@@ -224,8 +239,8 @@ async function start() {
   }
   try { areas = (await getJson("areas.json")).filter(a => a && a.name && typeof a.lat === "number"); } catch (e) { areas = []; }
 
-  document.getElementById("stat-ps").textContent = playschools.length;
-  document.getElementById("stat-daycare").textContent = playschools.filter(p => (p.kinds || []).includes("Daycare")).length;
+  setCount("stat-ps", playschools.length);
+  setCount("stat-daycare", playschools.filter(p => (p.kinds || []).includes("Daycare")).length);
   document.querySelectorAll("[data-kind]").forEach(b => b.addEventListener("click", () => { setKind(b.dataset.kind); track("ps-filter-" + b.dataset.kind); }));
 
   render();
