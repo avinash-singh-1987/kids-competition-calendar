@@ -268,5 +268,35 @@
     "addedOn": "2026-11-18",
     "unverified": true,
     "note": "For Class 1–12. The test is held first in schools; selected students go on to district, state and national rounds. As listed on the organiser's website, schools must send their registration by 30 Nov 2026 and the students' answer sheets by 15 Dec 2026; school-level results in the second week of January 2027. Ask your school whether it is taking part."
+  },
+  {
+    "name": "H&C Federal Bank All Kerala Quiz Competition 2026-27",
+    "organiser": "H&C (sponsored by Federal Bank)",
+    "classes": [
+      3,
+      4,
+      5
+    ],
+    "type": "Quiz",
+    "registrationLastDate": "",
+    "examDates": [
+      "2026-10-30"
+    ],
+    "seasonDates": [
+      "2026-10-30",
+      "2026-12-05",
+      "2027-01-30"
+    ],
+    "fee": "Free (through school)",
+    "mode": "School-based",
+    "individual": "no",
+    "repeatsYearly": true,
+    "link": "https://scholasticworld.blogspot.com/2023/08/h-c-all-kerala-quiz-competition-2023-24.html",
+    "linkLabel": "Read details (blog)",
+    "source": "http://kv-library.blogspot.com/2025/10/h-federal-bank-all-kerala-quiz.html",
+    "sourceType": "blog",
+    "addedOn": "2026-11-25",
+    "unverified": true,
+    "note": "For Class 3–7, only through the school (no fee) — ask your school librarian. School-level written test (1 hour, English, multiple choice) was on 30 Oct 2026; the top students of each class went on to the zonal round (5 Dec 2026), then district rounds in early January and the state final at Ernakulam (30 Jan 2027, as listed). Questions are mostly from the 'GK Treasure' book series plus general knowledge and current affairs. A school letter shared online says schools registered by 31 Aug, so ask your school early (June–July) next year."
   }
 ]
